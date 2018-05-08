@@ -3,6 +3,7 @@
     "https": "1.0.0",
     "later": "1.2.0",
     "pg": "6.1.2",
-    "node-run-cmd": "1.0.1"
+    "node-run-cmd": "1.0.1",
+    "@salesforce/plugin-generator": "0.0.6"
   }
 }
