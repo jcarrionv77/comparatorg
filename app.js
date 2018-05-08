@@ -10,7 +10,7 @@ nrc.run('sfdx force:auth:jwt:grant --clientid 3MVG9X0_oZyBSzHrtbrbfMcbIYRG2EJYKx
 
 nrc.run('sfdx force:org:list --verbose --json > tmp/MyOrgList.json');
 
-var contents = fs.readFileSync("tmp/MyOrgList.json");
+var contents = fs.readFileSync("/tmp/MyOrgList.json");
 var jsonContent = JSON.parse(contents);
 
 console.log('contents  ' + contents);
