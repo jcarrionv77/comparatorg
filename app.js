@@ -19,6 +19,6 @@ var dataCallback = function(data) {
   var jsonContent = JSON.parse(miJson);
   //console.log('miJson  ' + miJson);
 };
-nrc.run('sfdx force:org:list --verbose --json', { onData: dataCallback, onError:errorCallback });
+nrc.run('sfdx force:org:list --verbose --json', { onData: dataCallback });
 
 console.log('hola mundo2  ');
