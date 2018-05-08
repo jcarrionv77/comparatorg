@@ -10,4 +10,10 @@ nrc.run('sfdx force:auth:jwt:grant --clientid 3MVG9X0_oZyBSzHrtbrbfMcbIYRG2EJYKx
 
 nrc.run('sfdx force:org:list --verbose --json');
 
+var dataCallback = function(data) {
+  console.log('data es  ' + data);
+};
+
+nrc.run('ls', { onData: dataCallback });
+
 console.log('hola mundo2  ');
