@@ -10,18 +10,35 @@ try {
 
 console.log('hola mundo  ');
 
-var commandSFDX = 'sfdx force:auth:jwt:grant --clientid 3MVG9X0_oZyBSzHrtbrbfMcbIYRG2EJYKx.kHJqYn5fr_CJypNQvV0UaNy5ALJEqbHm8fuglPg6J0VxFdsCKa --jwtkeyfile ./repaudit/server.key --username jcarrion@salesforce.com.repsol.repaudit --instanceurl https://test.salesforce.com --setalias repaudit';
+var commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid 3MVG9X0_oZyBSzHrtbrbfMcbIYRG2EJYKx.kHJqYn5fr_CJypNQvV0UaNy5ALJEqbHm8fuglPg6J0VxFdsCKa --jwtkeyfile ./repaudit/server.key --username jcarrion@salesforce.com.repsol.repaudit --instanceurl https://test.salesforce.com --setalias repaudit';
+var commandSFDXList = 'sfdx force:org:list --verbose --json';
+
 
 var command = 'find . -type f | wc -l';
 
-exec(commandSFDX, (err, stdout, stderr) => {
+exec(commandSFDXLogin, (err, stdout, stderr) => {
   if (err) {
     console.error(`exec error: ${err}`);
     return;
   }
 
   console.log(`exec ok  ${stdout}`);
-  console.log('FIN exec');
+  console.log('FIN exec login');
+
+
+	exec(commandSFDXList, (err, stdout, stderr) => {
+	  if (err) {
+	    console.error(`exec error: ${err}`);
+	    return;
+	  }
+
+	  console.log(`exec ok  ${stdout}`);
+	  console.log('FIN exec login');
+	});
+
+
+
+  
 });
 
 
