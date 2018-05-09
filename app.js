@@ -21,7 +21,10 @@ exec(commandSFDX, (err, stdout, stderr) => {
   }
 
   console.log(`exec ok  ${stdout}`);
+  console.log('FIN exec');
 });
+
+
 
 
 
