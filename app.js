@@ -39,6 +39,7 @@ exec(commandSFDXLogin, (err, stdout, stderr) => {
 		var jsonContent = JSON.parse(contents);
 
 		console.log('contents ' + contents);
+		console.log('END');
 
 	});
 
