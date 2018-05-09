@@ -34,6 +34,12 @@ exec(commandSFDXLogin, (err, stdout, stderr) => {
 
 	  console.log(`exec ok  ${stdout}`);
 	  console.log('FIN exec login');
+
+		var contents = fs.readFileSync("tmp/MyOrgList.json");
+		var jsonContent = JSON.parse(contents);
+
+		console.log('contents ' + contents);
+
 	});
 
 
