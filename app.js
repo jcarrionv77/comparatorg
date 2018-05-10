@@ -32,7 +32,7 @@ function start()
 					instancia.secreto = result.rows[i].secreto;
 					instancia.usuario = result.rows[i].usuario;
 
-					console.log('instancia  ' + instancia);
+					console.log('instancia  ' + instancia.stringify());
 
 					instanciasArray.push(instancia);
 				}
