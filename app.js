@@ -25,7 +25,7 @@ function start()
 			} 
 			else if  (result != null && result.rows.length>0)
 			{
-				for (int i=0; i<result.rows.length; i++)
+				for (var i=0; i<result.rows.length; i++)
 				{
 					var instancia = {};
 					instancia.nombre = result.rows[i].nombre;
