@@ -32,6 +32,8 @@ function start()
 					instancia.secreto = result.rows[i].secreto;
 					instancia.usuario = result.rows[i].usuario;
 
+					console.log('instancia  ' + instancia);
+
 					instanciasArray.push(instancia);
 				}
 				whenConnected();
@@ -49,7 +51,7 @@ function whenConnected()
 
 		console.log('hola mundo  ');
 
-		console.log('instanciasArray  ' + instanciasArray);
+		
 
 		var serverKey = process.env.SERVER_KEY;
 
