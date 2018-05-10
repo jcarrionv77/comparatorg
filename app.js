@@ -50,8 +50,6 @@ function whenConnected()
 
 		console.log('hola mundo  ');
 
-		
-
 		var serverKey = process.env.SERVER_KEY;
 
 		var fs = require('fs');
@@ -69,7 +67,8 @@ function whenConnected()
 		
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
-		var commandSFDXList = 'sfdx force:org:list --verbose --json > tmp/MyOrgList.json';
+		//var commandSFDXList = 'sfdx force:org:list --verbose --json > tmp/MyOrgList.json';
+		var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[i].nombre +    ' -s Account --json > ./tmp/prueba.json';
 
 
 		var command = 'find . -type f | wc -l';
@@ -84,7 +83,7 @@ function whenConnected()
 			console.log('FIN exec login');
 
 
-			exec(commandSFDXList, (err, stdout, stderr) => {
+			exec(commandSFDXDescribe, (err, stdout, stderr) => {
 				if (err) {
 					console.error(`exec error: ${err}`);
 					return;
@@ -93,7 +92,7 @@ function whenConnected()
 				console.log(`exec ok  ${stdout}`);
 				console.log('FIN exec login');
 
-				var contents = fs.readFileSync("tmp/MyOrgList.json");
+				var contents = fs.readFileSync("tmp/prueba.json");
 				var jsonContent = JSON.parse(contents);
 
 				console.log('contents ' + contents);
