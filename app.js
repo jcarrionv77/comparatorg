@@ -68,7 +68,7 @@ function whenConnected()
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
 		//var commandSFDXList = 'sfdx force:org:list --verbose --json > tmp/MyOrgList.json';
-		var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[i].nombre +    ' -s Account --json > ./tmp/prueba.json';
+		var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json > ./tmp/prueba.json';
 
 
 		var command = 'find . -type f | wc -l';
