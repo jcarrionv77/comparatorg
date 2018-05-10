@@ -13,7 +13,7 @@ console.log('hola mundo  ');
 var serverKey = process.env.SERVER_KEY;
 
 var fs = require('fs');
-fs.writeFileSync("/tmp/server.key", serverKey); 
+fs.writeFileSync("tmp/server.key", serverKey); 
 
 var commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid 3MVG9X0_oZyBSzHrtbrbfMcbIYRG2EJYKx.kHJqYn5fr_CJypNQvV0UaNy5ALJEqbHm8fuglPg6J0VxFdsCKa --jwtkeyfile ./tmp/server.key --username jcarrion@salesforce.com.repsol.repaudit --instanceurl https://test.salesforce.com --setalias repaudit';
 var commandSFDXList = 'sfdx force:org:list --verbose --json > tmp/MyOrgList.json';
