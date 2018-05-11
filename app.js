@@ -246,7 +246,7 @@ function readFiles(obj){
 						campo.Name= nameOrg + jsonContent.result.fields[i].name;		
 						campo.JCV_fld_sandbox__c= nameOrg;
 						campo.JCV_fld_field__c= jsonContent.result.fields[i].name;
-						campo.JCV_fld_object__c = miObjeto;
+						campo.JCV_fld_object__c = obj;
 						camposArray.push(campo);
 
 						fields.push(field);
