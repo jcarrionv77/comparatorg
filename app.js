@@ -77,7 +77,7 @@ function consultaObjetos()
 				ConsultaInstancias();
 
 				console.log('fin consultaObjetos');
-				stopWorker();
+				//stopWorker();
 			}
 		}); 
 
