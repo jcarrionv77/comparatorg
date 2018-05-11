@@ -320,9 +320,22 @@ function readFiles(obj){
 
 	console.log('update ' + obj);
 
-
+	/*
     dbCli.query('UPDATE objetos set html =($1) where nombre = ($2)', 
-        [htmlTanspuesto, obj]); 
+        [htmlTanspuesto, obj], 
+        function(errUpd, resultUpd) {
+            if (errUpd) {
+                console.log(errUpd);
+            } else {
+                console.log('row update');
+            }
+        }); 
+    */
+
+	 dbCli.query('UPDATE objetos set html =($1) where nombre = ($2)', 
+	        [htmlTanspuesto, obj]); 
+	 console.log('row update');
+
 
 }
 
