@@ -220,7 +220,7 @@ function readFiles(obj){
 	files.forEach(file => {
 		try{
 
-			//console.log('file ' + file);
+			console.log('file ' + file);
 			if(path.extname(file) == '.json' && file != 'DevHub.json'  &&  file != 'repaudit.json')
 			{
 				//console.log('file ' + file);
@@ -317,7 +317,8 @@ function readFiles(obj){
 	}
 	htmlTanspuesto = htmlTanspuesto + '</table>';
 
-	console.log(htmlTanspuesto);
+
+
 
 
 }
