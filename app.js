@@ -203,6 +203,7 @@ function read(){
 		readFiles(objetosArray[i].apiname);
 	}
 	console.log('fin read  **********' );
+	stopWorker();
 
 }
 
@@ -221,7 +222,7 @@ function readFiles(obj){
 		try{
 
 			console.log('file ' + file);
-			if(path.extname(file) == '.json' && file != 'DevHub.json'  &&  file != 'repaudit.json')
+			if(path.extname(file) == '.json' && file != 'DevHub.json'  )
 			{
 				//console.log('file ' + file);
 
@@ -318,8 +319,16 @@ function readFiles(obj){
 	htmlTanspuesto = htmlTanspuesto + '</table>';
 
 
-
-
+    dbCli.query(
+        'UPDATE objetos set url =($1) where id = ($2)', 
+        [htmlTanspuesto, obj], 
+        function(errUpd, resultUpd) {
+            if (errUpd) {
+                console.log(errUpd);
+            } else {
+                //console.log('row update');
+            }
+        }); 
 
 }
 
@@ -327,6 +336,7 @@ function readFiles(obj){
 
 function stopWorker()
 {
+	dbCli.end();
 	process.exit(0);
 }
 
