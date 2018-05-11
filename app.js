@@ -126,7 +126,7 @@ function whenConnected()
 					return;
 				}
 
-				var contents = ${stdout};
+				var contents = '${stdout}';
 				
 				//console.log(`exec ok  ${stdout}`);
 				
