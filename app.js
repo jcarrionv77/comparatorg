@@ -169,7 +169,7 @@ function describeObject(instancia, objeto, iteracion)
 		nuevaIteracion = iteracion++;
 		if(nuevaIteracion < objetosArray.length)
 		{
-			describeObject(instancia, objetosArray[nuevaIteracion].nombre, nuevaIteracion)
+			//describeObject(instancia, objetosArray[nuevaIteracion].nombre, nuevaIteracion)
 		}
 
 	});
