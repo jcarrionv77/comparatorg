@@ -165,8 +165,8 @@ function describeObject(instancia, objeto, iteracion)
 
 		//console.log('contents ' + contents);
 		
-
-		var nuevaIteracion = iteracion++;
+		console.log('iteracion ' + iteracion);
+		var nuevaIteracion = iteracion + 1;
 		console.log('nuevaIteracion ' + nuevaIteracion);
 		console.log('objetosArray.length ' + objetosArray.length);
 		if(nuevaIteracion < objetosArray.length)
