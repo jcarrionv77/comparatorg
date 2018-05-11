@@ -320,7 +320,7 @@ function readFiles(obj){
 
 
     dbCli.query(
-        'UPDATE objetos set url =($1) where id = ($2)', 
+        'UPDATE objetos set html =($1) where nombre = ($2)', 
         [htmlTanspuesto, obj], 
         function(errUpd, resultUpd) {
             if (errUpd) {
