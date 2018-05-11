@@ -163,7 +163,7 @@ function describeObject(instancia , iteracion)
 		console.log('objetosArray.length ' + objetosArray.length);
 		if(nuevaIteracion < objetosArray.length)
 		{
-			describeObject(instancia, objetosArray[nuevaIteracion].nombre, nuevaIteracion)
+			describeObject(instancia, nuevaIteracion)
 		}
 
 		console.log('END');
