@@ -3,10 +3,11 @@ var bodyParser = require('body-parser');
 
 
 var app = express();
-
+var port = process.env.PORT || 8080;
 
 
 app.use(bodyParser.json());
+
 
 app.get('/', function(req, res) {
 
