@@ -37,7 +37,7 @@ function ConsultaInstancias()
 
 					instanciasArray.push(instancia);
 				}
-				descargaFicheros(instanciasArray[0]);
+				descargaFicheros(0);
 			}
 		}); 
 
@@ -82,9 +82,11 @@ function consultaObjetos()
 }
 
 
-function descargaFicheros(objInstancia)
+function descargaFicheros(indice)
 {
     console.log('descargaFicheros!');
+    var objInstancia = instanciasArray[indice];
+	
 	try {
 
 		console.log('Login en objInstancia ' + objInstancia.nombre);
@@ -110,11 +112,25 @@ function descargaFicheros(objInstancia)
 			console.log('FIN exec login');
 			
 			describeObject(objInstancia.nombre , 0);
-			
-			
 
+			console.log('indice ' + indice);
+			var nuevoIndice = indice + 1;
+			console.log('nuevoIndice ' + nuevoIndice);
+			console.log('instanciasArray.length ' + instanciasArray.length);
+			
+			if(nuevoIndice < instanciasArray.length)
+			{
+				descargaFicheros(nuevoIndice)
+			}
+
+			console.log('fin descargaFicheros');
 
 		});
+
+
+
+
+
 	console.log('hola mundo2  ');
 	}
 	catch (err) {
@@ -166,7 +182,7 @@ function describeObject(instancia , iteracion)
 			describeObject(instancia, nuevaIteracion)
 		}
 
-		console.log('END');
+		console.log('fin describeObject para instancia ' +instancia);
 
 	});
 
@@ -178,4 +194,5 @@ var fs = require('fs');
 fs.writeFileSync("tmp/server.key", serverKey); 
 
 consultaObjetos();
+console.log('END ');
 
