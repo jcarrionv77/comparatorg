@@ -6,6 +6,7 @@ var instanciasArray = new Array();
 var objetosArray = new Array();
 
 const { exec } = require('child_process');
+const { execSync } = require('child_process');
 
 
 function start()
@@ -69,6 +70,9 @@ function consultaObjetos()
 					objeto.apiname = result.rows[i].apiname;
 
 					objetosArray.push(objeto);
+
+					var directorio = 'tmp/'+objeto.nombre
+					execSync('mkdir ' + directorio);
 				}
 				whenConnected();
 			}
