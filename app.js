@@ -75,6 +75,8 @@ function consultaObjetos()
 					execSync('mkdir ' + directorio);
 				}
 				ConsultaInstancias();
+
+				console.log('fin consultaObjetos');
 			}
 		}); 
 
@@ -195,6 +197,9 @@ var fs = require('fs');
 fs.writeFileSync("tmp/server.key", serverKey); 
 
 consultaObjetos();
+
+console.log('fin');
+process.exit(0);
 
 
 
