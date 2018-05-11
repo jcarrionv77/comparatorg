@@ -79,6 +79,8 @@ function consultaObjetos()
 		}); 
 
     });
+
+    console.log('fin consultaObjetos');
 }
 
 
@@ -108,22 +110,12 @@ function descargaFicheros(indice)
 				return;
 			}
 
-			console.log(`exec ok  ${stdout}`);
-			console.log('FIN exec login');
 			
 			describeObject(objInstancia.nombre , 0);
-
-			console.log('indice ' + indice);
-			var nuevoIndice = indice + 1;
-			console.log('nuevoIndice ' + nuevoIndice);
-			console.log('instanciasArray.length ' + instanciasArray.length);
-			
 			if(nuevoIndice < instanciasArray.length)
 			{
 				descargaFicheros(nuevoIndice)
 			}
-
-			console.log('fin descargaFicheros');
 
 		});
 
@@ -145,11 +137,6 @@ function describeObject(instancia , iteracion)
 
 	var fileName = './tmp/' + objeto + '/' +  instancia + '.json';
 
-	
-	console.log('instancia [' + instancia + ']');
-	console.log('objeto [' + objeto + ']');
-	console.log('fileName [' + fileName + ']');
-	console.log('iteracion [' + iteracion + ']');
 
 	
 	var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instancia +    ' -s ' + objeto + ' --json > ' +  fileName;
@@ -163,26 +150,14 @@ function describeObject(instancia , iteracion)
 			console.error(`exec error: ${err}`);
 			return;
 		}
-
-		//var contents = stdout;
-		//console.log(`exec ok  ${stdout}`);
-		//console.log('exec contents ' + contents);
-		//console.log('FIN exec commandSFDXDescribe');
-		//var contents = fs.readFileSync("tmp/prueba.json");
-		//var jsonContent = JSON.parse(contents);
-
-		//console.log('contents ' + contents);
 		
-		console.log('iteracion ' + iteracion);
 		var nuevaIteracion = iteracion + 1;
-		console.log('nuevaIteracion ' + nuevaIteracion);
-		console.log('objetosArray.length ' + objetosArray.length);
+
 		if(nuevaIteracion < objetosArray.length)
 		{
 			describeObject(instancia, nuevaIteracion)
 		}
 
-		console.log('fin describeObject para instancia ' +instancia);
 
 	});
 
@@ -195,4 +170,5 @@ fs.writeFileSync("tmp/server.key", serverKey);
 
 consultaObjetos();
 console.log('END ');
+process.exit(0);
 
