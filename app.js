@@ -203,7 +203,7 @@ function read(){
 		readFiles(objetosArray[i].apiname);
 	}
 	console.log('fin read  **********' );
-	stopWorker();
+	//stopWorker();
 
 }
 
