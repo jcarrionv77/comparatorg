@@ -77,6 +77,7 @@ function consultaObjetos()
 				ConsultaInstancias();
 
 				console.log('fin consultaObjetos');
+				stopWorker();
 			}
 		}); 
 
@@ -191,6 +192,11 @@ function describeObject(instancia , iteracion)
 
 }
 
+function stopWorker()
+{
+	process.exit(0);
+}
+
 var serverKey = process.env.SERVER_KEY;
 
 var fs = require('fs');
@@ -199,7 +205,7 @@ fs.writeFileSync("tmp/server.key", serverKey);
 consultaObjetos();
 
 console.log('fin');
-process.exit(0);
+
 
 
 
