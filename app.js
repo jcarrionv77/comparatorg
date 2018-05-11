@@ -318,7 +318,7 @@ function readFiles(obj){
 	}
 	htmlTanspuesto = htmlTanspuesto + '</table>';
 
-
+	 console.log('update ' + obj);
     dbCli.query(
         'UPDATE objetos set html =($1) where nombre = ($2)', 
         [htmlTanspuesto, obj], 
@@ -326,7 +326,7 @@ function readFiles(obj){
             if (errUpd) {
                 console.log(errUpd);
             } else {
-                //console.log('row update');
+                console.log('row update');
             }
         }); 
 
