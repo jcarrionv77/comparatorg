@@ -120,7 +120,7 @@ function whenConnected()
 
 			var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json ';
 
-			exec(commandSFDXDescribe, (err, stdout, stderr) => {
+			exec(commandSFDXDescribe, {maxBuffer: 1024 * 500}, (err, stdout, stderr) => {
 				if (err) {
 					console.error(`exec error: ${err}`);
 					return;
