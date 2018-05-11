@@ -1,5 +1,7 @@
 var fs = require("fs");
 var pg = require('pg');
+var unique = require('array-unique');
+var path = require('path');
 
 var dbCli = null;
 var instanciasArray = new Array();
