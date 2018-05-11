@@ -9,7 +9,7 @@ const { exec } = require('child_process');
 const { execSync } = require('child_process');
 
 
-function start()
+function ConsultaInstancias()
 {
 	pg.defaults.ssl = true;
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
@@ -37,7 +37,7 @@ function start()
 
 					instanciasArray.push(instancia);
 				}
-				consultaObjetos();
+				descargaFicheros(instanciasArray[0]);
 			}
 		}); 
 
@@ -74,7 +74,7 @@ function consultaObjetos()
 					var directorio = 'tmp/'+objeto.nombre
 					execSync('mkdir ' + directorio);
 				}
-				whenConnected();
+				ConsultaInstancias();
 			}
 		}); 
 
@@ -82,36 +82,25 @@ function consultaObjetos()
 }
 
 
-function whenConnected()
+function descargaFicheros(objInstancia)
 {
-    console.log('whenConnected!');
+    console.log('descargaFicheros!');
 	try {
 
-		console.log('hola mundo  ');
+		console.log('hola mundo  objInstancia' + objInstancia.nombre);
 
-		var serverKey = process.env.SERVER_KEY;
 
-		var fs = require('fs');
-		fs.writeFileSync("tmp/server.key", serverKey); 
 
 		var commandSFDXLogin = '';
 
 		
-		for (var i=0; i<instanciasArray.length; i++)
-		{
-			commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid ' + instanciasArray[i].secreto +' --jwtkeyfile ./tmp/server.key --username ' + instanciasArray[i].usuario + ' --instanceurl ' + instanciasArray[i].url+ ' --setalias '+ instanciasArray[i].nombre;
-		}
+		commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid ' + objInstancia.secreto +' --jwtkeyfile ./tmp/server.key --username ' + objInstancia.usuario + ' --instanceurl ' + objInstancia.url+ ' --setalias '+ objInstancia.nombre;
 
 		//var commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid 3MVG9X0_oZyBSzHrtbrbfMcbIYRG2EJYKx.kHJqYn5fr_CJypNQvV0UaNy5ALJEqbHm8fuglPg6J0VxFdsCKa --jwtkeyfile ./tmp/server.key --username jcarrion@salesforce.com.repsol.repaudit --instanceurl https://test.salesforce.com --setalias repaudit';
 		
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
-		//var commandSFDXList = 'sfdx force:org:list --verbose --json > tmp/MyOrgList.json';
-		
-
-		var command = 'find . -type f | wc -l';
-
-		exec(commandSFDXLogin, (err, stdout, stderr) => {
+		execSync(commandSFDXLogin, (err, stdout, stderr) => {
 			if (err) {
 				console.error(`exec error: ${err}`);
 				return;
@@ -120,7 +109,7 @@ function whenConnected()
 			console.log(`exec ok  ${stdout}`);
 			console.log('FIN exec login');
 			
-			describeObject(instanciasArray[0].nombre, objetosArray[0].nombre, 0);
+			describeObject(objInstancia.nombre , 0);
 			
 			
 
@@ -134,8 +123,9 @@ function whenConnected()
 }
 
 
-function describeObject(instancia, objeto, iteracion)
+function describeObject(instancia , iteracion)
 {
+	var objeto = objetosArray[iteracion].nombre;
 
 	var fileName = './tmp/' + objeto + '/' +  instancia + '.json';
 
@@ -182,7 +172,10 @@ function describeObject(instancia, objeto, iteracion)
 
 }
 
+var serverKey = process.env.SERVER_KEY;
 
+var fs = require('fs');
+fs.writeFileSync("tmp/server.key", serverKey); 
 
-start();
+consultaObjetos();
 
