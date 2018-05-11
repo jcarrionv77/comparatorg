@@ -80,7 +80,6 @@ function consultaObjetos()
 
     });
 
-    console.log('fin consultaObjetos');
 }
 
 
@@ -104,6 +103,11 @@ function descargaFicheros(indice)
 		
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
+		console.log('ini llamada sincrona');
+		execSync(commandSFDXLogin);
+		console.log('fin llamada sincrona');
+
+		console.log('ini llamada asincrona');
 		exec(commandSFDXLogin, (err, stdout, stderr) => {
 			if (err) {
 				console.error(`exec error: ${err}`);
@@ -120,12 +124,8 @@ function descargaFicheros(indice)
 			}
 
 		});
+		console.log('fin llamada asincrona');
 
-
-
-
-
-	console.log('hola mundo2  ');
 	}
 	catch (err) {
 		console.error(err);
