@@ -115,31 +115,12 @@ function whenConnected()
 
 			console.log(`exec ok  ${stdout}`);
 			console.log('FIN exec login');
+			
+			describeObject(instanciasArray[0].nombre, objetosArray[0].nombre, 0);
+			
+			
 
-			//var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json > ./tmp/prueba.json';
 
-			var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json ';
-
-			exec(commandSFDXDescribe, {maxBuffer: 1024 * 500}, (err, stdout, stderr) => {
-				if (err) {
-					console.error(`exec error: ${err}`);
-					return;
-				}
-
-				var contents = stdout;
-				
-				//console.log(`exec ok  ${stdout}`);
-				
-				console.log('exec contents ' + contents);
-				console.log('FIN exec commandSFDXDescribe');
-
-				//var contents = fs.readFileSync("tmp/prueba.json");
-				var jsonContent = JSON.parse(contents);
-
-				console.log('contents ' + contents);
-				console.log('END');
-
-			});
 		});
 	console.log('hola mundo2  ');
 	}
@@ -147,6 +128,44 @@ function whenConnected()
 		console.error(err);
 	}
 }
+
+
+function describeObject(instancia, objeto, iteracion)
+{
+
+	console.log('describeObject ' + instancia + ' ' + objeto + ' ' + iteracion);
+	var fileName = instancia + objeto + '.json';
+	var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instancia +    ' -s ' + objeto + ' --json > ./tmp/' + fileName ;
+	
+	//var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json ';
+
+	exec(commandSFDXDescribe, {maxBuffer: 1024 * 500}, (err, stdout, stderr) => {
+		if (err) {
+			console.error(`exec error: ${err}`);
+			return;
+		}
+
+		//var contents = stdout;
+		//console.log(`exec ok  ${stdout}`);
+		//console.log('exec contents ' + contents);
+		//console.log('FIN exec commandSFDXDescribe');
+		//var contents = fs.readFileSync("tmp/prueba.json");
+		//var jsonContent = JSON.parse(contents);
+
+		//console.log('contents ' + contents);
+		console.log('END');
+
+		nuevaIteracion = iteracion++;
+		if(nuevaIteracion < objetosArray.length)
+		{
+			describeObject(instancia, objetosArray[nuevaIteracion], nuevaIteracion)
+		}
+
+	});
+
+}
+
+
 
 start();
 
