@@ -297,7 +297,7 @@ function readFiles(obj){
 		var orgName = orgsArray[k].name;
 		htmlTanspuesto = htmlTanspuesto + '<th>' + orgName.substring(0,orgName.length-5) + '</th>';
 	}
-	html = html + '</tr>';
+
 	for(var i=0; i< sortFieldsArray.length; i++){
 
 		if(sortFieldsArray[i].includes("__c"))
