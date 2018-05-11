@@ -112,6 +112,8 @@ function descargaFicheros(indice)
 
 			
 			describeObject(objInstancia.nombre , 0);
+			
+			var nuevoIndice = indice + 1;
 			if(nuevoIndice < instanciasArray.length)
 			{
 				descargaFicheros(nuevoIndice)
