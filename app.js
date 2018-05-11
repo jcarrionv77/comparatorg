@@ -38,6 +38,8 @@ function ConsultaInstancias()
 					instanciasArray.push(instancia);
 				}
 				descargaFicheros(0);
+				console.log('Fin descarga !!!!!!!!');
+				stopWorker();
 			}
 		}); 
 
