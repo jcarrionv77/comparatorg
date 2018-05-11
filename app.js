@@ -87,7 +87,7 @@ function descargaFicheros(objInstancia)
     console.log('descargaFicheros!');
 	try {
 
-		console.log('hola mundo  objInstancia' + objInstancia.nombre);
+		console.log('Login en objInstancia ' + objInstancia.nombre);
 
 
 
@@ -100,7 +100,7 @@ function descargaFicheros(objInstancia)
 		
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
-		execSync(commandSFDXLogin, (err, stdout, stderr) => {
+		exec(commandSFDXLogin, (err, stdout, stderr) => {
 			if (err) {
 				console.error(`exec error: ${err}`);
 				return;
