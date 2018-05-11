@@ -194,7 +194,7 @@ function describeObject(instancia , iteracion)
 
 }
 
-funtion read(){
+function read(){
 	for (var i=0; i<objetosArray.length; i++)
 	{
 		readFiles(objetosArray[i].apiname);
