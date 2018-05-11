@@ -164,13 +164,17 @@ function describeObject(instancia, objeto, iteracion)
 		//var jsonContent = JSON.parse(contents);
 
 		//console.log('contents ' + contents);
-		console.log('END');
+		
 
-		nuevaIteracion = iteracion++;
+		var nuevaIteracion = iteracion++;
+		console.log('nuevaIteracion ' + nuevaIteracion);
+		console.log('objetosArray.length ' + objetosArray.length);
 		if(nuevaIteracion < objetosArray.length)
 		{
-			//describeObject(instancia, objetosArray[nuevaIteracion].nombre, nuevaIteracion)
+			describeObject(instancia, objetosArray[nuevaIteracion].nombre, nuevaIteracion)
 		}
+
+		console.log('END');
 
 	});
 
