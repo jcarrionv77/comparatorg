@@ -169,6 +169,6 @@ var fs = require('fs');
 fs.writeFileSync("tmp/server.key", serverKey); 
 
 consultaObjetos();
-console.log('END ');
-process.exit(0);
+
+
 
