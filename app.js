@@ -137,7 +137,7 @@ function whenConnected()
 function describeObject(instancia, objeto, iteracion)
 {
 
-	var fileName = instancia + objeto + '.json';
+	var fileName = './tmp/' + objeto + '/' +  instancia + '.json';
 
 	
 	console.log('instancia [' + instancia + ']');
@@ -145,10 +145,8 @@ function describeObject(instancia, objeto, iteracion)
 	console.log('fileName [' + fileName + ']');
 	console.log('iteracion [' + iteracion + ']');
 
-
-
 	
-	var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instancia +    ' -s ' + objeto + ' --json > ./tmp/' + fileName ;
+	var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instancia +    ' -s ' + objeto + ' --json > ' +  fileName;
 	
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
 
