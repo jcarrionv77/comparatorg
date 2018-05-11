@@ -319,9 +319,11 @@ function readFiles(obj){
 	htmlTanspuesto = htmlTanspuesto + '</table>';
 
 	console.log('update ' + obj);
-	var miQuery =  'UPDATE objetos set html =' + 'htmlTanspuesto' + 'where nombre = ' + obj; 
 
-    dbCli.query(miQuery, 
+
+    dbCli.query(miQuery
+        'UPDATE objetos set html =($1) where nombre = ($2)', 
+        [htmlTanspuesto, obj], 
         function(errUpd, resultUpd) {
             if (errUpd) {
                 console.log(errUpd);
