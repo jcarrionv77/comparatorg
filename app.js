@@ -85,7 +85,7 @@ function consultaObjetos()
 
 function descargaFicheros(indice)
 {
-    console.log('descargaFicheros!');
+    console.log('ini descargaFicheros!');
     var objInstancia = instanciasArray[indice];
 	
 	try {
@@ -103,10 +103,20 @@ function descargaFicheros(indice)
 		
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
-		console.log('ini llamada sincrona');
+		
 		execSync(commandSFDXLogin);
-		console.log('fin llamada sincrona');
 
+		describeObject(objInstancia.nombre , 0);
+
+		var nuevoIndice = indice + 1;
+		if(nuevoIndice < instanciasArray.length)
+		{
+			descargaFicheros(nuevoIndice)
+		}		
+
+		console.log('fin descargaFicheros!');
+
+		/*
 		console.log('ini llamada asincrona');
 		exec(commandSFDXLogin, (err, stdout, stderr) => {
 			if (err) {
@@ -125,6 +135,7 @@ function descargaFicheros(indice)
 
 		});
 		console.log('fin llamada asincrona');
+		*/
 
 	}
 	catch (err) {
@@ -135,18 +146,30 @@ function descargaFicheros(indice)
 
 function describeObject(instancia , iteracion)
 {
+	console.log('ini describeObject');
+
 	var objeto = objetosArray[iteracion].nombre;
 
 	var fileName = './tmp/' + objeto + '/' +  instancia + '.json';
-
-
 	
 	var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instancia +    ' -s ' + objeto + ' --json > ' +  fileName;
 	
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
 
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+	var nuevaIteracion = iteracion + 1;
+
+	if(nuevaIteracion < objetosArray.length)
+	{
+		describeObject(instancia, nuevaIteracion)
+	}
+
+	console.log('fin describeObject');
+
+
 	//var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json ';
 
+	/*
 	exec(commandSFDXDescribe, {maxBuffer: 1024 * 500}, (err, stdout, stderr) => {
 		if (err) {
 			console.error(`exec error: ${err}`);
@@ -162,6 +185,7 @@ function describeObject(instancia , iteracion)
 
 
 	});
+	*/
 
 }
 
