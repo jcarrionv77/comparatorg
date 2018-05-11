@@ -7,6 +7,14 @@ var port = process.env.PORT || 8080;
 
 
 app.use(bodyParser.json());
+var routes = require('./routes/index');
+
+app.set('view engine', 'ejs');
+
+// make express look in the public directory for assets (css/js/img)
+app.use(express.static(__dirname + '/public'));
+
+app.use('/routes', routes);
 
 
 app.get('/', function(req, res) {
