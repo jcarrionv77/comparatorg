@@ -3,6 +3,7 @@ var pg = require('pg');
 
 var dbCli = null;
 var instanciasArray = new Array();
+var objetosArray = new Array();
 
 const { exec } = require('child_process');
 
@@ -34,6 +35,40 @@ function start()
 					instancia.url = result.rows[i].url;
 
 					instanciasArray.push(instancia);
+				}
+				consultaObjetos();
+			}
+		}); 
+
+    });
+}
+
+
+function consultaObjetos()
+{
+	pg.defaults.ssl = true;
+	pg.connect(process.env.DATABASE_URL, function(err, client) {
+		if (err) 
+			throw err;
+		
+		console.log('Connected to postgres!');
+		dbCli = client;
+
+		dbCli.query(
+			'SELECT nombre, apiname FROM objetos', 
+			function(err, result) {
+			if (err) {
+				console.log(err);
+			} 
+			else if  (result != null && result.rows.length>0)
+			{
+				for (var i=0; i<result.rows.length; i++)
+				{
+					var objeto = {};
+					objeto.nombre = result.rows[i].nombre;
+					objeto.apiname = result.rows[i].apiname;
+
+					objetosArray.push(objeto);
 				}
 				whenConnected();
 			}
@@ -68,8 +103,7 @@ function whenConnected()
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
 		//var commandSFDXList = 'sfdx force:org:list --verbose --json > tmp/MyOrgList.json';
-		var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json > ./tmp/prueba.json';
-
+		
 
 		var command = 'find . -type f | wc -l';
 
@@ -82,6 +116,9 @@ function whenConnected()
 			console.log(`exec ok  ${stdout}`);
 			console.log('FIN exec login');
 
+			//var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json > ./tmp/prueba.json';
+
+			var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json ';
 
 			exec(commandSFDXDescribe, (err, stdout, stderr) => {
 				if (err) {
@@ -89,10 +126,14 @@ function whenConnected()
 					return;
 				}
 
-				console.log(`exec ok  ${stdout}`);
-				console.log('FIN exec login');
+				var contents = ${stdout};
+				
+				//console.log(`exec ok  ${stdout}`);
+				
+				console.log('exec contents ' + contents);
+				console.log('FIN exec commandSFDXDescribe');
 
-				var contents = fs.readFileSync("tmp/prueba.json");
+				//var contents = fs.readFileSync("tmp/prueba.json");
 				var jsonContent = JSON.parse(contents);
 
 				console.log('contents ' + contents);
