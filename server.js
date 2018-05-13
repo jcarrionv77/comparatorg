@@ -34,7 +34,13 @@ app.get('/', function(req, res) {
 });
 
 app.get('/p', function(req, res) {
-  res.send("tagId is set to " + req.query.tagId);
+
+
+  console.log('hola mundo req.query.tagId ' + req.query.tagId);	
+
+  res.render('index',{objetos : objetosArray, html: objetosArray[0].html});
+  
+
 });
 
 
@@ -43,7 +49,7 @@ app.listen(port, function() {
 
 	var client = new Cliente();
 	client.connectSync(process.env.DATABASE_URL);
-	var rows = client.querySync('SELECT nombre, apiname FROM objetos');
+	var rows = client.querySync('SELECT nombre, apiname, html FROM objetos');
 
 
 	if  (rows != null && rows.length>0)
@@ -53,6 +59,7 @@ app.listen(port, function() {
 			var objeto = {};
 			objeto.nombre = rows[i].nombre;
 			objeto.apiname = rows[i].apiname;
+			objeto.html = rows[i].html;
 
 			objetosArray.push(objeto);
 
