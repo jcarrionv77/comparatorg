@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 
 	console.log('hola mundo');
 
-pg.defaults.ssl = true;
+	pg.defaults.ssl = true;
 	pg.connect(process.env.DATABASE_URL, function(err, client) {
 		if (err) 
 			throw err;
@@ -65,7 +65,7 @@ pg.defaults.ssl = true;
 			  	]});
 
 
-				
+
 			}
 		}); 
 
