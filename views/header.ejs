@@ -11,6 +11,14 @@
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
         </ul>
+
+        <ul>
+          <% users.forEach(function(user){ %>
+            <%= user.name %>
+          <% })%>
+        </ul>
+
+        
     </div>
 
 </div>
