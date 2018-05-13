@@ -29,7 +29,8 @@ app.get('/', function(req, res) {
 
 	console.log('hola mundo');
 
-	console.log(JSON.stringify(req.body, null, 2))
+	console.log(JSON.stringify(req.body, null, 2));
+	console.log(JSON.stringify(req.body));
 
 
 	res.render('index',{objetos : objetosArray});
