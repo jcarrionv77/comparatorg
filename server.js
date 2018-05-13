@@ -33,6 +33,14 @@ app.get('/', function(req, res) {
 
 });
 
+app.get('/index', function(req, res) {
+
+	console.log('hola mundo');
+
+	res.render('index',{objetos : objetosArray, html:''});
+
+});
+
 app.get('/objetos', function(req, res) {
 
 	console.log('hola mundo');
