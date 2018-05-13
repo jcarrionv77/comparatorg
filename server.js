@@ -41,7 +41,7 @@ app.get('/objetos', function(req, res) {
 
 });
 
-app.get('objetos/p', function(req, res) {
+app.get('/objetos/p', function(req, res) {
 
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
