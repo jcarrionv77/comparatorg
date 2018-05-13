@@ -45,6 +45,17 @@
           </div>
           <div class="slds-dropdown slds-dropdown_right">
             <ul class="slds-dropdown__list" role="menu">
+
+            
+              <% objetos.forEach(function(objeto){ %>
+              <li class="slds-dropdown__item" role="presentation">
+                 <a href="javascript:void(0);" role="menuitem" tabindex="-1">
+                    <span class="slds-truncate" title="Menu Item One"><%= objeto.nombre %></span>
+                </a>
+              </li>
+              <% })%>
+
+
               <li class="slds-dropdown__item" role="presentation">
                 <a href="javascript:void(0);" role="menuitem" tabindex="-1">
                   <span class="slds-truncate" title="Menu Item One">Menu Item One</span>
