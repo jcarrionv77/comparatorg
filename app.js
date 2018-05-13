@@ -290,33 +290,37 @@ function readFiles(obj){
 		fieldResult.push(camposOrg);
 	}
 	
-	htmlTanspuesto = '<table border=&quot;1&quot;>';
-	htmlTanspuesto = htmlTanspuesto + '<tr><th>Fields</th>';
+	htmlTanspuesto = '<table class=&quot;slds-table slds-table_bordered slds-table_cell-buffer&quot;';
+	htmlTanspuesto = htmlTanspuesto + '<thead><tr class=&quot;slds-text-title_caps&quot;><th scope=&quot;col&quot;><div class=&quot;slds-truncate&quot;>Fields</div></th>';
+	//htmlTanspuesto = htmlTanspuesto + '<tr><th>Fields</th>';
 
 	for (var k=0; k<orgsArray.length;k++){
 
 		var orgName = orgsArray[k].name;
-		htmlTanspuesto = htmlTanspuesto + '<th>' + orgName.substring(0,orgName.length-5) + '</th>';
+		htmlTanspuesto = htmlTanspuesto + '<th scope=&quot;col&quot;><div class=&quot;slds-truncate&quot;>' + orgName.substring(0,orgName.length-5) + '</div></th>';
+		//htmlTanspuesto = htmlTanspuesto + '<th>' + orgName.substring(0,orgName.length-5) + '</th>';
 	}
+
+	htmlTanspuesto = htmlTanspuesto + '</thead><tbody>';
 
 	for(var i=0; i< sortFieldsArray.length; i++){
 
 		if(sortFieldsArray[i].includes("__c"))
 		{	
 
-			htmlTanspuesto = htmlTanspuesto + '<tr><td>' + sortFieldsArray[i] + '</td>';
+			htmlTanspuesto = htmlTanspuesto + '<tr><th scope=&quot;row&quot;><div class=&quot;slds-truncate&quot;>' + sortFieldsArray[i] + '</div></th>';
 			for (var k=0; k<orgsArray.length;k++){
 
 				if(fieldResult[k][i] == 'undefined' || fieldResult[k][i] == '' || fieldResult[k][i] == null)
-					htmlTanspuesto = htmlTanspuesto + '<td>' + '' + '</td>';
+					htmlTanspuesto = htmlTanspuesto + '<th scope=&quot;row&quot;><div class=&quot;slds-truncate&quot;>' + '' + '</div></th>';
 				else
-					htmlTanspuesto = htmlTanspuesto + '<td>' + fieldResult[k][i] + '</td>';
+					htmlTanspuesto = htmlTanspuesto + '<th scope=&quot;row&quot;><div class=&quot;slds-truncate&quot;>' + fieldResult[k][i] + '</div></th>';
 			}
 			htmlTanspuesto = htmlTanspuesto + '</tr>';
 		}
 		
 	}
-	htmlTanspuesto = htmlTanspuesto + '</table>';
+	htmlTanspuesto = htmlTanspuesto + '</tbody></table>';
 
 	console.log('update ' + obj);
 
