@@ -33,7 +33,15 @@ app.get('/', function(req, res) {
 
 });
 
-app.get('/p', function(req, res) {
+app.get('/objetos', function(req, res) {
+
+	console.log('hola mundo');
+
+	res.render('index',{objetos : objetosArray, html:''});
+
+});
+
+app.get('objetos/p', function(req, res) {
 
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
