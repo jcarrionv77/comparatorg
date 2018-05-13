@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray});
+	res.render('index',{objetos : objetosArray, html:''});
 
 });
 
