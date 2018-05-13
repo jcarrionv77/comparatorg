@@ -28,6 +28,10 @@ app.use('/routes', routes);
 app.get('/', function(req, res) {
 
 	console.log('hola mundo');
+
+	console.log(JSON.stringify(req.body, null, 2))
+
+
 	res.render('index',{objetos : objetosArray});
 
 });
