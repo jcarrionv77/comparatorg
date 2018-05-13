@@ -291,13 +291,13 @@ function readFiles(obj){
 	}
 	
 	htmlTanspuesto = '<table class="slds-table slds-table_bordered slds-table_cell-buffer"';
-	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="&quot;"slds-text-title_caps"><th scope=&quot;col&quot;><div class=&quot;slds-truncate&quot;>Fields</div></th>';
+	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">Fields</div></th>';
 	//htmlTanspuesto = htmlTanspuesto + '<tr><th>Fields</th>';
 
 	for (var k=0; k<orgsArray.length;k++){
 
 		var orgName = orgsArray[k].name;
-		htmlTanspuesto = htmlTanspuesto + '<th scope=&quot;col&quot;><div class=&quot;slds-truncate&quot;>' + orgName.substring(0,orgName.length-5) + '</div></th>';
+		htmlTanspuesto = htmlTanspuesto + '<th scope="col"><div class="slds-truncate">' + orgName.substring(0,orgName.length-5) + '</div></th>';
 		//htmlTanspuesto = htmlTanspuesto + '<th>' + orgName.substring(0,orgName.length-5) + '</th>';
 	}
 
@@ -308,13 +308,13 @@ function readFiles(obj){
 		if(sortFieldsArray[i].includes("__c"))
 		{	
 
-			htmlTanspuesto = htmlTanspuesto + '<tr><th scope=&quot;row&quot;><div class=&quot;slds-truncate&quot;>' + sortFieldsArray[i] + '</div></th>';
+			htmlTanspuesto = htmlTanspuesto + '<tr><th scope="row"><div class="slds-truncate">' + sortFieldsArray[i] + '</div></th>';
 			for (var k=0; k<orgsArray.length;k++){
 
 				if(fieldResult[k][i] == 'undefined' || fieldResult[k][i] == '' || fieldResult[k][i] == null)
-					htmlTanspuesto = htmlTanspuesto + '<th scope=&quot;row&quot;><div class=&quot;slds-truncate&quot;>' + '' + '</div></th>';
+					htmlTanspuesto = htmlTanspuesto + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
 				else
-					htmlTanspuesto = htmlTanspuesto + '<th scope=&quot;row&quot;><div class=&quot;slds-truncate&quot;>' + fieldResult[k][i] + '</div></th>';
+					htmlTanspuesto = htmlTanspuesto + '<th scope="row"><div class="slds-truncate">' + fieldResult[k][i] + '</div></th>';
 			}
 			htmlTanspuesto = htmlTanspuesto + '</tr>';
 		}
