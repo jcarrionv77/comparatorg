@@ -56,11 +56,7 @@ app.get('/', function(req, res) {
 
 				console.log('fin consultaObjetos');
 
-			res.render('index',{users : [
-			            { name: 'John' },
-			            { name: 'Mike' },
-			            { name: 'Samantha' }
-			  	]});
+			res.render('index',{objetos : objetosArray});
 
 
 
