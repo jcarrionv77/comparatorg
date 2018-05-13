@@ -72,6 +72,9 @@ app.listen(port, function() {
 
 			objetosArray.push(objeto);
 
+
+			console.log('objeto.html ' + objeto.html);
+
 		}
 		
 		console.log('fin consultaObjetos');
