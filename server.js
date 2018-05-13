@@ -51,8 +51,6 @@ app.get('/', function(req, res) {
 
 					objetosArray.push(objeto);
 
-					var directorio = 'tmp/'+objeto.nombre
-					execSync('mkdir ' + directorio);
 				}
 
 
