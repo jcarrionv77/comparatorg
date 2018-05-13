@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var pg = require('pg');
+var Cliente = require('pg-native');
+
+
 
 
 var dbCli = null;
@@ -9,7 +12,6 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 var objetosArray = new Array();
-
 
 
 app.use(bodyParser.json());
@@ -52,8 +54,6 @@ app.get('/', function(req, res) {
 					objetosArray.push(objeto);
 
 				}
-
-
 				console.log('fin consultaObjetos');
 
 			res.render('index',{objetos : objetosArray});
@@ -67,18 +67,18 @@ app.get('/', function(req, res) {
 
 
 
-
-
-    // ejs render automatically looks in the views folder
-    /*res.render('index',{users : [
-            { name: 'John' },
-            { name: 'Mike' },
-            { name: 'Samantha' }
-  	]});*/
-
 });
 
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
+
+	var client = new Cliente();
+	client.connectSync(process.env.DATABASE_URL);
+	var rows = client.querySync('SELECT NOW() AS the_date');
+	console.log(rows[0].the_date);
+
+
+
+
 });
