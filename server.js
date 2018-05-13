@@ -36,9 +36,9 @@ app.get('/', function(req, res) {
 app.get('/p', function(req, res) {
 
 
-  console.log('hola mundo req.query.tagId ' + req.query.tagId);	
+  console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('index',{objetos : objetosArray, html: objetosArray[0].html});
+  res.render('index',{objetos : objetosArray, html: objetosArray[req.query.indice].html});
   
 
 });
@@ -60,6 +60,7 @@ app.listen(port, function() {
 			objeto.nombre = rows[i].nombre;
 			objeto.apiname = rows[i].apiname;
 			objeto.html = rows[i].html;
+			objeto.indice = "/p?indice=" + i;
 
 			objetosArray.push(objeto);
 
