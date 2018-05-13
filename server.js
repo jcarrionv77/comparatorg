@@ -28,44 +28,7 @@ app.use('/routes', routes);
 app.get('/', function(req, res) {
 
 	console.log('hola mundo');
-
-	pg.defaults.ssl = true;
-	pg.connect(process.env.DATABASE_URL, function(err, client) {
-		if (err) 
-			throw err;
-		
-		console.log('Connected to postgres!');
-		dbCli = client;
-
-		dbCli.query(
-			'SELECT nombre, apiname FROM objetos', 
-			function(err, result) {
-			if (err) {
-				console.log(err);
-			} 
-			else if  (result != null && result.rows.length>0)
-			{
-				for (var i=0; i<result.rows.length; i++)
-				{
-					var objeto = {};
-					objeto.nombre = result.rows[i].nombre;
-					objeto.apiname = result.rows[i].apiname;
-
-					objetosArray.push(objeto);
-
-				}
-				console.log('fin consultaObjetos');
-
-			res.render('index',{objetos : objetosArray});
-
-
-
-			}
-		}); 
-
-    });
-
-
+	res.render('index',{objetos : objetosArray});
 
 });
 
@@ -75,10 +38,24 @@ app.listen(port, function() {
 
 	var client = new Cliente();
 	client.connectSync(process.env.DATABASE_URL);
-	var rows = client.querySync('SELECT NOW() AS the_date');
-	console.log(rows[0].the_date);
+	var rows = client.querySync('SELECT nombre, apiname FROM objetos');
 
 
+	if  (rows != null && rows.length>0)
+	{
+		for (var i=0; i<rows.length; i++)
+		{
+			var objeto = {};
+			objeto.nombre = rows[i].nombre;
+			objeto.apiname = rows[i].apiname;
+
+			objetosArray.push(objeto);
+
+		}
+		
+		console.log('fin consultaObjetos');
+
+	}
 
 
 });
