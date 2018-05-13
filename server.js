@@ -1,6 +1,9 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var pg = require('pg');
 
+
+var dbCli = null;
 
 var app = express();
 var port = process.env.PORT || 8080;
@@ -10,15 +13,13 @@ var objetosArray = new Array();
 function consultaObjetos()
 {
 	pg.defaults.ssl = true;
-	pg.connect(process.env.DATABASE_URL, function(err, client) {
-		if (err) 
-			throw err;
-		
-		console.log('Connected to postgres!');
-		dbCli = client;
-
-		var a  = dbCli.query('SELECT nombre, apiname FROM objetos');
-		console.log('a es ' + a);
+	
+	dbCli = pg.connect(process.env.DATABASE_URL); 
+	
+	var a  = dbCli.query('SELECT nombre, apiname FROM objetos');
+	
+	console.log('a es ' + a);
+	
 
 }
 
