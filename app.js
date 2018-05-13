@@ -290,8 +290,8 @@ function readFiles(obj){
 		fieldResult.push(camposOrg);
 	}
 	
-	htmlTanspuesto = '<table class=&quot;slds-table slds-table_bordered slds-table_cell-buffer&quot;';
-	htmlTanspuesto = htmlTanspuesto + '<thead><tr class=&quot;slds-text-title_caps&quot;><th scope=&quot;col&quot;><div class=&quot;slds-truncate&quot;>Fields</div></th>';
+	htmlTanspuesto = '<table class="slds-table slds-table_bordered slds-table_cell-buffer"';
+	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="&quot;"slds-text-title_caps"><th scope=&quot;col&quot;><div class=&quot;slds-truncate&quot;>Fields</div></th>';
 	//htmlTanspuesto = htmlTanspuesto + '<tr><th>Fields</th>';
 
 	for (var k=0; k<orgsArray.length;k++){
