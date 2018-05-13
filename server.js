@@ -68,7 +68,7 @@ app.listen(port, function() {
 			objeto.nombre = rows[i].nombre;
 			objeto.apiname = rows[i].apiname;
 			objeto.html = rows[i].html;
-			objeto.indice = "/p?indice=" + i;
+			objeto.indice = "/objetos/p?indice=" + i;
 
 			objetosArray.push(objeto);
 
