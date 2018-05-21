@@ -114,6 +114,9 @@ function descargaFicheros(indice)
 		
 		var resultado = execSync(commandSFDXLogin);
 
+		console.log('resultado es ' + resultado);
+
+
 		describeObject(objInstancia.nombre , 0);
 
 		var nuevoIndice = indice + 1;
