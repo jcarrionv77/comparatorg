@@ -105,14 +105,14 @@ function descargaFicheros(indice)
 		var commandSFDXLogin = '';
 
 		
-		commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid ' + objInstancia.secreto +' --jwtkeyfile ./tmp/server.key --username ' + objInstancia.usuario + ' --instanceurl ' + objInstancia.url+ ' --setalias '+ objInstancia.nombre;
+		commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid ' + objInstancia.secreto +' --jwtkeyfile ./tmp/server.key --username ' + objInstancia.usuario + ' --instanceurl ' + objInstancia.url+ ' --setalias '+ objInstancia.nombre + ' --json';
 
 		//var commandSFDXLogin = 'sfdx force:auth:jwt:grant --clientid 3MVG9X0_oZyBSzHrtbrbfMcbIYRG2EJYKx.kHJqYn5fr_CJypNQvV0UaNy5ALJEqbHm8fuglPg6J0VxFdsCKa --jwtkeyfile ./tmp/server.key --username jcarrion@salesforce.com.repsol.repaudit --instanceurl https://test.salesforce.com --setalias repaudit';
 		
 		console.log('commandSFDXLogin  ' + commandSFDXLogin);
 
 		
-		execSync(commandSFDXLogin);
+		var resultado = execSync(commandSFDXLogin);
 
 		describeObject(objInstancia.nombre , 0);
 
@@ -124,26 +124,6 @@ function descargaFicheros(indice)
 
 		console.log('fin descargaFicheros!');
 
-		/*
-		console.log('ini llamada asincrona');
-		exec(commandSFDXLogin, (err, stdout, stderr) => {
-			if (err) {
-				console.error(`exec error: ${err}`);
-				return;
-			}
-
-			
-			describeObject(objInstancia.nombre , 0);
-			
-			var nuevoIndice = indice + 1;
-			if(nuevoIndice < instanciasArray.length)
-			{
-				descargaFicheros(nuevoIndice)
-			}
-
-		});
-		console.log('fin llamada asincrona');
-		*/
 
 	}
 	catch (err) {
@@ -175,25 +155,6 @@ function describeObject(instancia , iteracion)
 	console.log('fin describeObject');
 
 
-	//var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instanciasArray[0].nombre +    ' -s Account --json ';
-
-	/*
-	exec(commandSFDXDescribe, {maxBuffer: 1024 * 500}, (err, stdout, stderr) => {
-		if (err) {
-			console.error(`exec error: ${err}`);
-			return;
-		}
-		
-		var nuevaIteracion = iteracion + 1;
-
-		if(nuevaIteracion < objetosArray.length)
-		{
-			describeObject(instancia, nuevaIteracion)
-		}
-
-
-	});
-	*/
 
 }
 
@@ -216,7 +177,6 @@ function readFiles(obj){
 	var files = fs.readdirSync(directorioObj);
 	var fieldsArray = new Array();
 	var orgsArray = new Array();
-	var camposArray = new Array(); 
 
 	files.forEach(file => {
 		try{
@@ -240,17 +200,9 @@ function readFiles(obj){
 					for (var i =0; i<jsonContent.result.fields.length; i++)
 					{
 						var field = {};
-						var campo = new Object()
 						field.name = jsonContent.result.fields[i].name;
-
-						
-						campo.Name= nameOrg + jsonContent.result.fields[i].name;		
-						campo.JCV_fld_sandbox__c= nameOrg;
-						campo.JCV_fld_field__c= jsonContent.result.fields[i].name;
-						campo.JCV_fld_object__c = obj;
-						camposArray.push(campo);
-
 						fields.push(field);
+
 						org.fields.push(jsonContent.result.fields[i].name);
 						fieldsArray.push(jsonContent.result.fields[i].name);
 					}
@@ -266,7 +218,6 @@ function readFiles(obj){
 	});
 
 
-	var camposJSON = JSON.parse(JSON.stringify(camposArray));
 
 	unique(fieldsArray);
 	var sortFieldsArray = fieldsArray.sort();
@@ -324,17 +275,6 @@ function readFiles(obj){
 
 	console.log('update ' + obj);
 
-	/*
-    dbCli.query('UPDATE objetos set html =($1) where nombre = ($2)', 
-        [htmlTanspuesto, obj], 
-        function(errUpd, resultUpd) {
-            if (errUpd) {
-                console.log(errUpd);
-            } else {
-                console.log('row update');
-            }
-        }); 
-    */
 
 	 dbCli.query('UPDATE objetos set html =($1) where nombre = ($2)', 
 	        [htmlTanspuesto, obj]); 
