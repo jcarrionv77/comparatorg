@@ -75,7 +75,7 @@ app.listen(port, function() {
 
 	var client = new Cliente();
 	client.connectSync(process.env.DATABASE_URL);
-	var rows = client.querySync('SELECT nombre, apiname, html FROM objetos');
+	var rows = client.querySync('SELECT nombre, apiname, html, htmlrt FROM objetos');
 
 
 	if  (rows != null && rows.length>0)
