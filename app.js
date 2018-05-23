@@ -219,8 +219,8 @@ function readFiles(obj){
 						var rt = {};
 						rt.name = jsonContent.result.recordTypeInfos[i].name;
 
-						org.recordTypes.push(rt);
-						rtArray.push(rt);
+						org.recordTypes.push(jsonContent.result.recordTypeInfos[i].name);
+						rtArray.push(jsonContent.result.recordTypeInfos[i].name);
 					}
 
 					orgsArray.push(org);
