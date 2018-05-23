@@ -59,6 +59,16 @@ app.get('/objetos/p', function(req, res) {
 
 });
 
+app.get('/rt/p', function(req, res) {
+
+
+  console.log('hola mundo req.query.tagId ' + req.query.indice);	
+
+  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt});
+  
+
+});
+
 
 app.listen(port, function() {
 	console.log('Our app is running on http://localhost:' + port);
@@ -76,7 +86,9 @@ app.listen(port, function() {
 			objeto.nombre = rows[i].nombre;
 			objeto.apiname = rows[i].apiname;
 			objeto.html = rows[i].html;
+			objeto.htmlrt = rows[i].htmlrt;
 			objeto.indice = "/objetos/p?indice=" + i;
+			objeto.indiceRt = "/rt/p?indice=" + i;
 
 			objetosArray.push(objeto);
 
