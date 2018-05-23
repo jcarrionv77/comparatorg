@@ -181,6 +181,8 @@ function readFiles(obj){
 	var fieldsArray = new Array();
 	var orgsArray = new Array();
 
+	var rtArray = new Array();
+
 	files.forEach(file => {
 		try{
 
@@ -189,7 +191,7 @@ function readFiles(obj){
 			{
 				//console.log('file ' + file);
 
-				var org = { name: '', fields: []};
+				var org = { name: '', fields: [], recordTypes:[]};
 				org.name = file;
 				var nameOrg = file.substring(0,file.length-5);
 				var MyFile = fs.readFileSync(directorioObj+'/'+file);
@@ -199,6 +201,8 @@ function readFiles(obj){
 
 					var jsonContent = JSON.parse(MyFile);
 					var fields = new Array();
+
+					var recordTypes = new Array();
 
 					for (var i =0; i<jsonContent.result.fields.length; i++)
 					{
@@ -210,7 +214,18 @@ function readFiles(obj){
 						fieldsArray.push(jsonContent.result.fields[i].name);
 					}
 
+					for (var i =0; i<jsonContent.result.recordTypeInfos.length; i++)
+					{
+						var rt = {};
+						rt.name = jsonContent.result.recordTypeInfos[i].name;
+
+						org.recordTypes.push(rt);
+						rtArray.push(rt);
+					}
+
 					orgsArray.push(org);
+
+
 				}
 			}
 		}
@@ -225,12 +240,21 @@ function readFiles(obj){
 	unique(fieldsArray);
 	var sortFieldsArray = fieldsArray.sort();
 
+	unique(rtArray);
+	var sortRtArray = rtArray.sort();
+
 	var fieldResult = new Array();
+	var rtResult = new Array();
 	
 	var map = new HashMap();
+	var mapRt = new HashMap();
 
 	for(var i=0; i< sortFieldsArray.length; i++){
 		map.set(sortFieldsArray[i], i);
+	}
+
+	for(var i=0; i< sortRtArray.length; i++){
+		mapRt.set(sortRtArray[i], i);
 	}
 
 	for (var k=0; k<orgsArray.length;k++){
@@ -243,19 +267,41 @@ function readFiles(obj){
 		}
 		fieldResult.push(camposOrg);
 	}
+
+
+	for (var k=0; k<orgsArray.length;k++){
+	
+		var rtOrg = new Array(sortRtArray.length);  
+
+		for(j=0;j<orgsArray[k].recordTypes.length;j++)
+		{
+			rtOrg[map.get(orgsArray[k].recordTypes[j])] = 'si';
+		}
+		rtResult.push(rtOrg);
+	}
+
+
 	
 	htmlTanspuesto = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
 	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">Fields</div></th>';
-	//htmlTanspuesto = htmlTanspuesto + '<tr><th>Fields</th>';
+
+
+	htmlTanspuestoRT = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
+	htmlTanspuestoRT = htmlTanspuestoRT + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">Fields</div></th>';
+
 
 	for (var k=0; k<orgsArray.length;k++){
 
 		var orgName = orgsArray[k].name;
 		htmlTanspuesto = htmlTanspuesto + '<th scope="col"><div class="slds-truncate">' + orgName.substring(0,orgName.length-5) + '</div></th>';
+		
+		htmlTanspuestoRT = htmlTanspuestoRT + '<th scope="col"><div class="slds-truncate">' + orgName.substring(0,orgName.length-5) + '</div></th>';
+		
 		//htmlTanspuesto = htmlTanspuesto + '<th>' + orgName.substring(0,orgName.length-5) + '</th>';
 	}
 
 	htmlTanspuesto = htmlTanspuesto + '</thead><tbody>';
+	htmlTanspuestoRT = htmlTanspuestoRT + '</thead><tbody>';
 
 	for(var i=0; i< sortFieldsArray.length; i++){
 
@@ -274,13 +320,31 @@ function readFiles(obj){
 		}
 		
 	}
+
+
+	for(var i=0; i< sortRtArray.length; i++){
+
+		htmlTanspuestoRT = htmlTanspuestoRT + '<tr><th scope="row"><div class="slds-truncate">' + sortRtArray[i] + '</div></th>';
+		for (var k=0; k<orgsArray.length;k++){
+
+			if(rtResult[k][i] == 'undefined' || rtResult[k][i] == '' || rtResult[k][i] == null)
+				htmlTanspuestoRT = htmlTanspuestoRT + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+			else
+				htmlTanspuestoRT = htmlTanspuestoRT + '<th scope="row"><div class="slds-truncate">' + rtResult[k][i] + '</div></th>';
+		}
+		htmlTanspuestoRT = htmlTanspuestoRT + '</tr>';
+				
+	}
+
+
 	htmlTanspuesto = htmlTanspuesto + '</tbody></table>';
+	htmlTanspuestoRT = htmlTanspuestoRT + '</tbody></table>';
 
 	console.log('update ' + obj);
 
 
-	 dbCli.query('UPDATE objetos set html =($1) where nombre = ($2)', 
-	        [htmlTanspuesto, obj]); 
+	 dbCli.query('UPDATE objetos set html =($1), htmlRT =($2) where nombre = ($3)', 
+	        [htmlTanspuesto, htmlTanspuestoRT, obj]); 
 	 console.log('row update');
 
 
