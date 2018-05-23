@@ -275,7 +275,7 @@ function readFiles(obj){
 
 		for(j=0;j<orgsArray[k].recordTypes.length;j++)
 		{
-			rtOrg[map.get(orgsArray[k].recordTypes[j])] = 'si';
+			rtOrg[mapRt.get(orgsArray[k].recordTypes[j])] = 'si';
 		}
 		rtResult.push(rtOrg);
 	}
