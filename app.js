@@ -283,11 +283,11 @@ function readFiles(obj){
 
 	
 	htmlTanspuesto = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
-	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">Fields</div></th>';
+	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">Campo</div></th>';
 
 
 	htmlTanspuestoRT = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
-	htmlTanspuestoRT = htmlTanspuestoRT + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">Fields</div></th>';
+	htmlTanspuestoRT = htmlTanspuestoRT + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">Record Type</div></th>';
 
 
 	for (var k=0; k<orgsArray.length;k++){
