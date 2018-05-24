@@ -54,7 +54,7 @@ app.get('/objetos/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html}, miObjeto: objetosArray[req.query.indice].nombre );
+  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html , miObjeto: objetosArray[req.query.indice].nombre} );
   
 
 });
