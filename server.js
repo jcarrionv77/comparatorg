@@ -64,7 +64,7 @@ app.get('/rt/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt});
+  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre});
   
 
 });
