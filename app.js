@@ -138,8 +138,10 @@ function descargaFicheros(indice)
 
 function describeOrg(instancia)
 {
-
+	var directorio = '/tmp/objetos';
+	
 	console.log('ini describeOrg');
+	execSync('mkdir ' + directorio);
 	var fileName = './tmp/objetos/' +  instancia + '.json';
 
 	var commandSFDXDescribe	= 'sfdx force:schema:sobject:list -c custom -u ' + instancia +  ' --json > ' +  fileName;
