@@ -55,7 +55,7 @@ app.get('/sandbox', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('sandbox',{ html: sObjetos});
+	res.render('sandbox',{ objetos : objetosArray, html: sObjetos});
 
 });
 
