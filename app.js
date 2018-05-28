@@ -118,6 +118,7 @@ function descargaFicheros(indice)
 
 
 		describeObject(objInstancia.nombre , 0);
+		describeOrg(objInstancia.nombre);
 
 		var nuevoIndice = indice + 1;
 		if(nuevoIndice < instanciasArray.length)
@@ -134,6 +135,22 @@ function descargaFicheros(indice)
 	}
 }
 
+
+function describeOrg(instancia)
+{
+
+	console.log('ini describeOrg');
+	var fileName = './tmp/objetos/' +  instancia + '.json';
+
+	var commandSFDXDescribe	= 'sfdx force:schema:sobject:list -c custom -u ' + instancia +  ' --json > ' +  fileName;
+	
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+	console.log('fin describeOrg');
+
+}
 
 function describeObject(instancia , iteracion)
 {
@@ -166,11 +183,140 @@ function read(){
 	{
 		readFiles(objetosArray[i].apiname);
 	}
+	readFilesSandbox();
 	console.log('fin read  **********' );
 	//stopWorker();
 
 }
 
+function procesaArrays(fieldsArray, orgsArray, nombreColumna){
+
+	unique(fieldsArray);
+	var sortFieldsArray = fieldsArray.sort();
+
+
+	var fieldResult = new Array();
+	
+	var map = new HashMap();
+
+
+	for(var i=0; i< sortFieldsArray.length; i++){
+		map.set(sortFieldsArray[i], i);
+	}
+
+
+	for (var k=0; k<orgsArray.length;k++){
+	
+		var camposOrg = new Array(sortFieldsArray.length);  
+
+		for(j=0;j<orgsArray[k].fields.length;j++)
+		{
+			camposOrg[map.get(orgsArray[k].fields[j])] = 'si';
+		}
+		fieldResult.push(camposOrg);
+	}
+
+	
+	htmlTanspuesto = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
+	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
+
+
+	for (var k=0; k<orgsArray.length;k++){
+
+		var orgName = orgsArray[k].name;
+		htmlTanspuesto = htmlTanspuesto + '<th scope="col"><div class="slds-truncate">' + orgName.substring(0,orgName.length-5) + '</div></th>';
+		
+	}
+
+	htmlTanspuesto = htmlTanspuesto + '</thead><tbody>';
+
+	for(var i=0; i< sortFieldsArray.length; i++){
+
+
+
+		htmlTanspuesto = htmlTanspuesto + '<tr><th scope="row"><div class="slds-truncate">' + sortFieldsArray[i] + '</div></th>';
+		for (var k=0; k<orgsArray.length;k++){
+
+			if(fieldResult[k][i] == 'undefined' || fieldResult[k][i] == '' || fieldResult[k][i] == null)
+				htmlTanspuesto = htmlTanspuesto + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+			else
+				htmlTanspuesto = htmlTanspuesto + '<th scope="row"><div class="slds-truncate">' + fieldResult[k][i] + '</div></th>';
+		}
+		htmlTanspuesto = htmlTanspuesto + '</tr>';
+		
+		
+	}
+
+	htmlTanspuestoRT = htmlTanspuestoRT + '</tbody></table>';
+
+	return htmlTanspuesto:
+}
+
+function readFilesSandbox(){
+	
+	var directorioObj = 'tmp/objetos' + obj;
+	console.log('readFiles en  ' + readFilesSandbox);
+	var files = fs.readdirSync(readFilesSandbox);
+
+	var fieldsArray = new Array();
+	var orgsArray = new Array();
+
+	files.forEach(file => {
+		try{
+
+			console.log('file ' + file);
+			if(path.extname(file) == '.json' && file != 'DevHub.json'  )
+			{
+				var org = { name: '', fields: []};
+				org.name = file;
+
+				var nameOrg = file.substring(0,file.length-5);
+				var MyFile = fs.readFileSync(directorioObj+'/'+file);
+
+				if(MyFile.length>0)
+				{
+
+					var jsonContent = JSON.parse(MyFile);
+					var fields = new Array();
+
+
+					for (var i =0; i<jsonContent.result.length; i++)
+					{
+						var field = {};
+						field.name = jsonContent.result[i];
+						fields.push(field);
+
+						org.fields.push(jsonContent.result[i]);
+						fieldsArray.push(jsonContent.result[i]);
+					}
+					orgsArray.push(org);
+				}
+			}
+
+		}
+
+		catch (err) {
+			console.error('Error en files.forEach');
+  			console.error(err);
+		}
+
+
+
+
+	});
+
+	var htmlObjetos = procesaArrays(fieldsArray, orgsArray,   'Objetos');
+
+
+	console.log('update ' + obj);
+
+
+	 dbCli.query('UPDATE instacias set html =($1)', 
+	        [htmlCampos]); 
+	 console.log('row update');
+
+
+}
 
 function readFiles(obj){
 
@@ -178,10 +324,12 @@ function readFiles(obj){
 
 	console.log('readFiles en  ' + directorioObj);
 	var files = fs.readdirSync(directorioObj);
+	
 	var fieldsArray = new Array();
-	var orgsArray = new Array();
-
 	var rtArray = new Array();
+
+	var orgsArray = new Array();
+	var orgsRtArray = new Array();
 
 	files.forEach(file => {
 		try{
@@ -191,8 +339,13 @@ function readFiles(obj){
 			{
 				//console.log('file ' + file);
 
-				var org = { name: '', fields: [], recordTypes:[]};
+				var org = { name: '', fields: []};
 				org.name = file;
+
+				var orgRT = { name: '', fields:[]};
+				orgRT.name = file;
+
+
 				var nameOrg = file.substring(0,file.length-5);
 				var MyFile = fs.readFileSync(directorioObj+'/'+file);
 
@@ -213,18 +366,18 @@ function readFiles(obj){
 						org.fields.push(jsonContent.result.fields[i].name);
 						fieldsArray.push(jsonContent.result.fields[i].name);
 					}
+					orgsArray.push(org);
 
 					for (var i =0; i<jsonContent.result.recordTypeInfos.length; i++)
 					{
 						var rt = {};
 						rt.name = jsonContent.result.recordTypeInfos[i].name;
 
-						org.recordTypes.push(jsonContent.result.recordTypeInfos[i].name);
+						orgRT.fields.push(jsonContent.result.recordTypeInfos[i].name);
 						rtArray.push(jsonContent.result.recordTypeInfos[i].name);
 					}
 
-					orgsArray.push(org);
-
+					orgsRtArray.push(orgRT);
 
 				}
 			}
@@ -235,7 +388,10 @@ function readFiles(obj){
 		}
 	});
 
+	var htmlCampos = procesaArrays(fieldsArray, orgsArray,   'Campos');
+	var htmlRT = procesaArrays(rtArray, orgsRtArray,  'Record Type');
 
+/*
 
 	unique(fieldsArray);
 	var sortFieldsArray = fieldsArray.sort();
@@ -339,12 +495,14 @@ function readFiles(obj){
 
 	htmlTanspuesto = htmlTanspuesto + '</tbody></table>';
 	htmlTanspuestoRT = htmlTanspuestoRT + '</tbody></table>';
+*/
+
 
 	console.log('update ' + obj);
 
 
 	 dbCli.query('UPDATE objetos set html =($1), htmlrt =($2) where nombre = ($3)', 
-	        [htmlTanspuesto, htmlTanspuestoRT, obj]); 
+	        [htmlCampos, htmlRT, obj]); 
 	 console.log('row update');
 
 
