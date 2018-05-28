@@ -138,7 +138,7 @@ function descargaFicheros(indice)
 
 function describeOrg(instancia)
 {
-	var directorio = '/tmp/objetos';
+	var directorio = 'tmp/objetos';
 	
 	console.log('ini describeOrg');
 	execSync('mkdir ' + directorio);
