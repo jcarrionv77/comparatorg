@@ -258,7 +258,8 @@ function readFilesSandbox(){
 	
 	var directorioObj = 'tmp/objetos';
 	console.log('readFiles en  ' + readFilesSandbox);
-	var files = fs.readdirSync(readFilesSandbox);
+	
+	var files = fs.readdirSync(directorioObj);
 
 	var fieldsArray = new Array();
 	var orgsArray = new Array();
