@@ -310,7 +310,7 @@ function readFilesSandbox(){
 	var htmlObjetos = procesaArrays(fieldsArray, orgsArray,   'Objetos');
 
 
-	console.log('update ' + obj);
+	console.log('update ');
 
 
 	 dbCli.query('UPDATE instacias set html =($1)', 
