@@ -257,7 +257,7 @@ function procesaArrays(fieldsArray, orgsArray, nombreColumna){
 function readFilesSandbox(){
 	
 	var directorioObj = 'tmp/objetos';
-	console.log('readFiles en  ' + readFilesSandbox);
+	console.log('readFiles en  ' + directorioObj);
 	
 	var files = fs.readdirSync(directorioObj);
 

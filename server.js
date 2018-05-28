@@ -51,6 +51,14 @@ app.get('/objetos', function(req, res) {
 
 });
 
+app.get('/sandbox', function(req, res) {
+
+	console.log('hola mundo');
+
+	res.render('sandbox',{ html: sObjetos});
+
+});
+
 app.get('/objetos/p', function(req, res) {
 
 
