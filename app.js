@@ -138,10 +138,10 @@ function descargaFicheros(indice)
 
 function describeOrg(instancia)
 {
-	var directorio = 'tmp/objetos';
+	
 	
 	console.log('ini describeOrg');
-	execSync('mkdir ' + directorio);
+
 	var fileName = './tmp/objetos/' +  instancia + '.json';
 
 	var commandSFDXDescribe	= 'sfdx force:schema:sobject:list -c custom -u ' + instancia +  ' --json > ' +  fileName;
@@ -519,6 +519,9 @@ function stopWorker()
 }
 
 var serverKey = process.env.SERVER_KEY;
+
+var directorio = 'tmp/objetos';
+execSync('mkdir ' + directorio);
 
 var fs = require('fs');
 fs.writeFileSync("tmp/server.key", serverKey); 
