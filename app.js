@@ -314,7 +314,7 @@ function readFilesSandbox(){
 	console.log('update ');
 
 
-	 dbCli.query('UPDATE instacias set html =($1)', 
+	 dbCli.query('UPDATE instancias set html =($1)', 
 	        [htmlObjetos]); 
 	 console.log('row update');
 

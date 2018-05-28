@@ -13,6 +13,8 @@ var port = process.env.PORT || 8080;
 
 var objetosArray = new Array();
 
+var sObjetos = '';
+
 
 app.use(bodyParser.json());
 var routes = require('./routes/index');
@@ -95,7 +97,13 @@ app.listen(port, function() {
 
 		}
 		
-		console.log('fin consultaObjetos');
+	}
+
+
+	var rowsObjetos = client.querySync('SELECT  html FROM instancias limit 1');
+	if  (rowsObjetos != null && rowsObjetos.length>0)
+	{
+		sObjetos = rowsObjetos[0].html;
 
 	}
 
