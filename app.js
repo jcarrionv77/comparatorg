@@ -249,7 +249,7 @@ function procesaArrays(fieldsArray, orgsArray, nombreColumna){
 
 	htmlTanspuestoRT = htmlTanspuestoRT + '</tbody></table>';
 
-	return htmlTanspuesto:
+	return htmlTanspuesto;
 }
 
 function readFilesSandbox(){
