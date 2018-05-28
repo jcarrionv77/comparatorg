@@ -249,7 +249,7 @@ function procesaArrays(fieldsArray, orgsArray, nombreColumna){
 		
 	}
 
-	htmlTanspuestoRT = htmlTanspuestoRT + '</tbody></table>';
+	htmlTanspuesto = htmlTanspuesto + '</tbody></table>';
 
 	return htmlTanspuesto;
 }
