@@ -521,11 +521,33 @@ function readFiles(obj){
 
 function consultaPermission(){
 
-	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions " -u deportmx --json > tmp/pp.json';
-	
-	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+	var result = dbCli.query('SELECT nombre, apiname FROM permissionset');
 
-	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+	if  (result != null && result.rows.length>0)
+	{
+
+		for (var j=0; j<instanciasArray.length; j++)
+		{
+			for (var i=0; i<result.rows.length; i++)
+			{
+				console.log('result[i].apiname ' + result[i].apiname);
+				console.log('instanciasArray[i] ' + instanciasArray[i]);
+
+				var fileName = './tmp/' + result[i].apiname + '/' +  instanciasArray[i] + '.json';
+
+				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions " -u ' + instanciasArray[i] +' --json > ' + fileName;
+
+				console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+				execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+			}
+		}
+	}
+			
+
+
 
 }
 
@@ -539,6 +561,9 @@ function stopWorker()
 var serverKey = process.env.SERVER_KEY;
 
 var directorio = 'tmp/objetos';
+execSync('mkdir ' + directorio);
+
+var directorio = 'tmp/ps';
 execSync('mkdir ' + directorio);
 
 var fs = require('fs');
