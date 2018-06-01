@@ -524,7 +524,7 @@ function consultaPermission(){
 	var result = dbCli.query('SELECT nombre, apiname FROM permissionset');
 
 
-	if  (result != null && result.rows.length>0)
+	if  (result != null && result.length>0)
 	{
 
 		for (var j=0; j<instanciasArray.length; j++)
@@ -536,7 +536,7 @@ function consultaPermission(){
 
 				var fileName = './tmp/' + result[i].apiname + '/' +  instanciasArray[i] + '.json';
 
-				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions " -u ' + instanciasArray[i] +' --json > ' + fileName;
+				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions where parent.name= \""' +  result[i].apiname  + +'\"' + '-u ' + instanciasArray[i] +' --json > ' + fileName;
 
 				console.log('commandSFDXDescribe ' + commandSFDXDescribe);
 
