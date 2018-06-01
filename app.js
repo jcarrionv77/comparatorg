@@ -521,11 +521,9 @@ function readFiles(obj){
 
 function consultaPermission(){
 
-	var result = dbCli.query('SELECT nombre, apiname FROM permissionset');
+	var result = dbCli.querySync('SELECT nombre, apiname FROM permissionset');
 
-	console.log('result ' + JSON.stringify(result));
-
-
+	
 	if  (result != null && result.length>0)
 	{
 
