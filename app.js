@@ -8,6 +8,8 @@ var dbCli = null;
 var instanciasArray = new Array();
 var objetosArray = new Array();
 
+var Cliente = require('pg-native');
+
 const { exec } = require('child_process');
 const { execSync } = require('child_process');
 
@@ -521,9 +523,12 @@ function readFiles(obj){
 
 function consultaPermission(){
 
-	var result = dbCli.querySync('SELECT nombre, apiname FROM permissionset');
+	var client = new Cliente();
+	client.connectSync(process.env.DATABASE_URL);
 
-	
+	var result = client.querySync('SELECT nombre, apiname FROM permissionset');
+
+
 	if  (result != null && result.length>0)
 	{
 
