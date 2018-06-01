@@ -532,7 +532,7 @@ function consultaPermission(){
 	if  (result != null && result.length>0)
 	{
 
-		console.log('result[i].apiname ' + result[i].apiname);
+	
 
 		for (var j=0; j<instanciasArray.length; j++)
 		{
