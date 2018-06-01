@@ -23,7 +23,7 @@ function ConsultaInstancias()
 		dbCli = client;
 
 		dbCli.query(
-			'SELECT nombre, secreto, usuario, url FROM instancias', 
+			'SELECT nombre, secreto, usuario, url FROM instancias where activo = true', 
 			function(err, result) {
 			if (err) {
 				console.log(err);
@@ -523,15 +523,19 @@ function consultaPermission(){
 
 	var result = dbCli.query('SELECT nombre, apiname FROM permissionset');
 
+	console.log('result ' + result);
+
 
 	if  (result != null && result.length>0)
 	{
+
+		console.log('result[i].apiname ' + result[i].apiname);
 
 		for (var j=0; j<instanciasArray.length; j++)
 		{
 			for (var i=0; i<result.rows.length; i++)
 			{
-				console.log('result[i].apiname ' + result[i].apiname);
+				
 				console.log('instanciasArray[i] ' + instanciasArray[i]);
 
 				var fileName = './tmp/' + result[i].apiname + '/' +  instanciasArray[i] + '.json';
