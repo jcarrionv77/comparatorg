@@ -187,6 +187,14 @@ function read(){
 	}
 	readFilesSandbox();
 	console.log('fin read  **********' );
+
+
+	console.log('fin release 1');
+
+	consultaPermission();
+
+	console.log('fin release 2');
+
 	//stopWorker();
 
 }
@@ -538,11 +546,7 @@ fs.writeFileSync("tmp/server.key", serverKey);
 
 consultaObjetos();
 
-console.log('fin release 1');
 
-consultaPermission();
-
-console.log('fin release 2');
 
 
 
