@@ -511,6 +511,15 @@ function readFiles(obj){
 
 }
 
+function consultaPermission(){
+
+	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions " -u deportmx';
+	
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+}
 
 
 function stopWorker()
@@ -529,7 +538,13 @@ fs.writeFileSync("tmp/server.key", serverKey);
 
 consultaObjetos();
 
-console.log('fin');
+console.log('fin release 1');
+
+consultaPermission();
+
+console.log('fin release 2');
+
+
 
 
 
