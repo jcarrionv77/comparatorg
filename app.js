@@ -523,7 +523,7 @@ function consultaPermission(){
 
 	var result = dbCli.query('SELECT nombre, apiname FROM permissionset');
 
-	console.log('result ' + result);
+	console.log('result ' + JSON.stringify(result));
 
 
 	if  (result != null && result.length>0)
