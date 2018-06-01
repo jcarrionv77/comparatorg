@@ -521,7 +521,7 @@ function readFiles(obj){
 
 function consultaPermission(){
 
-	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions " -u deportmx';
+	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions " -u deportmx --json > tmp/pp.json';
 	
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
 
