@@ -536,14 +536,14 @@ function consultaPermission(){
 
 		for (var j=0; j<instanciasArray.length; j++)
 		{
-			for (var i=0; i<result.rows.length; i++)
+			for (var i=0; i<result.length; i++)
 			{
 				
 				console.log('instanciasArray[i] ' + instanciasArray[i]);
 
 				var fileName = './tmp/' + result[i].apiname + '/' +  instanciasArray[i] + '.json';
 
-				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions where parent.name= \""' +  result[i].apiname  + +'\"' + '-u ' + instanciasArray[i] +' --json > ' + fileName;
+				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions where parent.name= \""' +  result[i].apiname  + +'\" order by SobjectType' + '-u ' + instanciasArray[i] +' --json > ' + fileName;
 
 				console.log('commandSFDXDescribe ' + commandSFDXDescribe);
 
