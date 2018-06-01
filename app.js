@@ -526,7 +526,7 @@ function consultaPermission(){
 	var client = new Cliente();
 	client.connectSync(process.env.DATABASE_URL);
 
-	var result = client.querySync('SELECT nombre, apiname FROM permissionset');
+	var result = client.querySync('SELECT name, apiname FROM permissionset');
 
 
 	if  (result != null && result.length>0)
