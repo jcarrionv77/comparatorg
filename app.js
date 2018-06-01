@@ -78,7 +78,7 @@ function consultaObjetos()
 
 					objetosArray.push(objeto);
 
-					var directorio = 'tmp/'+objeto.nombre
+					var directorio = 'tmp/'+objeto.nombre;
 					execSync('mkdir ' + directorio);
 				}
 				ConsultaInstancias();
@@ -527,6 +527,13 @@ function consultaPermission(){
 	client.connectSync(process.env.DATABASE_URL);
 
 	var result = client.querySync('SELECT name, apiname FROM permissionset');
+
+	for (var i=0; i<result.length; i++)
+	{
+		var directorio = 'tmp/'+result[i].apiname;
+		execSync('mkdir ' + directorio);
+	}
+
 
 
 	if  (result != null && result.length>0)
