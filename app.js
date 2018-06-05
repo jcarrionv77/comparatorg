@@ -282,11 +282,11 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 	console.log('procesaArraysNuevo  ************************************************' );
 	
 
-	console.log('JSON.stringify(orgsArray) ' + JSON.stringify(orgsArray));
+	//console.log('JSON.stringify(orgsArray) ' + JSON.stringify(orgsArray));
 
-	console.log('orgsArray.fieldsData.length ' + orgsArray.fieldsData.length);
-	console.log('JSON.stringify(orgsArray.fieldsData[0] ' + JSON.stringify(orgsArray.fieldsData[0]));
-	console.log('JSON.stringify(orgsArray.fieldsData[0].PermissionsRead ' + JSON.stringify(orgsArray.fieldsData[0].PermissionsRead));
+	console.log('orgsArray.fieldsData.length ' + orgsArray[0].fieldsData.length);
+	console.log('JSON.stringify(orgsArray.fieldsData[0] ' + JSON.stringify(orgsArray[0].fieldsData[0]));
+	console.log('JSON.stringify(orgsArray.fieldsData[0].PermissionsRead ' + JSON.stringify(orgsArray[0].fieldsData[0].PermissionsRead));
 
 	
 
@@ -312,8 +312,8 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 		//pongo un si en las posiciones que aplican para 
 		for(j=0;j<orgsArray[k].fields.length;j++)
 		{
-			//console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[i].PermissionsRead);
-			camposOrg[map.get(orgsArray[k].fields[j])] = 'si';
+			console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[i].PermissionsRead);
+			camposOrg[map.get(orgsArray[k].fields[j])] = orgsArray[k].fieldsData[i].PermissionsRead;
 		}
 		fieldResult.push(camposOrg);
 	}
