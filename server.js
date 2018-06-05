@@ -142,6 +142,9 @@ app.listen(port, function() {
 			ps.nombre = rowsPS[i].nombre;
 			ps.html = rowsPS[i].html;
 
+			console.log('ps.nombre ' + ps.nombre);	
+
+
 			ps.indice = "/ps/p?indice=" + i;
 
 			psArray.push(ps);
