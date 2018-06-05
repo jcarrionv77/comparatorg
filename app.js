@@ -119,8 +119,8 @@ function descargaFicheros(indice)
 		console.log('resultado es ' + resultado);
 
 
-		describeObject(objInstancia.nombre , 0);
-		describeOrg(objInstancia.nombre);
+		//describeObject(objInstancia.nombre , 0);
+		//describeOrg(objInstancia.nombre);
 
 		var nuevoIndice = indice + 1;
 		if(nuevoIndice < instanciasArray.length)
