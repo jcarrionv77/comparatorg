@@ -543,11 +543,11 @@ function consultaPermission(){
 			for (var i=0; i<result.length; i++)
 			{
 				
-				console.log('instanciasArray[i] ' + instanciasArray[i].nombre);
+				console.log('instanciasArray[j] ' + instanciasArray[j].nombre);
 
-				var fileName = './tmp/' + result[i].apiname + '/' +  instanciasArray[i].nombre + '.json';
+				var fileName = './tmp/' + result[i].apiname + '/' +  instanciasArray[j].nombre + '.json';
 
-				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions where parent.name= \'' +  result[i].apiname   +'\' order by SobjectType" ' + '-u ' + instanciasArray[i].nombre +' --json > ' + fileName;
+				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions where parent.name= \'' +  result[i].apiname   +'\' order by SobjectType" ' + '-u ' + instanciasArray[j].nombre +' --json > ' + fileName;
 
 				console.log('commandSFDXDescribe ' + commandSFDXDescribe);
 				console.log('escribimos en ' + fileName);
