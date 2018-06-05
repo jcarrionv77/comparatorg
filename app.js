@@ -599,7 +599,7 @@ function consultaPermission(){
 							{
 
 								var Permssions={};
-								
+
 								Permssions.PermissionsRead = jsonContent.result.records[i].PermissionsRead;
 								Permssions.PermissionsCreate = jsonContent.result.records[i].PermissionsCreate;
 								Permssions.PermissionsDelete = jsonContent.result.records[i].PermissionsDelete;
@@ -631,6 +631,14 @@ function consultaPermission(){
 
 			var html = procesaArrays(fieldsArray, orgsArray,   'permission Set');
 
+
+
+			console.log('update ' + result[i].apiname);
+
+
+			dbCli.query('UPDATE permissionset set html =($1),  where nombre = ($2)', 
+				[htmlCampos, html, result[i].apiname]); 
+			console.log('row update');
 
 				
 		}
