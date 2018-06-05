@@ -131,7 +131,7 @@ app.listen(port, function() {
 
 
 
-	var rowsPS = client.querySync('SELECT name,  html FROM permissionset');
+	var rowsPS = client.querySync('SELECT name,  html FROM permissionset where tipo="ps"');
 
 
 	if  (rowsPS != null && rowsPS.length>0)

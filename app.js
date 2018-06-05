@@ -300,8 +300,6 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 		//pongo un si en las posiciones que aplican para 
 		for(j=0;j<orgsArray[k].fields.length;j++)
 		{
-			console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[j].valor);
-			
 			camposOrg[map.get(orgsArray[k].fields[j])] = orgsArray[k].fieldsData[j].valor;
 		}
 		fieldResult.push(camposOrg);
