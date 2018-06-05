@@ -562,7 +562,7 @@ function consultaPermission(){
 		{
 			var directorio = 'tmp/'+result[i].apiname;
 
-			console.log('directorio en PS' + directorio);
+			console.log('directorio en PS  ' + directorio);
 
 			var files = fs.readdirSync(directorio);
 
