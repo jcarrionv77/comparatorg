@@ -595,30 +595,24 @@ function consultaPermission(){
 						{
 							var jsonContent = JSON.parse(MyFile);	
 
-							console.log('jsonContent.result ' + jsonContent.result.length);
-
-							for (var i =0; i<jsonContent.result.length; i++)
+							for (var i =0; i<jsonContent.result.records.length; i++)
 							{
 
 								var Permssions;
-								Permssions.PermissionsRead = jsonContent.result[i].PermissionsRead;
-
-
-								console.log('jsonContent.result[i].PermissionsRead ' + jsonContent.result[i].PermissionsRead);
-
-								Permssions.PermissionsCreate = jsonContent.result[i].PermissionsCreate;
-								Permssions.PermissionsDelete = jsonContent.result[i].PermissionsDelete;
-								Permssions.PermissionsViewAllRecords = jsonContent.result[i].PermissionsViewAllRecords;
-								Permssions.PermissionsModifyAllRecords = jsonContent.result[i].PermissionsModifyAllRecords;
-								Permssions.name = jsonContent.result[i].SobjectType;
+								Permssions.PermissionsRead = jsonContent.result.records[i].PermissionsRead;
+								Permssions.PermissionsCreate = jsonContent.result.records[i].PermissionsCreate;
+								Permssions.PermissionsDelete = jsonContent.result.records[i].PermissionsDelete;
+								Permssions.PermissionsViewAllRecords = jsonContent.result.records[i].PermissionsViewAllRecords;
+								Permssions.PermissionsModifyAllRecords = jsonContent.result.records[i].PermissionsModifyAllRecords;
+								Permssions.name = jsonContent.result.records[i].SobjectType;
 
 								Permssions.descripcion = Permssions.PermissionsRead + ' ' + Permssions.PermissionsCreate + ' ' + Permssions.PermissionsDelete + ' ' + Permssions.PermissionsViewAllRecords + ' ' + Permssions.PermissionsModifyAllRecords;
 
-								org.fields.push(jsonContent.result[i].SobjectType);
+								org.fields.push(jsonContent.result.records[i].SobjectType);
 								org.fieldsData.push(Permssions);
 
 
-								fieldsArray.push(jsonContent.result[i].SobjectType);
+								fieldsArray.push(jsonContent.result.records[i].SobjectType);
 
 							}
 
