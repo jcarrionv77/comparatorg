@@ -90,7 +90,7 @@ app.get('/ps/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('ps',{objetos : objetosArray, html: psArray.pset[req.query.indice].html, miObjeto: psArray[req.query.indice].nombre, ps : psArray.pset});
+  res.render('ps',{objetos : objetosArray, html: psArray.pset[req.query.indice].html, miObjeto: psArray.pset[req.query.indice].nombre, ps : psArray.pset});
   
 
 });
