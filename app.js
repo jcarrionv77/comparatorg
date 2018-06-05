@@ -598,7 +598,8 @@ function consultaPermission(){
 							for (var i =0; i<jsonContent.result.records.length; i++)
 							{
 
-								var Permssions;
+								var Permssions={};
+								
 								Permssions.PermissionsRead = jsonContent.result.records[i].PermissionsRead;
 								Permssions.PermissionsCreate = jsonContent.result.records[i].PermissionsCreate;
 								Permssions.PermissionsDelete = jsonContent.result.records[i].PermissionsDelete;
