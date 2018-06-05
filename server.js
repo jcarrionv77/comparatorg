@@ -33,6 +33,7 @@ app.get('/', function(req, res) {
 	console.log('hola mundo');
 
 	console.log('psArray.length ' + psArray.length);
+	console.log('psArray[0].nombre ' + psArray[0].nombre);
 
 	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
