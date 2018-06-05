@@ -574,7 +574,7 @@ function consultaPermission(){
 					console.log('file ' + file);
 					if(path.extname(file) == '.json')
 					{
-						var org = { name: '', fields: [], fieldsData[]};
+						var org = { name: '', fields: [], fieldsData: []};
 						org.name = file;
 
 						var nameOrg = file.substring(0,file.length-5);
@@ -617,6 +617,7 @@ function consultaPermission(){
 				}
 			});
 
+			var html = procesaArrays(fieldsArray, orgsArray,   'permission Set');
 
 
 				
