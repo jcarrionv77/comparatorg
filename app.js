@@ -550,6 +550,7 @@ function consultaPermission(){
 				var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "select SobjectType,parent.name,PermissionsCreate,PermissionsRead,PermissionsDelete,PermissionsViewAllRecords,PermissionsModifyAllRecords from ObjectPermissions where parent.name= \'' +  result[i].apiname   +'\' order by SobjectType" ' + '-u ' + instanciasArray[i].nombre +' --json > ' + fileName;
 
 				console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+				console.log('escribimos en ' + fileName);
 
 				execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
@@ -578,6 +579,9 @@ function consultaPermission(){
 						org.name = file;
 
 						var nameOrg = file.substring(0,file.length-5);
+
+						console.log('leer directorio ' + directorio + '/' + file);
+
 						var MyFile = fs.readFileSync(directorio+'/'+file);
 
 						if(MyFile.length>0)
