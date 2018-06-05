@@ -45,7 +45,7 @@ app.get('/index', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray, html:'', ps : psArray.pset});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
 });
 
@@ -53,7 +53,7 @@ app.get('/objetos', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray, html:'', ps : psArray.pset});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
 });
 
@@ -61,7 +61,7 @@ app.get('/sandbox', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray.pset});
+	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray});
 
 });
 
@@ -70,7 +70,7 @@ app.get('/objetos/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html , miObjeto: objetosArray[req.query.indice].nombre, ps : psArray.pset} );
+  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html , miObjeto: objetosArray[req.query.indice].nombre, ps : psArray} );
   
 
 });
@@ -80,7 +80,7 @@ app.get('/rt/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre, ps : psArray.pset});
+  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre, ps : psArray});
   
 
 });
@@ -90,7 +90,7 @@ app.get('/ps/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('ps',{objetos : objetosArray, html: psArray.pset[req.query.indice].html, miObjeto: psArray.pset[req.query.indice].nombre, ps : psArray.pset});
+  res.render('ps',{objetos : objetosArray, html: psArray.pset[req.query.indice].html, miObjeto: psArray.pset[req.query.indice].nombre, ps : psArray});
   
 
 });
