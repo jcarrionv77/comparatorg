@@ -534,15 +534,12 @@ function consultaPermission(){
 		execSync('mkdir ' + directorio);
 	}
 
-
-
 	if  (result != null && result.length>0)
 	{
-
-	
-
+		//descargar las permission set de una sandbox
 		for (var j=0; j<instanciasArray.length; j++)
 		{
+			//descarga de un PS
 			for (var i=0; i<result.length; i++)
 			{
 				
@@ -558,10 +555,77 @@ function consultaPermission(){
 
 			}
 		}
+		//ya estan los PS de todas las sandbox descargados
+		//buche para recorrer por PS 
+		for (var i=0; i<result.length; i++)
+		{
+			var directorio = 'tmp/'+result[i].apiname;
+			var files = fs.readdirSync(directorio);
+
+			//Array con las filas unicas quitando duplicados
+			var fieldsArray = new Array();
+
+			//Array con los datos por org
+			var orgsArray = new Array();
+
+			files.forEach(file => {
+				try{
+
+					console.log('file ' + file);
+					if(path.extname(file) == '.json')
+					{
+						var org = { name: '', fields: [], fieldsData[]};
+						org.name = file;
+
+						var nameOrg = file.substring(0,file.length-5);
+						var MyFile = fs.readFileSync(directorioObj+'/'+file);
+
+						if(MyFile.length>0)
+						{
+							var jsonContent = JSON.parse(MyFile);	
+
+							for (var i =0; i<jsonContent.result.fields.length; i++)
+							{
+
+								var Permssions;
+								Permssions.PermissionsRead = jsonContent.result.fields[i].PermissionsRead;
+								Permssions.PermissionsCreate = jsonContent.result.fields[i].PermissionsCreate;
+								Permssions.PermissionsDelete = jsonContent.result.fields[i].PermissionsDelete;
+								Permssions.PermissionsViewAllRecords = jsonContent.result.fields[i].PermissionsViewAllRecords;
+								Permssions.PermissionsModifyAllRecords = jsonContent.result.fields[i].PermissionsModifyAllRecords;
+								Permssions.name = jsonContent.result.fields[i].SobjectType;
+
+								Permssions.descripcion = Permssions.PermissionsRead + ' ' + Permssions.PermissionsCreate + ' ' + Permssions.PermissionsDelete + ' ' + Permssions.PermissionsViewAllRecords + ' ' + Permssions.PermissionsModifyAllRecords;
+
+								org.fields.push(jsonContent.result.fields[i].SobjectType);
+								org.fieldsData.push(Permssions);
+
+
+								fieldsArray.push(jsonContent.result.fields[i].SobjectType);
+
+							}
+
+							orgsArray.push(org);
+						}	
+
+					}
+
+				}
+				catch (err) {
+					console.error('Error en files.forEach');
+		  			console.error(err);
+				}
+			});
+
+
+
+				
+		}
+
+
+
 	}
 			
-
-
 
 }
 
