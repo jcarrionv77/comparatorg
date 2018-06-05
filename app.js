@@ -408,7 +408,7 @@ function readFilesSandbox(){
 
 	});
 
-	var htmlObjetos = procesaArray(fieldsArray, orgsArray,   'Objetos');
+	var htmlObjetos = procesaArrays(fieldsArray, orgsArray,   'Objetos');
 
 
 	console.log('update ');
