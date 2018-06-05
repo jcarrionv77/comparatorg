@@ -279,18 +279,6 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 	//lista unica de elementos para las filas
 	var sortFieldsArray = fieldsArray.sort();
 
-	console.log('procesaArraysNuevo  ************************************************' );
-	
-
-	//console.log('JSON.stringify(orgsArray) ' + JSON.stringify(orgsArray));
-
-	console.log('orgsArray.fieldsData.length ' + orgsArray[0].fieldsData.length);
-	console.log('JSON.stringify(orgsArray.fieldsData[0] ' + JSON.stringify(orgsArray[0].fieldsData[0]));
-	console.log('JSON.stringify(orgsArray.fieldsData[0].PermissionsRead ' + JSON.stringify(orgsArray[0].fieldsData[0].PermissionsRead));
-
-	
-
-
 	var fieldResult = new Array();
 	
 	//mapa de saber cada elemento en que fila está
