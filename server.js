@@ -12,6 +12,7 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 var objetosArray = new Array();
+var psArray = new Array();
 
 var sObjetos = '';
 
@@ -31,7 +32,7 @@ app.get('/', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray, html:''});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
 });
 
@@ -39,7 +40,7 @@ app.get('/index', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray, html:''});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
 });
 
@@ -47,7 +48,7 @@ app.get('/objetos', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray, html:''});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
 });
 
@@ -55,7 +56,7 @@ app.get('/sandbox', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('sandbox',{ objetos : objetosArray, html: sObjetos});
+	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray});
 
 });
 
@@ -64,7 +65,7 @@ app.get('/objetos/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html , miObjeto: objetosArray[req.query.indice].nombre} );
+  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html , miObjeto: objetosArray[req.query.indice].nombre, ps : psArray} );
   
 
 });
@@ -74,7 +75,17 @@ app.get('/rt/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre});
+  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre, ps : psArray});
+  
+
+});
+
+app.get('/ps/p', function(req, res) {
+
+
+  console.log('hola mundo req.query.tagId ' + req.query.indice);	
+
+  res.render('ps',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre, ps : psArray});
   
 
 });
@@ -114,6 +125,32 @@ app.listen(port, function() {
 		sObjetos = rowsObjetos[0].html;
 
 	}
+
+
+
+	var rowsPS = client.querySync('SELECT name,  html FROM permissionset');
+
+
+	if  (rowsPS != null && rowsPS.length>0)
+	{
+		for (var i=0; i<rowsPS.length; i++)
+		{
+			var ps = {};
+			ps.nombre = rowsPS[i].nombre;
+			ps.html = rowsPS[i].html;
+
+			ps.indice = "/ps/p?indice=" + i;
+
+			psArray.push(ps);
+
+
+		}
+		
+	}
+
+
+
+
 
 
 });
