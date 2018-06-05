@@ -578,7 +578,7 @@ function consultaPermission(){
 						org.name = file;
 
 						var nameOrg = file.substring(0,file.length-5);
-						var MyFile = fs.readFileSync(directorioObj+'/'+file);
+						var MyFile = fs.readFileSync(directorio+'/'+file);
 
 						if(MyFile.length>0)
 						{
