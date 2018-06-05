@@ -279,6 +279,14 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 	//lista unica de elementos para las filas
 	var sortFieldsArray = fieldsArray.sort();
 
+	console.log('procesaArraysNuevo  ************************************************' );
+	
+	console.log('orgsArray.fieldsData.length ' + orgsArray.fieldsData.length);
+	console.log('JSON.stringify(orgsArray.fieldsData[0] ' + JSON.stringify(orgsArray.fieldsData[0]));
+	console.log('JSON.stringify(orgsArray.fieldsData[0].PermissionsRead ' + JSON.stringify(orgsArray.fieldsData[0].PermissionsRead));
+
+	
+
 
 	var fieldResult = new Array();
 	
@@ -691,7 +699,7 @@ function consultaPermission(){
 								org.fields.push(jsonContent.result.records[i].SobjectType);
 								org.fieldsData.push(Permssions);
 
-								console.log(' org  ' + JSON.stringify(org));
+
 
 
 								fieldsArray.push(jsonContent.result.records[i].SobjectType);
