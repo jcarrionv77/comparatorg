@@ -138,6 +138,13 @@ app.listen(port, function() {
 	{
 		for (var i=0; i<rowsPS.length; i++)
 		{
+
+
+			console.log('i ' + i);	
+			console.log('rowsPS[i].nombre ' + rowsPS[i].nombre);	
+
+
+
 			var ps = {};
 			ps.nombre = rowsPS[i].nombre;
 			ps.html = rowsPS[i].html;
