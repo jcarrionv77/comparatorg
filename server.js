@@ -88,7 +88,7 @@ app.get('/ps/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('ps',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre, ps : psArray});
+  res.render('ps',{objetos : objetosArray, html: psArray[req.query.indice].html, miObjeto: psArray[req.query.indice].nombre, ps : psArray});
   
 
 });
