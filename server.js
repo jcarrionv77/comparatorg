@@ -12,10 +12,12 @@ var app = express();
 var port = process.env.PORT || 8080;
 
 var objetosArray = new Array();
-var psArray = new Array();
+
+//var psArray = new Array();
 
 var sObjetos = '';
 
+var psArray = {pset: [], profile: []};
 
 app.use(bodyParser.json());
 var routes = require('./routes/index');
@@ -32,10 +34,10 @@ app.get('/', function(req, res) {
 
 	console.log('hola mundo');
 
-	console.log('psArray.length ' + psArray.length);
-	console.log('psArray[0].nombre ' + psArray[0].nombre);
+	console.log('psArray.length ' + psArray.pset.length);
+	console.log('psArray[0].nombre ' + psArray.pset[0].nombre);
 
-	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray.pset});
 
 });
 
@@ -43,7 +45,7 @@ app.get('/index', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray.pset});
 
 });
 
@@ -51,7 +53,7 @@ app.get('/objetos', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray.pset});
 
 });
 
@@ -59,7 +61,7 @@ app.get('/sandbox', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray});
+	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray.pset});
 
 });
 
@@ -68,7 +70,7 @@ app.get('/objetos/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html , miObjeto: objetosArray[req.query.indice].nombre, ps : psArray} );
+  res.render('objetos',{objetos : objetosArray, html: objetosArray[req.query.indice].html , miObjeto: objetosArray[req.query.indice].nombre, ps : psArray.pset} );
   
 
 });
@@ -78,7 +80,7 @@ app.get('/rt/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre, ps : psArray});
+  res.render('rt',{objetos : objetosArray, html: objetosArray[req.query.indice].htmlrt, miObjeto: objetosArray[req.query.indice].nombre, ps : psArray.pset});
   
 
 });
@@ -88,7 +90,7 @@ app.get('/ps/p', function(req, res) {
 
   console.log('hola mundo req.query.tagId ' + req.query.indice);	
 
-  res.render('ps',{objetos : objetosArray, html: psArray[req.query.indice].html, miObjeto: psArray[req.query.indice].nombre, ps : psArray});
+  res.render('ps',{objetos : objetosArray, html: psArray[req.query.indice].html, miObjeto: psArray[req.query.indice].nombre, ps : psArray.pset});
   
 
 });
@@ -154,7 +156,7 @@ app.listen(port, function() {
 
 			ps.indice = "/ps/p?indice=" + i;
 
-			psArray.push(ps);
+			psArray.pset.push(ps);
 
 
 		}
