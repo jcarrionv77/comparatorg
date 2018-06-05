@@ -561,7 +561,12 @@ function consultaPermission(){
 		for (var i=0; i<result.length; i++)
 		{
 			var directorio = 'tmp/'+result[i].apiname;
+
+			console.log('directorio en PS' + directorio);
+
 			var files = fs.readdirSync(directorio);
+
+			console.log('files.length ' + files.length);
 
 			//Array con las filas unicas quitando duplicados
 			var fieldsArray = new Array();
@@ -580,7 +585,7 @@ function consultaPermission(){
 
 						var nameOrg = file.substring(0,file.length-5);
 
-						console.log('leer directorio ' + directorio + '/' + file);
+						console.log('leer fichero ' + directorio + '/' + file);
 
 						var MyFile = fs.readFileSync(directorio+'/'+file);
 
