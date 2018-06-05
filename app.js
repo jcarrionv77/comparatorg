@@ -300,9 +300,9 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 		//pongo un si en las posiciones que aplican para 
 		for(j=0;j<orgsArray[k].fields.length;j++)
 		{
-			console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[j].PermissionsRead);
+			console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[j].valor);
 			
-			camposOrg[map.get(orgsArray[k].fields[j])] = orgsArray[k].fieldsData[j].PermissionsRead;
+			camposOrg[map.get(orgsArray[k].fields[j])] = orgsArray[k].fieldsData[j].valor;
 		}
 		fieldResult.push(camposOrg);
 	}
@@ -679,6 +679,8 @@ function consultaPermission(){
 
 								var Permssions={};
 
+								var cadena= '';
+
 								Permssions.PermissionsRead = jsonContent.result.records[i].PermissionsRead;
 								Permssions.PermissionsCreate = jsonContent.result.records[i].PermissionsCreate;
 								Permssions.PermissionsDelete = jsonContent.result.records[i].PermissionsDelete;
@@ -687,6 +689,19 @@ function consultaPermission(){
 								Permssions.name = jsonContent.result.records[i].SobjectType;
 
 								Permssions.descripcion = Permssions.PermissionsRead + ' ' + Permssions.PermissionsCreate + ' ' + Permssions.PermissionsDelete + ' ' + Permssions.PermissionsViewAllRecords + ' ' + Permssions.PermissionsModifyAllRecords;
+
+								if(Permssions.PermissionsRead)
+									cadena = cadena + ' R';
+								if(Permssions.PermissionsCreate)
+									cadena = cadena + ' C';
+								if(Permssions.PermissionsDelete)
+									cadena = cadena + ' D';		
+								if(Permssions.PermissionsViewAllRecords)
+									cadena = cadena + ' VA';	
+								if(Permssions.PermissionsModifyAllRecords)
+									cadena = cadena + ' MA';		
+
+								Permssions.valor = 	cadena;			
 
 								org.fields.push(jsonContent.result.records[i].SobjectType);
 								org.fieldsData.push(Permssions);
