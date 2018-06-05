@@ -408,7 +408,7 @@ function readFilesSandbox(){
 
 	});
 
-	var htmlObjetos = procesaArraysNuevo(fieldsArray, orgsArray,   'Objetos');
+	var htmlObjetos = procesaArray(fieldsArray, orgsArray,   'Objetos');
 
 
 	console.log('update ');
@@ -721,7 +721,7 @@ function consultaPermission(){
 				}
 			});
 
-			var html = procesaArrays(fieldsArray, orgsArray,   'Objetos');
+			var html = procesaArraysNuevo(fieldsArray, orgsArray,   'Objetos');
 
 
 
