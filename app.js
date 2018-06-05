@@ -589,28 +589,36 @@ function consultaPermission(){
 
 						var MyFile = fs.readFileSync(directorio+'/'+file);
 
+
+
 						if(MyFile.length>0)
 						{
 							var jsonContent = JSON.parse(MyFile);	
 
-							for (var i =0; i<jsonContent.result.fields.length; i++)
+							console.log('jsonContent.result ' + djsonContent.result.length);
+
+							for (var i =0; i<jsonContent.result.length; i++)
 							{
 
 								var Permssions;
-								Permssions.PermissionsRead = jsonContent.result.fields[i].PermissionsRead;
-								Permssions.PermissionsCreate = jsonContent.result.fields[i].PermissionsCreate;
-								Permssions.PermissionsDelete = jsonContent.result.fields[i].PermissionsDelete;
-								Permssions.PermissionsViewAllRecords = jsonContent.result.fields[i].PermissionsViewAllRecords;
-								Permssions.PermissionsModifyAllRecords = jsonContent.result.fields[i].PermissionsModifyAllRecords;
-								Permssions.name = jsonContent.result.fields[i].SobjectType;
+								Permssions.PermissionsRead = jsonContent.result[i].PermissionsRead;
+
+
+								console.log('jsonContent.result[i].PermissionsRead ' + jsonContent.result[i].PermissionsRead);
+								
+								Permssions.PermissionsCreate = jsonContent.result[i].PermissionsCreate;
+								Permssions.PermissionsDelete = jsonContent.result[i].PermissionsDelete;
+								Permssions.PermissionsViewAllRecords = jsonContent.result[i].PermissionsViewAllRecords;
+								Permssions.PermissionsModifyAllRecords = jsonContent.result[i].PermissionsModifyAllRecords;
+								Permssions.name = jsonContent.result[i].SobjectType;
 
 								Permssions.descripcion = Permssions.PermissionsRead + ' ' + Permssions.PermissionsCreate + ' ' + Permssions.PermissionsDelete + ' ' + Permssions.PermissionsViewAllRecords + ' ' + Permssions.PermissionsModifyAllRecords;
 
-								org.fields.push(jsonContent.result.fields[i].SobjectType);
+								org.fields.push(jsonContent.result[i].SobjectType);
 								org.fieldsData.push(Permssions);
 
 
-								fieldsArray.push(jsonContent.result.fields[i].SobjectType);
+								fieldsArray.push(jsonContent.result[i].SobjectType);
 
 							}
 
