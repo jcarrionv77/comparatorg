@@ -141,15 +141,15 @@ app.listen(port, function() {
 
 
 			console.log('i ' + i);	
-			console.log('rowsPS[i].nombre ' + rowsPS[i].nombre);	
+			console.log('rowsPS[i].nombre ' + rowsPS[i].name);	
 
 
 
 			var ps = {};
-			ps.nombre = rowsPS[i].nombre;
+			ps.nombre = rowsPS[i].name;
 			ps.html = rowsPS[i].html;
 
-			console.log('ps.nombre ' + ps.nombre);	
+			console.log('ps.nombre ' + ps.name);	
 
 
 			ps.indice = "/ps/p?indice=" + i;
