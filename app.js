@@ -629,7 +629,7 @@ function consultaPermission(){
 				}
 			});
 
-			var html = procesaArrays(fieldsArray, orgsArray,   'permission Set');
+			var html = procesaArrays(fieldsArray, orgsArray,   'Objetos');
 
 
 
