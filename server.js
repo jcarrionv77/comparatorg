@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
 	console.log('psArray.length ' + psArray.pset.length);
 	console.log('psArray[0].nombre ' + psArray.pset[0].nombre);
 
-	res.render('index',{objetos : objetosArray, html:'', ps : psArray.pset});
+	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
 });
 
@@ -135,7 +135,6 @@ app.listen(port, function() {
 
 	var rowsPS = client.querySync('SELECT name,  html FROM permissionset where tipo=\'ps\'');
 
-
 	if  (rowsPS != null && rowsPS.length>0)
 	{
 		for (var i=0; i<rowsPS.length; i++)
@@ -151,9 +150,6 @@ app.listen(port, function() {
 			ps.nombre = rowsPS[i].name;
 			ps.html = rowsPS[i].html;
 
-			console.log('ps.nombre ' + ps.name);	
-
-
 			ps.indice = "/ps/p?indice=" + i;
 
 			psArray.pset.push(ps);
@@ -163,6 +159,31 @@ app.listen(port, function() {
 		
 	}
 
+	var rowsProfile = client.querySync('SELECT name,  html FROM permissionset where tipo=\'profile\'');
+
+	if  (rowsProfile != null && rowsProfile.length>0)
+	{
+		for (var i=0; i<rowsProfile.length; i++)
+		{
+
+
+			console.log('i ' + i);	
+			console.log('rowsPS[i].nombre ' + rowsProfile[i].name);	
+
+
+
+			var profile = {};
+			profile.nombre = rowsProfile[i].name;
+			profile.html = rowsProfile[i].html;
+
+			profile.indice = "/ps/p?indice=" + i;
+
+			psArray.profile.push(profile);
+
+
+		}
+		
+	}
 
 
 
