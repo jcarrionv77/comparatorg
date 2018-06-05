@@ -301,7 +301,7 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 		//pongo un si en las posiciones que aplican para 
 		for(j=0;j<orgsArray[k].fields.length;j++)
 		{
-			console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[i].PermissionsRead);
+			//console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[i].PermissionsRead);
 			camposOrg[map.get(orgsArray[k].fields[j])] = 'si';
 		}
 		fieldResult.push(camposOrg);
@@ -690,6 +690,8 @@ function consultaPermission(){
 
 								org.fields.push(jsonContent.result.records[i].SobjectType);
 								org.fieldsData.push(Permssions);
+
+								console.log(' org  ' + JSON.stringify(org));
 
 
 								fieldsArray.push(jsonContent.result.records[i].SobjectType);
