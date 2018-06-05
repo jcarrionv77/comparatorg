@@ -636,7 +636,7 @@ function consultaPermission(){
 			console.log('update ' + result[i].apiname);
 
 
-			dbCli.query('UPDATE permissionset set html =($1),  where nombre = ($2)', 
+			dbCli.query('UPDATE permissionset set html =($1)  where nombre = ($2)', 
 				[html, result[i].apiname]); 
 			console.log('row update');
 
