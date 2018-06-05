@@ -595,7 +595,7 @@ function consultaPermission(){
 						{
 							var jsonContent = JSON.parse(MyFile);	
 
-							console.log('jsonContent.result ' + djsonContent.result.length);
+							console.log('jsonContent.result ' + jsonContent.result.length);
 
 							for (var i =0; i<jsonContent.result.length; i++)
 							{
@@ -605,7 +605,7 @@ function consultaPermission(){
 
 
 								console.log('jsonContent.result[i].PermissionsRead ' + jsonContent.result[i].PermissionsRead);
-								
+
 								Permssions.PermissionsCreate = jsonContent.result[i].PermissionsCreate;
 								Permssions.PermissionsDelete = jsonContent.result[i].PermissionsDelete;
 								Permssions.PermissionsViewAllRecords = jsonContent.result[i].PermissionsViewAllRecords;
