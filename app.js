@@ -204,25 +204,104 @@ function read(){
 function procesaArrays(fieldsArray, orgsArray, nombreColumna){
 
 	unique(fieldsArray);
+	
+	//lista unica de elementos para las filas
 	var sortFieldsArray = fieldsArray.sort();
 
 
 	var fieldResult = new Array();
 	
+	//mapa de saber cada elemento en que fila está
 	var map = new HashMap();
 
 
+	//relleno el mapa
 	for(var i=0; i< sortFieldsArray.length; i++){
 		map.set(sortFieldsArray[i], i);
 	}
 
 
+	//recorrer el listadp de org
 	for (var k=0; k<orgsArray.length;k++){
-	
+		
+		//array con el tamaño de las filas unicas para rellenar los valores especificos de una org específica
 		var camposOrg = new Array(sortFieldsArray.length);  
 
+		//pongo un si en las posiciones que aplican para 
 		for(j=0;j<orgsArray[k].fields.length;j++)
 		{
+			camposOrg[map.get(orgsArray[k].fields[j])] = 'si';
+		}
+		fieldResult.push(camposOrg);
+	}
+
+	
+	htmlTanspuesto = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
+	htmlTanspuesto = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
+
+
+	for (var k=0; k<orgsArray.length;k++){
+
+		var orgName = orgsArray[k].name;
+		htmlTanspuesto = htmlTanspuesto + '<th scope="col"><div class="slds-truncate">' + orgName.substring(0,orgName.length-5) + '</div></th>';
+		
+	}
+
+	htmlTanspuesto = htmlTanspuesto + '</thead><tbody>';
+
+	for(var i=0; i< sortFieldsArray.length; i++){
+
+
+
+		htmlTanspuesto = htmlTanspuesto + '<tr><th scope="row"><div class="slds-truncate">' + sortFieldsArray[i] + '</div></th>';
+		for (var k=0; k<orgsArray.length;k++){
+
+			if(fieldResult[k][i] == 'undefined' || fieldResult[k][i] == '' || fieldResult[k][i] == null)
+				htmlTanspuesto = htmlTanspuesto + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+			else
+				htmlTanspuesto = htmlTanspuesto + '<th scope="row"><div class="slds-truncate">' + fieldResult[k][i] + '</div></th>';
+		}
+		htmlTanspuesto = htmlTanspuesto + '</tr>';
+		
+		
+	}
+
+	htmlTanspuesto = htmlTanspuesto + '</tbody></table>';
+
+	return htmlTanspuesto;
+}
+
+
+function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
+
+	unique(fieldsArray);
+	
+	//lista unica de elementos para las filas
+	var sortFieldsArray = fieldsArray.sort();
+
+
+	var fieldResult = new Array();
+	
+	//mapa de saber cada elemento en que fila está
+	var map = new HashMap();
+
+
+	//relleno el mapa
+	for(var i=0; i< sortFieldsArray.length; i++){
+		map.set(sortFieldsArray[i], i);
+	}
+
+
+	//recorrer el listadp de org
+	for (var k=0; k<orgsArray.length;k++){
+		
+		//array con el tamaño de las filas unicas para rellenar los valores especificos de una org específica
+		var camposOrg = new Array(sortFieldsArray.length);  
+
+		//pongo un si en las posiciones que aplican para 
+		for(j=0;j<orgsArray[k].fields.length;j++)
+		{
+			console.log('orgsArray[k].fieldsData[i].PermissionsRead ' +orgsArray[k].fieldsData[i].PermissionsRead);
 			camposOrg[map.get(orgsArray[k].fields[j])] = 'si';
 		}
 		fieldResult.push(camposOrg);
@@ -318,7 +397,7 @@ function readFilesSandbox(){
 
 	});
 
-	var htmlObjetos = procesaArrays(fieldsArray, orgsArray,   'Objetos');
+	var htmlObjetos = procesaArraysNuevo(fieldsArray, orgsArray,   'Objetos');
 
 
 	console.log('update ');
