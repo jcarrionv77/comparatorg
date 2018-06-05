@@ -281,6 +281,9 @@ function procesaArraysNuevo(fieldsArray, orgsArray, nombreColumna){
 
 	console.log('procesaArraysNuevo  ************************************************' );
 	
+
+	console.log('JSON.stringify(orgsArray) ' + JSON.stringify(orgsArray));
+
 	console.log('orgsArray.fieldsData.length ' + orgsArray.fieldsData.length);
 	console.log('JSON.stringify(orgsArray.fieldsData[0] ' + JSON.stringify(orgsArray.fieldsData[0]));
 	console.log('JSON.stringify(orgsArray.fieldsData[0].PermissionsRead ' + JSON.stringify(orgsArray.fieldsData[0].PermissionsRead));
