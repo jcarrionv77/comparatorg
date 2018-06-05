@@ -32,6 +32,8 @@ app.get('/', function(req, res) {
 
 	console.log('hola mundo');
 
+	console.log('psArray.length ' + psArray.length);
+
 	res.render('index',{objetos : objetosArray, html:'', ps : psArray});
 
 });
