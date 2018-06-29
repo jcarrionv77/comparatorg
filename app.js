@@ -13,6 +13,9 @@ var Cliente = require('pg-native');
 const { exec } = require('child_process');
 const { execSync } = require('child_process');
 
+var client = new Cliente();
+client.connectSync(process.env.DATABASE_URL);
+
 
 function ConsultaInstancias()
 {
@@ -600,8 +603,7 @@ function readFiles(obj){
 
 function consultaPermission(){
 
-	var client = new Cliente();
-	client.connectSync(process.env.DATABASE_URL);
+
 
 	var result = client.querySync('SELECT name, apiname FROM permissionset');
 
