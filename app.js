@@ -170,8 +170,14 @@ function describeObject(instancia , iteracion)
 	var commandSFDXDescribe	= 'sfdx force:schema:sobject:describe -u ' + instancia +    ' -s ' + objeto + ' --json > ' +  fileName;
 	
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
-
-	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+	
+	try{
+		execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+	}
+	catch(err){
+		console.log('skip ' + instancia);
+	}
+	
 	var nuevaIteracion = iteracion + 1;
 
 	if(nuevaIteracion < objetosArray.length)
