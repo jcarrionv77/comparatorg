@@ -66,7 +66,7 @@ function consultaObjetos()
 		dbCli = client;
 
 		dbCli.query(
-			'SELECT nombre, apiname FROM objetos', 
+			'SELECT nombre, apiname FROM objetos  where activo = true', 
 			function(err, result) {
 			if (err) {
 				console.log(err);
@@ -603,6 +603,45 @@ function readFiles(obj){
 	 dbCli.query('UPDATE objetos set html =($1), htmlrt =($2) where nombre = ($3)', 
 	        [htmlCampos, htmlRT, obj]); 
 	 console.log('row update');
+
+
+}
+
+
+function consultaLicencias(){
+
+	var directorio = 'tmp/licencias';
+
+	execSync('mkdir ' + directorio);
+
+	var fileName = './tmp/licencias/asignacionPS.json'
+	var sQuery = 'SELECT Assignee.name, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where PermissionSet.IsOwnedByProfile=false and Assignee.Profile.UserLicense.name= \'Salesforce\'';
+	var sProduccion = 'produccion';
+	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
+
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+	var fileName = './tmp/licencias/asignacionApp.json'
+	sQuery = 'SELECT Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\' and Parent.IsOwnedByProfile=false ';
+	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
+
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+
+	var fileName = './tmp/licencias/App.json'
+	sQuery = 'SELECT ApplicationId,Label FROM AppMenuItem';
+	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
+
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+	var MyFile = fs.readFileSync('/tmp/licencias/App.json');
+	
 
 
 }
