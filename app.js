@@ -716,8 +716,9 @@ function consultaLicencias(){
 
 				objUser.userAppsArray = userAppsArray;
 				userAppsArray.push(objUser);
+				console.log('******');
 			}
-
+			
 			objUser={};
 			userAppsArray = [];
 			
@@ -741,6 +742,8 @@ function consultaLicencias(){
 		else
 		{
 			var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
+			console.log('miPS else: ' + JSON.stringify(miPS));
+
 			for (var j=0; j<miPS.arrayApps.length; j++)
 			{
 				userAppsArray.push(miPS.arrayApps[j]);
