@@ -740,7 +740,7 @@ function consultaLicencias(){
 		}
 		else
 		{
-			var miPS = mapPS.get(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
+			var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
 			for (var j=0; j<miPS.arrayApps.length; j++)
 			{
 				userAppsArray.push(miPS.arrayApps[j]);
