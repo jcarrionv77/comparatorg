@@ -724,9 +724,11 @@ function consultaLicencias(){
 			objUser.Name = jsonContent.result.records[i].Assignee.Name;
 			console.log('objUser.Name : ' + objUser.Name);
 
-			var miPS = mapPS.get(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
-			
+			console.log('jsonContent.result.records[i].PermissionSet.name : ' + jsonContent.result.records[i].PermissionSet.name);
 
+			var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.name);
+			
+			console.log('miPS: ' + JSON.stringify(miPS));
 
 			for (var j=0; j<miPS.arrayApps.length; j++)
 			{
