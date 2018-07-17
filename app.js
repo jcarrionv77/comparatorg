@@ -206,6 +206,10 @@ function read(){
 
 	console.log('fin release 2');
 
+	consultaLicencias();
+
+	console.log('fin release 3');
+
 	//stopWorker();
 
 }
@@ -642,7 +646,6 @@ function consultaLicencias(){
 
 	var MyFile = fs.readFileSync('/tmp/licencias/App.json');
 	
-
 
 }
 
