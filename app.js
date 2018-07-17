@@ -628,7 +628,7 @@ function consultaLicencias(){
 	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
 	var fileName = './tmp/licencias/asignacionApp.json'
-	sQuery = 'SELECT Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\' and Parent.IsOwnedByProfile=false ';
+	sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\' and Parent.IsOwnedByProfile=false ';
 	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
@@ -644,8 +644,52 @@ function consultaLicencias(){
 
 	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
-	var MyFile = fs.readFileSync('/tmp/licencias/App.json');
+	var MyFile = fs.readFileSync('tmp/licencias/App.json');
+	var jsonContent = JSON.parse(MyFile);
+
+	var map = new HashMap();
+
+	for (var i =0; i<jsonContent.result.records.length; i++)
+	{
+		map.set(jsonContent.result.records[i].ApplicationId, jsonContent.result.records[i].Label);
+	}
+
+	MyFile = fs.readFileSync('tmp/licencias/asignacionApp.json');
+	jsonContent = JSON.parse(MyFile);
 	
+	var psArray = new Array();
+	var appsArray = new Array();
+	var objPsAppp ={};
+
+	for (var i =0; i<jsonContent.result.records.length; i++)
+	{
+		
+		if(i=0 || jsonContent.result.records[i].Parent.Name != jsonContent.result.records[i-1].Parent.Name)
+		{
+			if (i>0){
+				console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+				console.log('objPsApp : ' + objPsApp);
+				objPsApp.arrayApps = objPsApp;
+				psArray.push(objPsApp);
+			}
+
+			objPsApp={};
+			appsArray = [];
+			objPsApp.NamePs = jsonContent.result.records[i].Parent.Name;
+			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+		}
+		else
+		{
+			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+		}
+		
+	}
+
+	console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+	console.log('objPsApp : ' + objPsApp);
+
+	objPsApp.arrayApps = objPsApp;
+	psArray.push(objPsApp);
 
 }
 
