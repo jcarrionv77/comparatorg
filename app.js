@@ -664,7 +664,7 @@ function consultaLicencias(){
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
 		
-		if(i=0 || jsonContent.result.records[i].Parent.Name != jsonContent.result.records[i-1].Parent.Name)
+		if(i == 0 || jsonContent.result.records[i].Parent.Name != jsonContent.result.records[i-1].Parent.Name)
 		{
 			if (i>0){
 				console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
