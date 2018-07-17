@@ -708,6 +708,8 @@ function consultaLicencias(){
 
 	console.log('********************************************');
 
+	console.log('jsonContent.result.records.length ' + jsonContent.result.records.length);
+
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
 		if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
@@ -730,7 +732,7 @@ function consultaLicencias(){
 			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
 				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
 
-				console.log('miPS: ' + JSON.stringify(miPS));
+				//console.log('miPS: ' + JSON.stringify(miPS));
 
 				for (var j=0; j<miPS.arrayApps.length; j++)
 				{
@@ -749,7 +751,7 @@ function consultaLicencias(){
 			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
 				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
 
-				console.log('miPS: ' + JSON.stringify(miPS));
+				//console.log('miPS: ' + JSON.stringify(miPS));
 
 				for (var j=0; j<miPS.arrayApps.length; j++)
 				{
@@ -762,6 +764,8 @@ function consultaLicencias(){
 
 	objUser.userAppsArray = userAppsArray;
 	userAppsArray.push(objUser);
+
+	console.log('********************************************');
 
 
 }
