@@ -679,15 +679,15 @@ function consultaLicencias(){
 			objPsApp={};
 			appsArray = [];
 			objPsApp.NamePs = jsonContent.result.records[i].Parent.Name;
-			console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+			//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
 
 			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
-			console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
+			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
 		else
 		{
 			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
-			console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
+			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
 		
 	}
@@ -727,7 +727,7 @@ function consultaLicencias(){
 			objUser.Name = jsonContent.result.records[i].Assignee.Name;
 			console.log('objUser.Name : ' + objUser.Name);
 
-			console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
+			//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
 			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
 				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
@@ -746,7 +746,7 @@ function consultaLicencias(){
 		}
 		else
 		{
-			console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
+			//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
 			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
 				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
