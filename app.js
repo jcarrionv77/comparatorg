@@ -727,27 +727,35 @@ function consultaLicencias(){
 
 			console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
-			var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
-			
-			console.log('miPS: ' + JSON.stringify(miPS));
+			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
+				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
 
-			for (var j=0; j<miPS.arrayApps.length; j++)
-			{
-				userAppsArray.push(miPS.arrayApps[j]);
-				console.log('app : ' + miPS.arrayApps[j]);
+				console.log('miPS: ' + JSON.stringify(miPS));
+
+				for (var j=0; j<miPS.arrayApps.length; j++)
+				{
+					userAppsArray.push(miPS.arrayApps[j]);
+					console.log('app : ' + miPS.arrayApps[j]);
+				}
 			}
+
 
 
 		}
 		else
 		{
-			var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
-			console.log('miPS else: ' + JSON.stringify(miPS));
+			console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
-			for (var j=0; j<miPS.arrayApps.length; j++)
-			{
-				userAppsArray.push(miPS.arrayApps[j]);
-				console.log('app : ' + miPS.arrayApps[j]);
+			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
+				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
+
+				console.log('miPS: ' + JSON.stringify(miPS));
+
+				for (var j=0; j<miPS.arrayApps.length; j++)
+				{
+					userAppsArray.push(miPS.arrayApps[j]);
+					console.log('app : ' + miPS.arrayApps[j]);
+				}
 			}
 		}
 	}
