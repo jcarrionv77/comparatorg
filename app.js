@@ -619,7 +619,7 @@ function consultaLicencias(){
 	execSync('mkdir ' + directorio);
 
 	var fileName = './tmp/licencias/asignacionPS.json'
-	var sQuery = 'SELECT Assignee.name, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where PermissionSet.IsOwnedByProfile=false and Assignee.Profile.UserLicense.name= \'Salesforce\'';
+	var sQuery = 'SELECT Assignee.name, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where PermissionSet.IsOwnedByProfile=false and Assignee.Profile.UserLicense.name= \'Salesforce\' order by Assignee.name';
 	var sProduccion = 'produccion';
 	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
@@ -628,7 +628,7 @@ function consultaLicencias(){
 	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
 	var fileName = './tmp/licencias/asignacionApp.json'
-	sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\' and Parent.IsOwnedByProfile=false ';
+	sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\' and Parent.IsOwnedByProfile=false order by Parent.name';
 	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
@@ -660,6 +660,9 @@ function consultaLicencias(){
 	var psArray = new Array();
 	var appsArray = new Array();
 	var objPsAppp ={};
+	var mapPS = new HashMap();
+
+	console.log('********************************************');
 
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
@@ -667,29 +670,86 @@ function consultaLicencias(){
 		if(i == 0 || jsonContent.result.records[i].Parent.Name != jsonContent.result.records[i-1].Parent.Name)
 		{
 			if (i>0){
-				console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
-				console.log('objPsApp : ' + objPsApp);
-				objPsApp.arrayApps = objPsApp;
+				objPsApp.arrayApps = appsArray;
 				psArray.push(objPsApp);
+
+				mapPS.set(objPsApp.NamePs, objPsApp);
 			}
 
 			objPsApp={};
 			appsArray = [];
 			objPsApp.NamePs = jsonContent.result.records[i].Parent.Name;
+			console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+
 			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+			console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
 		else
 		{
 			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+			console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
 		
 	}
 
-	console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
-	console.log('objPsApp : ' + objPsApp);
 
-	objPsApp.arrayApps = objPsApp;
+	objPsApp.arrayApps = appsArray;
+
+	mapPS.set(objPsApp.NamePs, objPsApp);
 	psArray.push(objPsApp);
+
+
+	MyFile = fs.readFileSync('tmp/licencias/asignacionPS.json');
+	jsonContent = JSON.parse(MyFile);
+
+	var userArray = new Array();
+	var objUser ={};
+	var userAppsArray = new Array();
+
+	console.log('********************************************');
+
+	for (var i =0; i<jsonContent.result.records.length; i++)
+	{
+		if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
+		{
+			if (i>0){
+
+				objUser.userAppsArray = userAppsArray;
+				userAppsArray.push(objUser);
+			}
+
+			objUser={};
+			userAppsArray = [];
+			
+			objUser.Name = jsonContent.result.records[i].Assignee.Name;
+			console.log('objUser.Name : ' + objUser.Name);
+
+			var miPS = mapPS.get(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
+			
+
+
+			for (var j=0; j<miPS.arrayApps.length; j++)
+			{
+				userAppsArray.push(miPS.arrayApps[j]);
+				console.log('app : ' + miPS.arrayApps[j]);
+			}
+
+
+		}
+		else
+		{
+			var miPS = mapPS.get(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
+			for (var j=0; j<miPS.arrayApps.length; j++)
+			{
+				userAppsArray.push(miPS.arrayApps[j]);
+				console.log('app : ' + miPS.arrayApps[j]);
+			}
+		}
+	}
+
+	objUser.userAppsArray = userAppsArray;
+	userAppsArray.push(objUser);
+
 
 }
 
