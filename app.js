@@ -718,56 +718,58 @@ function consultaLicencias(){
 
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
-		if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
+		if(ojsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
 		{
-			if (i>0){
+			if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
+			{
+				if (i>0){
 
-				objUser.userAppsArray = userAppsArray;
-				if(objUser.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
-				{
-					userArray.push(objUser);
+					objUser.userAppsArray = userAppsArray;
+
+						userArray.push(objUser);
+					}
+					//console.log('******');
 				}
-				//console.log('******');
-			}
-			
-			objUser={};
-			userAppsArray = [];
-			
-			objUser.Name = jsonContent.result.records[i].Assignee.Name;
-			//console.log('objUser.Name : ' + objUser.Name);
+				
+				objUser={};
+				userAppsArray = [];
+				
+				objUser.Name = jsonContent.result.records[i].Assignee.Name;
+				//console.log('objUser.Name : ' + objUser.Name);
 
-			//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
+				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
-			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
-				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
+				if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
+					var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
 
-				//console.log('miPS: ' + JSON.stringify(miPS));
+					//console.log('miPS: ' + JSON.stringify(miPS));
 
-				for (var j=0; j<miPS.arrayApps.length; j++)
-				{
-					userAppsArray.push(miPS.arrayApps[j]);
-					listaAppProcesada.push(miPS.arrayApps[j]);
-					//console.log('app : ' + miPS.arrayApps[j]);
+					for (var j=0; j<miPS.arrayApps.length; j++)
+					{
+						userAppsArray.push(miPS.arrayApps[j]);
+						listaAppProcesada.push(miPS.arrayApps[j]);
+						//console.log('app : ' + miPS.arrayApps[j]);
+					}
 				}
+
+
+
 			}
+			else
+			{
+				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
+				if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
+					var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
 
+					//console.log('miPS: ' + JSON.stringify(miPS));
 
-		}
-		else
-		{
-			//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
-
-			if(mapPS.get(jsonContent.result.records[i].PermissionSet.Name) != null){
-				var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet.Name);
-
-				//console.log('miPS: ' + JSON.stringify(miPS));
-
-				for (var j=0; j<miPS.arrayApps.length; j++)
-				{
-					userAppsArray.push(miPS.arrayApps[j]);
-					listaAppProcesada.push(miPS.arrayApps[j]);
-					//console.log('app : ' + miPS.arrayApps[j]);
+					for (var j=0; j<miPS.arrayApps.length; j++)
+					{
+						userAppsArray.push(miPS.arrayApps[j]);
+						listaAppProcesada.push(miPS.arrayApps[j]);
+						//console.log('app : ' + miPS.arrayApps[j]);
+					}
 				}
 			}
 		}
