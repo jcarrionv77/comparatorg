@@ -206,7 +206,7 @@ function read(){
 
 	console.log('fin release 2');
 
-	//consultaLicencias();
+	consultaLicencias();
 
 	console.log('fin release 3');
 
