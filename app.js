@@ -708,6 +708,8 @@ function consultaLicencias(){
 	var objUser ={};
 	var userAppsArray = new Array();
 
+	var listaAppProcesada = new Array();
+
 	//console.log('********************************************');
 
 	//console.log('jsonContent.result.records.length ' + jsonContent.result.records.length);
@@ -739,6 +741,7 @@ function consultaLicencias(){
 				for (var j=0; j<miPS.arrayApps.length; j++)
 				{
 					userAppsArray.push(miPS.arrayApps[j]);
+					listaAppProcesada.push(miPS.arrayApps[j]);
 					//console.log('app : ' + miPS.arrayApps[j]);
 				}
 			}
@@ -758,6 +761,7 @@ function consultaLicencias(){
 				for (var j=0; j<miPS.arrayApps.length; j++)
 				{
 					userAppsArray.push(miPS.arrayApps[j]);
+					listaAppProcesada.push(miPS.arrayApps[j]);
 					//console.log('app : ' + miPS.arrayApps[j]);
 				}
 			}
@@ -772,10 +776,8 @@ function consultaLicencias(){
 
 	console.log(userArray.length);
 
-	for (var j=0; j<userArray.length; j++) {
-		userArray[j].userAppsArray = unique(userAppsArray);
-	}
 
+	nombreAppArray = unique(listaAppProcesada);
 	
 
 	var HTML = '';
@@ -808,7 +810,7 @@ function consultaLicencias(){
 
 
 				console.log('userArray[i].userAppsArray[j]: ' + userArray[i].userAppsArray[j]);
-				console.log('ombreAppArray[k]: ' + ombreAppArray[k]);
+				console.log('nombreAppArray[k]: ' + nombreAppArray[k]);
 
 
 				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
