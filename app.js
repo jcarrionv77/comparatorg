@@ -779,7 +779,7 @@ function consultaLicencias(){
 
 	nombreAppArray = unique(listaAppProcesada);
 
-	for(var i=0; i<userArray.length; i++){
+	for(var i=0; i<userArray.length; i++)
 	{
 		userArray[i].userAppsArray = unique(userArray[i].userAppsArray);
 	}
