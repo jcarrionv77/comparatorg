@@ -719,7 +719,7 @@ function consultaLicencias(){
 
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
-		if(ojsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
+		if(jsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
 		{
 			if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
 			{
