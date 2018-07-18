@@ -785,7 +785,9 @@ function consultaLicencias(){
 	var nombreColumna = 'Usuario';
 
 	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
-	HTML = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
+	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
+
+	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
 
 	for (var k=0; k<nombreAppArray.length;k++){
 
@@ -794,6 +796,8 @@ function consultaLicencias(){
 	}
 
 	HTML = HTML + '</thead><tbody>';
+
+	console.log('objUser.length es: ' + objUser.length);
 
 	for(var i=0; i< objUser.length; i++){
 		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + objUser[i].Name + '</div></th>';
