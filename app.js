@@ -778,7 +778,10 @@ function consultaLicencias(){
 
 	
 
-	var HTML;
+	var HTML = '';
+
+	console.log('HTML es: ' + HTML);
+
 	var nombreColumna = 'Usuario';
 
 	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
@@ -818,7 +821,7 @@ function consultaLicencias(){
 	HTML = HTML + '</tbody></table>';
 
 
-	console.log(HTML);
+	console.log('HTML es: ' + HTML);
 
 	console.log('********************************************');
 
