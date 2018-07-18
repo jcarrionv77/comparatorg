@@ -71,7 +71,7 @@ app.get('/licenses', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray, htmlLicenses: sLicencia});
+	res.render('license',{ objetos : objetosArray, html: sObjetos, ps : psArray, htmlLicenses: sLicencia});
 
 });
 
