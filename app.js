@@ -683,12 +683,14 @@ function consultaLicencias(){
 			objPsApp.NamePs = jsonContent.result.records[i].Parent.Name;
 			//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
 
-			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'CHATTER REPSOL')
+				appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
 			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
 		else
 		{
-			appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'CHATTER REPSOL')
+				appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
 			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
 		
@@ -721,7 +723,10 @@ function consultaLicencias(){
 			if (i>0){
 
 				objUser.userAppsArray = userAppsArray;
-				userArray.push(objUser);
+				if(userArray[i].Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
+				{
+					userArray.push(objUser);
+				}
 				//console.log('******');
 			}
 			
@@ -808,37 +813,36 @@ function consultaLicencias(){
 
 	for(var i=0; i<userArray.length; i++){
 
-		if(userArray[i].Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
-		{
 
 
-			HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
-		
-			for (var k=0; k<nombreAppArray.length;k++){
-				var bool = false;
-				for (var j=0; j< userArray[i].userAppsArray.length; j++){
 
-					if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
-						var bool = true;
-					}
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
+	
+		for (var k=0; k<nombreAppArray.length;k++){
+			var bool = false;
+			for (var j=0; j< userArray[i].userAppsArray.length; j++){
 
+				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
+					var bool = true;
 				}
 
-				if(bool)
-					HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/userArray[i].userAppsArray.length + '</div></th>';
-				else
-					HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
-					
 			}
-			HTML = HTML + '</tr>';
+
+			if(bool)
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/userArray[i].userAppsArray.length + '</div></th>';
+			else
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+				
 		}
+		HTML = HTML + '</tr>';
+		
 
 	}	
 	
 	HTML = HTML + '</tbody></table>';
 
 
-	console.log('HTML es: ' + HTML);
+	//console.log('HTML es: ' + HTML);
 
 	console.log('********************************************');
 
