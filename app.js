@@ -801,17 +801,12 @@ function consultaLicencias(){
 
 	console.log('userArray.length es: ' + userArray.length);
 
-	for(var i=0; i<10; i++){
+	for(var i=0; i<userArray.length; i++){
 		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
 			for (var j=0; j< userArray[i].userAppsArray.length; j++){
-
-
-				console.log('userArray[i].userAppsArray[j]: ' + userArray[i].userAppsArray[j]);
-				console.log('nombreAppArray[k]: ' + nombreAppArray[k]);
-
 
 				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
 					var bool = true;
@@ -836,6 +831,10 @@ function consultaLicencias(){
 	console.log('HTML es: ' + HTML);
 
 	console.log('********************************************');
+
+	dbCli.query('UPDATE licenses set html =($1) ', 
+		[HTML]); 
+	console.log('row update');
 
 
 }
