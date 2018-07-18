@@ -767,7 +767,7 @@ function consultaLicencias(){
 	objUser.userAppsArray = userAppsArray;
 	userArray.push(objUser);
 
-	//console.log('********************************************');
+	console.log('********************************************');
 
 
 	console.log(userArray.length);
@@ -820,7 +820,7 @@ function consultaLicencias(){
 
 	console.log(HTML);
 
-
+	console.log('********************************************');
 
 
 }
