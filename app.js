@@ -637,7 +637,7 @@ function consultaLicencias(){
 
 
 	var fileName = './tmp/licencias/App.json'
-	sQuery = 'SELECT ApplicationId,Label FROM AppMenuItem';
+	sQuery = 'SELECT ApplicationId,Label FROM AppMenuItem WHERE Type = \'TabSet\'';
 	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
@@ -797,22 +797,22 @@ function consultaLicencias(){
 
 	HTML = HTML + '</thead><tbody>';
 
-	console.log('objUser.length es: ' + objUser.length);
+	console.log('userArray.length es: ' + userArray.length);
 
-	for(var i=0; i< objUser.length; i++){
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + objUser[i].Name + '</div></th>';
+	for(var i=0; i< userArray.length; i++){
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
-			for (var j=0; j< objUser[i].userAppsArray.length; j++){
-				if(objUser[i].userAppsArray[j]==nombreAppArray[k]){
+			for (var j=0; j< userArray[i].userAppsArray.length; j++){
+				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
 					var bool = true;
 				}
 
 			}
 
 			if(bool)
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/objUser[i].userAppsArray.length + '</div></th>';
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/userArray[i].userAppsArray.length + '</div></th>';
 			else
 				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
 				
