@@ -648,10 +648,12 @@ function consultaLicencias(){
 	var jsonContent = JSON.parse(MyFile);
 
 	var map = new HashMap();
+	var nombreAppArray = new Array();
 
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
 		map.set(jsonContent.result.records[i].ApplicationId, jsonContent.result.records[i].Label);
+		nombreAppArray.push(jsonContent.result.records[i].Label);
 	}
 
 	MyFile = fs.readFileSync('tmp/licencias/asignacionApp.json');
@@ -706,9 +708,9 @@ function consultaLicencias(){
 	var objUser ={};
 	var userAppsArray = new Array();
 
-	console.log('********************************************');
+	//console.log('********************************************');
 
-	console.log('jsonContent.result.records.length ' + jsonContent.result.records.length);
+	//console.log('jsonContent.result.records.length ' + jsonContent.result.records.length);
 
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
@@ -717,15 +719,15 @@ function consultaLicencias(){
 			if (i>0){
 
 				objUser.userAppsArray = userAppsArray;
-				userAppsArray.push(objUser);
-				console.log('******');
+				userArray.push(objUser);
+				//console.log('******');
 			}
 			
 			objUser={};
 			userAppsArray = [];
 			
 			objUser.Name = jsonContent.result.records[i].Assignee.Name;
-			console.log('objUser.Name : ' + objUser.Name);
+			//console.log('objUser.Name : ' + objUser.Name);
 
 			//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
@@ -737,7 +739,7 @@ function consultaLicencias(){
 				for (var j=0; j<miPS.arrayApps.length; j++)
 				{
 					userAppsArray.push(miPS.arrayApps[j]);
-					console.log('app : ' + miPS.arrayApps[j]);
+					//console.log('app : ' + miPS.arrayApps[j]);
 				}
 			}
 
@@ -756,16 +758,69 @@ function consultaLicencias(){
 				for (var j=0; j<miPS.arrayApps.length; j++)
 				{
 					userAppsArray.push(miPS.arrayApps[j]);
-					console.log('app : ' + miPS.arrayApps[j]);
+					//console.log('app : ' + miPS.arrayApps[j]);
 				}
 			}
 		}
 	}
 
 	objUser.userAppsArray = userAppsArray;
-	userAppsArray.push(objUser);
+	userArray.push(objUser);
 
-	console.log('********************************************');
+	//console.log('********************************************');
+
+
+	console.log(userArray.length);
+
+	for (var j=0; j<userArray.length; j++) {
+		objUser[j].userAppsArray = unique(userAppsArray);
+	}
+
+	
+
+	var HTML;
+	var nombreColumna = 'Usuario';
+
+	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
+	HTML = htmlTanspuesto + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
+
+	for (var k=0; k<nombreAppArray.length;k++){
+
+		HTML = HTML + '<th scope="col"><div class="slds-truncate">' + nombreAppArray[k] + '</div></th>';
+		
+	}
+
+	HTML = HTML + '</thead><tbody>';
+
+	for(var i=0; i< objUser.length; i++){
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + objUser[i].Name + '</div></th>';
+	
+		for (var k=0; k<nombreAppArray.length;k++){
+			var bool = false;
+			for (var j=0; j< objUser[i].userAppsArray.length; j++){
+				if(objUser[i].userAppsArray[j]==nombreAppArray[k]){
+					var bool = true;
+				}
+
+			}
+
+			if(bool)
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/objUser[i].userAppsArray.length + '</div></th>';
+			else
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+				
+		}
+		HTML = HTML + '</tr>';
+
+
+	}	
+	
+	HTML = HTML + '</tbody></table>';
+
+
+	console.log(HTML);
+
+
 
 
 }
