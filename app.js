@@ -807,26 +807,31 @@ function consultaLicencias(){
 	console.log('userArray.length es: ' + userArray.length);
 
 	for(var i=0; i<userArray.length; i++){
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
-	
-		for (var k=0; k<nombreAppArray.length;k++){
-			var bool = false;
-			for (var j=0; j< userArray[i].userAppsArray.length; j++){
 
-				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
-					var bool = true;
+		if(userArray[i].Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
+		{
+
+
+			HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
+		
+			for (var k=0; k<nombreAppArray.length;k++){
+				var bool = false;
+				for (var j=0; j< userArray[i].userAppsArray.length; j++){
+
+					if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
+						var bool = true;
+					}
+
 				}
 
+				if(bool)
+					HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/userArray[i].userAppsArray.length + '</div></th>';
+				else
+					HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+					
 			}
-
-			if(bool)
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/userArray[i].userAppsArray.length + '</div></th>';
-			else
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
-				
+			HTML = HTML + '</tr>';
 		}
-		HTML = HTML + '</tr>';
-
 
 	}	
 	
