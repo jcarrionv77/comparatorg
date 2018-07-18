@@ -829,7 +829,7 @@ function consultaLicencias(){
 			}
 
 			if(bool)
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + 1/userArray[i].userAppsArray.length + '</div></th>';
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  Number.parseFloat(1/userArray[i].userAppsArray.length).toPrecision(2)  + '</div></th>';
 			else
 				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
 				
