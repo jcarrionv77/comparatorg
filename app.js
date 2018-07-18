@@ -773,7 +773,7 @@ function consultaLicencias(){
 	console.log(userArray.length);
 
 	for (var j=0; j<userArray.length; j++) {
-		objUser[j].userAppsArray = unique(userAppsArray);
+		userArray[j].userAppsArray = unique(userAppsArray);
 	}
 
 	
