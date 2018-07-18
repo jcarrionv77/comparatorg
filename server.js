@@ -17,6 +17,8 @@ var objetosArray = new Array();
 
 var sObjetos = '';
 
+var sLicencia = '';
+
 var psArray = {pset: [], profile: []};
 
 app.use(bodyParser.json());
@@ -61,7 +63,15 @@ app.get('/sandbox', function(req, res) {
 
 	console.log('hola mundo');
 
-	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray});
+	res.render('license',{ objetos : objetosArray, html: sObjetos, ps : psArray});
+
+});
+
+app.get('/licenses', function(req, res) {
+
+	console.log('hola mundo');
+
+	res.render('sandbox',{ objetos : objetosArray, html: sObjetos, ps : psArray, htmlLicenses: sLicencia});
 
 });
 
@@ -128,6 +138,13 @@ app.listen(port, function() {
 	if  (rowsObjetos != null && rowsObjetos.length>0)
 	{
 		sObjetos = rowsObjetos[0].html;
+
+	}
+
+	var rowsLicencia = client.querySync('SELECT  html FROM licenses limit 1');
+	if  (rowsLicencia != null && rowsLicencia.length>0)
+	{
+		sLicencia = rowsLicencia[0].html;
 
 	}
 
