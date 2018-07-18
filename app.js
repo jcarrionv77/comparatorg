@@ -724,13 +724,11 @@ function consultaLicencias(){
 			if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
 			{
 				if (i>0){
-
 					objUser.userAppsArray = userAppsArray;
-
-						userArray.push(objUser);
-					}
-					//console.log('******');
+					userArray.push(objUser);
 				}
+					//console.log('******');
+				
 				
 				objUser={};
 				userAppsArray = [];
