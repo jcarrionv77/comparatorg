@@ -723,7 +723,7 @@ function consultaLicencias(){
 			if (i>0){
 
 				objUser.userAppsArray = userAppsArray;
-				if(userArray[i].Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
+				if(objUser[i].Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
 				{
 					userArray.push(objUser);
 				}
