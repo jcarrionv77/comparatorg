@@ -977,6 +977,8 @@ function stopWorker()
 	process.exit(0);
 }
 
+console.log('ARRANQUE !!!');
+
 var serverKey = process.env.SERVER_KEY;
 
 var directorio = 'tmp/objetos';
