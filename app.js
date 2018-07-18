@@ -805,6 +805,12 @@ function consultaLicencias(){
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
 			for (var j=0; j< userArray[i].userAppsArray.length; j++){
+
+
+				console.log('userArray[i].userAppsArray[j]: ' + userArray[i].userAppsArray[j]);
+				console.log('ombreAppArray[k]: ' + ombreAppArray[k]);
+
+
 				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
 					var bool = true;
 				}
