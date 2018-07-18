@@ -628,7 +628,8 @@ function consultaLicencias(){
 	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
 	var fileName = './tmp/licencias/asignacionApp.json'
-	sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\' and Parent.IsOwnedByProfile=false order by Parent.name';
+	//sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\' and Parent.IsOwnedByProfile=false order by Parent.name';
+	sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\'  order by Parent.name';
 	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
 	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
