@@ -799,7 +799,7 @@ function consultaLicencias(){
 
 	console.log('userArray.length es: ' + userArray.length);
 
-	for(var i=0; i< userArray.length; i++){
+	for(var i=0; i<10; i++){
 		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
