@@ -829,7 +829,7 @@ function consultaLicencias(){
 
 
 
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].LastLoginDate + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].Profile + '</div></th>';
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].LastLoginDate.substring(0, 10) + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].Profile + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
