@@ -619,7 +619,7 @@ function consultaLicencias(){
 	execSync('mkdir ' + directorio);
 
 	var fileName = './tmp/licencias/asignacionPS.json'
-	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.Id, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where  Assignee.IsActive = true and Assignee.Profile.UserLicense.name= \'Salesforce\' order by Assignee.name';
+	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.Id, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where PermissionSet.IsOwnedByProfile=false and  Assignee.IsActive = true and Assignee.Profile.UserLicense.name= \'Salesforce\' order by Assignee.name';
 	var sProduccion = 'produccion';
 	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
@@ -724,8 +724,8 @@ function consultaLicencias(){
 
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
-		//if(jsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
-		//{
+		if(jsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
+		{
 			if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
 			{
 				if (i>0){
@@ -784,7 +784,7 @@ function consultaLicencias(){
 					}
 				}
 			}
-		//}
+		}
 	}
 
 	objUser.userAppsArray = userAppsArray;
@@ -823,7 +823,7 @@ function consultaLicencias(){
 
 	for (var k=0; k<nombreAppArray.length;k++){
 
-		HTML = HTML + '<th scope="col"><div class="slds-truncate">' + nombreAppArray[k] + '</div></th>';
+		HTML = HTML + '<th scope="col"><div class="slds-truncate">' + nombreAppArray[k].substring(0, 8) + '</div></th>';
 		
 	}
 
