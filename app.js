@@ -829,7 +829,7 @@ function consultaLicencias(){
 
 		var lastLogin;
 		if(userArray[i].LastLoginDate != null)
-			lastLogin = userArray[i].LastLoginDate.substring(0, 10);
+			lastLogin = userArray[i].LastLoginDate.substring(0, 13);
 		else
 			lastLogin = '';
 
