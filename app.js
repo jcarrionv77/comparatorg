@@ -823,7 +823,7 @@ function consultaLicencias(){
 
 	for (var k=0; k<nombreAppArray.length;k++){
 
-		HTML = HTML + '<th scope="col"><div class="slds-truncate">' + nombreAppArray[k].substring(0, 8); + '</div></th>';
+		HTML = HTML + '<th scope="col"><div class="slds-truncate">' + nombreAppArray[k] + '</div></th>';
 		
 	}
 
