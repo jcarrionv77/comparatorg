@@ -619,7 +619,7 @@ function consultaLicencias(){
 	execSync('mkdir ' + directorio);
 
 	var fileName = './tmp/licencias/asignacionPS.json'
-	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where PermissionSet.IsOwnedByProfile=false and  Assignee.IsActive = true and Assignee.Profile.UserLicense.name= \'Salesforce\' order by Assignee.name';
+	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.Id, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where  Assignee.IsActive = true and Assignee.Profile.UserLicense.name= \'Salesforce\' order by Assignee.name';
 	var sProduccion = 'produccion';
 	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
@@ -675,8 +675,8 @@ function consultaLicencias(){
 				objPsApp.arrayApps = appsArray;
 				psArray.push(objPsApp);
 
-				console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
-				console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
+				//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+				//console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
 
 				mapPS.set(objPsApp.NamePs, objPsApp);
 			}
@@ -705,8 +705,8 @@ function consultaLicencias(){
 	mapPS.set(objPsApp.NamePs, objPsApp);
 	psArray.push(objPsApp);
 
-	console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
-	console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
+	//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+	//console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
 
 
 	MyFile = fs.readFileSync('tmp/licencias/asignacionPS.json');
@@ -741,6 +741,7 @@ function consultaLicencias(){
 				objUser.Name = jsonContent.result.records[i].Assignee.Name;
 				objUser.LastLoginDate = jsonContent.result.records[i].Assignee.LastLoginDate;
 				objUser.Profile = jsonContent.result.records[i].Assignee.Profile.Name;
+				objUser.ProfileId = jsonContent.result.records[i].Assignee.Profile.Id;
 				//console.log('objUser.Name : ' + objUser.Name);
 
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
