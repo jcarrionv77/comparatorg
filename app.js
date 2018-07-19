@@ -675,6 +675,9 @@ function consultaLicencias(){
 				objPsApp.arrayApps = appsArray;
 				psArray.push(objPsApp);
 
+				console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+				console.log('objPsApp : ' + objPsApp);
+
 				mapPS.set(objPsApp.NamePs, objPsApp);
 			}
 
@@ -701,6 +704,9 @@ function consultaLicencias(){
 
 	mapPS.set(objPsApp.NamePs, objPsApp);
 	psArray.push(objPsApp);
+
+	console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+	console.log('objPsApp : ' + objPsApp);
 
 
 	MyFile = fs.readFileSync('tmp/licencias/asignacionPS.json');
@@ -829,7 +835,7 @@ function consultaLicencias(){
 
 		var lastLogin;
 		if(userArray[i].LastLoginDate != null)
-			lastLogin = userArray[i].LastLoginDate.substring(0, 13);
+			lastLogin = userArray[i].LastLoginDate.substring(0, 10);
 		else
 			lastLogin = '';
 
