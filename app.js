@@ -676,7 +676,7 @@ function consultaLicencias(){
 				psArray.push(objPsApp);
 
 				console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
-				console.log('objPsApp : ' + objPsApp);
+				console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
 
 				mapPS.set(objPsApp.NamePs, objPsApp);
 			}
@@ -706,7 +706,7 @@ function consultaLicencias(){
 	psArray.push(objPsApp);
 
 	console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
-	console.log('objPsApp : ' + objPsApp);
+	console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
 
 
 	MyFile = fs.readFileSync('tmp/licencias/asignacionPS.json');
@@ -755,7 +755,7 @@ function consultaLicencias(){
 						if(miPS.arrayApps[j] != 'Chatter Repsol'){
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
-							console.log('app : ' + miPS.arrayApps[j]);
+							//console.log('app : ' + miPS.arrayApps[j]);
 						}
 
 					}
@@ -778,7 +778,7 @@ function consultaLicencias(){
 						if(miPS.arrayApps[j] != 'Chatter Repsol'){
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
-							console.log('app : ' + miPS.arrayApps[j]);
+							//console.log('app : ' + miPS.arrayApps[j]);
 						}
 					}
 				}
