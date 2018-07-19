@@ -683,13 +683,13 @@ function consultaLicencias(){
 			objPsApp.NamePs = jsonContent.result.records[i].Parent.Name;
 			//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
 
-			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'CHATTER REPSOL')
+			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'Chatter Repsol')
 				appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
 			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
 		else
 		{
-			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'CHATTER REPSOL')
+			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'Chatter Repsol')
 				appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
 			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
 		}
@@ -746,7 +746,7 @@ function consultaLicencias(){
 
 					for (var j=0; j<miPS.arrayApps.length; j++)
 					{
-						if(miPS.arrayApps[j] != 'CHATTER REPSOL'){
+						if(miPS.arrayApps[j] != 'Chatter Repsol'){
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
 							console.log('app : ' + miPS.arrayApps[j]);
@@ -769,7 +769,7 @@ function consultaLicencias(){
 
 					for (var j=0; j<miPS.arrayApps.length; j++)
 					{
-						if(miPS.arrayApps[j] != 'CHATTER REPSOL'){
+						if(miPS.arrayApps[j] != 'Chatter Repsol'){
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
 							console.log('app : ' + miPS.arrayApps[j]);
