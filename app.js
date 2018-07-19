@@ -827,9 +827,13 @@ function consultaLicencias(){
 	for(var i=0; i<userArray.length; i++){
 
 
+		var lastLogin;
+		if(userArray[i].LastLoginDate != null)
+			lastLogin = userArray[i].LastLoginDate.substring(0, 10);
+		else
+			lastLogin = '';
 
-
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].LastLoginDate.substring(0, 10) + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].Profile + '</div></th>';
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + lastLogin + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].Profile + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
