@@ -734,6 +734,7 @@ function consultaLicencias(){
 				
 				objUser.Name = jsonContent.result.records[i].Assignee.Name;
 				objUser.LastLoginDate = jsonContent.result.records[i].Assignee.LastLoginDate;
+				objUser.Profile = jsonContent.result.records[i].Assignee.Profile.Name;
 				//console.log('objUser.Name : ' + objUser.Name);
 
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
@@ -745,10 +746,10 @@ function consultaLicencias(){
 
 					for (var j=0; j<miPS.arrayApps.length; j++)
 					{
-						if(miPS.arrayApps[j] !='CHATTER REPSOL'){
+						if(miPS.arrayApps[j] != 'CHATTER REPSOL'){
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
-							//console.log('app : ' + miPS.arrayApps[j]);
+							console.log('app : ' + miPS.arrayApps[j]);
 						}
 
 					}
@@ -768,10 +769,10 @@ function consultaLicencias(){
 
 					for (var j=0; j<miPS.arrayApps.length; j++)
 					{
-						if(miPS.arrayApps[j] !='CHATTER REPSOL'){
+						if(miPS.arrayApps[j] != 'CHATTER REPSOL'){
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
-							//console.log('app : ' + miPS.arrayApps[j]);
+							console.log('app : ' + miPS.arrayApps[j]);
 						}
 					}
 				}
@@ -809,7 +810,7 @@ function consultaLicencias(){
 	var nombreColumna = 'Usuario';
 
 	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
-	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th><th scope="col"><div class="slds-truncate">Last Login</div></th>';
+	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th><th scope="col"><div class="slds-truncate">Last Login</div></th></th><th scope="col"><div class="slds-truncate">Profile</div></th>';
 
 	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
 
@@ -828,7 +829,7 @@ function consultaLicencias(){
 
 
 
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].LastLoginDate + '</div></th>';
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].LastLoginDate + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].Profile + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
