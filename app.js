@@ -619,7 +619,7 @@ function consultaLicencias(){
 	execSync('mkdir ' + directorio);
 
 	var fileName = './tmp/licencias/asignacionPS.json'
-	var sQuery = 'SELECT Assignee.name, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where PermissionSet.IsOwnedByProfile=false and Assignee.Profile.UserLicense.name= \'Salesforce\' order by Assignee.name';
+	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where PermissionSet.IsOwnedByProfile=false and  Assignee.IsActive = true and Assignee.Profile.UserLicense.name= \'Salesforce\' order by Assignee.name';
 	var sProduccion = 'produccion';
 	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
@@ -733,6 +733,7 @@ function consultaLicencias(){
 				userAppsArray = [];
 				
 				objUser.Name = jsonContent.result.records[i].Assignee.Name;
+				objUser.LastLoginDate = jsonContent.result.records[i].Assignee.LastLoginDate;
 				//console.log('objUser.Name : ' + objUser.Name);
 
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
@@ -803,7 +804,7 @@ function consultaLicencias(){
 	var nombreColumna = 'Usuario';
 
 	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
-	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
+	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th><th scope="col"><div class="slds-truncate">Last Login</div></th>';
 
 	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
 
@@ -822,7 +823,7 @@ function consultaLicencias(){
 
 
 
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th>';
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].LastLoginDate + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
