@@ -1024,7 +1024,7 @@ function consultaLicencias(){
 	{
 		//if(jsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
 		//{
-			if(i == 0 || jsonContent.result.records[i].cuenta != jsonContent.result.records[i-1].cuenta)
+			if(i == 0 || jsonContent.result.records[i].UserLicense != jsonContent.result.records[i-1].UserLicense)
 			{
 				if (i>0){
 					objUser.userAppsArray = userAppsArray;
@@ -1150,7 +1150,7 @@ function consultaLicencias(){
 	var nombreColumna = 'Usuario';
 
 	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
-	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th><th scope="col"><div class="slds-truncate">Last Login</div></th></th><th scope="col"><div class="slds-truncate">Profile</div></th>';
+	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
 
 	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
 
@@ -1173,7 +1173,7 @@ function consultaLicencias(){
 		else
 			lastLogin = '';
 
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].UserLicense + '</div></th><th scope="row"><div class="slds-truncate">' + lastLogin + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].Profile + '</div></th>';
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].UserLicense + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 			var bool = false;
