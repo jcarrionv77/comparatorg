@@ -1085,11 +1085,12 @@ function consultaLicencias(){
 			}
 			else
 			{
+				var contador = 0;
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 				
 				if(mapPS.get(jsonContent.result.records[i].PermissionSet) != null){
 					var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet);
-					var contador = 0;
+					
 					//console.log('miPS: ' + JSON.stringify(miPS));
 
 					for (var j=0; j<miPS.arrayApps.length; j++)
@@ -1196,7 +1197,7 @@ function consultaLicencias(){
 			}
 
 			if(bool)
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  Number.parseFloat(userArray[i].cuenta).toPrecision(2)   + '</div></th>';
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  userArray[i].cuenta  + '</div></th>';
 			else
 				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
 				
