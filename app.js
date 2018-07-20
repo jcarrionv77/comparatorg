@@ -754,6 +754,8 @@ function consultaLicencias(){
 					for (var j=0; j<miPS.arrayApps.length; j++)
 					{
 						if(miPS.arrayApps[j] != 'Chatter Repsol' && miPS.arrayApps[j] != 'App Launcher' 
+								 && miPS.arrayApps[j] != '' 
+								 && miPS.arrayApps[j] != 'undefined' 
 								 && miPS.arrayApps[j] != 'All Tabs' 
 								 && miPS.arrayApps[j] != 'Sales Console'
 								 && miPS.arrayApps[j] != 'Sales'
@@ -791,6 +793,8 @@ function consultaLicencias(){
 					{
 						if(miPS.arrayApps[j] != 'Chatter Repsol' && miPS.arrayApps[j] != 'App Launcher' 
 								 && miPS.arrayApps[j] != 'All Tabs' 
+								 && miPS.arrayApps[j] != '' 
+								 && miPS.arrayApps[j] != 'undefined' 
 								 && miPS.arrayApps[j] != 'Sales Console'
 								 && miPS.arrayApps[j] != 'Sales'
 								 && miPS.arrayApps[j] != 'Content'
