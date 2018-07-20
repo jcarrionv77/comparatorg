@@ -1082,7 +1082,7 @@ function consultaLicencias(){
 			{
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 				objUser.cuenta = objUser.cuenta + jsonContent.result.records[i].cuenta;
-				if(mapPS.get(jsonContent.result.records[i].PermissionSet.) != null){
+				if(mapPS.get(jsonContent.result.records[i].PermissionSet) != null){
 					var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet);
 
 					//console.log('miPS: ' + JSON.stringify(miPS));
