@@ -917,7 +917,7 @@ function consultaLicencias(){
 	execSync('mkdir ' + directorio);
 
 	var fileName = './tmp/licencias/asignacionPS.json'
-	var sQuery = 'SELECT SELECT count(id) cuenta, Assignee.Profile.UserLicense.name UserLicense, PermissionSet.name PermissionSet FROM PermissionSetAssignment  where Assignee.IsActive = true  group by Assignee.Profile.UserLicense.name,  PermissionSet.name order by Assignee.Profile.UserLicense.name';
+	var sQuery = 'SELECT count(id) cuenta, Assignee.Profile.UserLicense.name UserLicense, PermissionSet.name PermissionSet FROM PermissionSetAssignment  where Assignee.IsActive = true  group by Assignee.Profile.UserLicense.name,  PermissionSet.name order by Assignee.Profile.UserLicense.name';
 	var sProduccion = 'produccion';
 	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
