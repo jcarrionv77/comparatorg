@@ -809,7 +809,7 @@ function consultaLicencias(){
 						{
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
-							console.log('app : ' + miPS.arrayApps[j]);
+							//console.log('app : ' + miPS.arrayApps[j]);
 						}
 					}
 				}
