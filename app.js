@@ -1024,7 +1024,7 @@ function consultaLicencias(){
 	{
 		//if(jsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
 		//{
-			if(i == 0 || jsonContent.result.records[i].Assignee.Name != jsonContent.result.records[i-1].Assignee.Name)
+			if(i == 0 || jsonContent.result.records[i].cuenta != jsonContent.result.records[i-1].cuenta)
 			{
 				if (i>0){
 					objUser.userAppsArray = userAppsArray;
