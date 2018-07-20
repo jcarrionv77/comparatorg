@@ -1032,11 +1032,11 @@ function consultaLicencias(){
 				}
 					//console.log('******');
 				
-				
+				var contador =0;
 				objUser={};
 				userAppsArray = [];
 				
-				objUser.cuenta = jsonContent.result.records[i].cuenta;
+				objUser.cuenta = 0;
 				objUser.UserLicense = jsonContent.result.records[i].UserLicense;
 
 				//console.log('objUser.Name : ' + objUser.Name);
@@ -1067,12 +1067,17 @@ function consultaLicencias(){
 								 && miPS.arrayApps[j] != 'Sales'
 								 && miPS.arrayApps[j] != 'Lightning Usage App') 
 						{
+							contador = contador++;
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
 							console.log('app : ' + miPS.arrayApps[j]);
 						}
 
 					}
+				}
+				if(contador)
+				{
+					objUser.cuenta = objUser.cuenta + jsonContent.result.records[i].cuenta/contador;
 				}
 
 
@@ -1081,10 +1086,10 @@ function consultaLicencias(){
 			else
 			{
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
-				objUser.cuenta = objUser.cuenta + jsonContent.result.records[i].cuenta;
+				
 				if(mapPS.get(jsonContent.result.records[i].PermissionSet) != null){
 					var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet);
-
+					var contador = 0;
 					//console.log('miPS: ' + JSON.stringify(miPS));
 
 					for (var j=0; j<miPS.arrayApps.length; j++)
@@ -1108,9 +1113,14 @@ function consultaLicencias(){
 						{
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
+							contador = contador++;
 							//console.log('app : ' + miPS.arrayApps[j]);
 						}
 					}
+				}
+				if(contador)
+				{
+					objUser.cuenta = objUser.cuenta + jsonContent.result.records[i].cuenta/contador;
 				}
 			}
 		//}
@@ -1186,7 +1196,7 @@ function consultaLicencias(){
 			}
 
 			if(bool)
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  userArray[i].cuenta * Number.parseFloat(1/userArray[i].userAppsArray.length).toPrecision(2)  + '</div></th>';
+				HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  Number.parseFloat(userArray[i].cuenta).toPrecision(2)   + '</div></th>';
 			else
 				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
 				
