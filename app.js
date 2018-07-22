@@ -1107,13 +1107,13 @@ function consultaLicencias(){
 
 	var matriz = new Array();
 
-	for(i=0; i<userArray.length;i++)
+	for(i=0; i<licenciasArray.length;i++)
 	{
-		for (j=0; j<licenciasArray.length;j++)
+		for (j=0; j<userArray.length;j++)
 		{
-			if(userArray[i] = licenciasArray[j])
+			if(licenciasArray[i] = userArray[j])
 			{
-				console.log('userArray[i] ' + userArray[i]);
+				console.log('licenciasArray[i] ' + licenciasArray[i]);
 			}
 		}
 	}
@@ -1193,10 +1193,10 @@ function consultaLicencias(){
 
 	console.log('********************************************');
 
-*/
+
 	dbCli.query('UPDATE licenses set html =($1) ', 
 		[HTML]); 
-	console.log('row update');
+	console.log('row update');*/
 
 
 }
