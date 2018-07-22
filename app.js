@@ -1130,7 +1130,7 @@ function consultaLicencias(){
 		for(var j=0; j<userArray[i].userAppsArray.length; j++)
 		{
 			var fila = mapLicencias.get(userArray[i].UserLicense);
-			var columna = mapAplicaciones.get(userArray[i].userAppsArray[k]);
+			var columna = mapAplicaciones.get(userArray[i].userAppsArray[j]);
 			matriz[fila][columna] = matriz[fila][columna] + userArray.cuenta;
 		}
 	}
