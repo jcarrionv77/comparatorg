@@ -1119,9 +1119,13 @@ function consultaLicencias(){
 
 				for(l=0;userArray[k].userAppsArray.length; l++)
 				{
-					if(licenciasArray[i]==userArray[k].UserLicense && licenciasArray[k] == userArray[k].userAppsArray[l])
+					if(licenciasArray[i]==userArray[k].UserLicense && nombreAppArray[j] == userArray[k].userAppsArray[l])
 					{
-						fila[l] =  fila[l] + 0 + userArray[k].cuenta;
+						console.log('licenciasArray[i] ' + licenciasArray[i]);
+						console.log('userArray[k].UserLicense ' + userArray[k].UserLicense);
+						console.log('nombreAppArray[j] ' + nombreAppArray[j]);
+						console.log('userArray[k].userAppsArray[l] ' + userArray[k].userAppsArray[l]);
+						fila[j] =  fila[j] + 0 + userArray[k].cuenta;
 					}
 				}
 			}
