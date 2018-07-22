@@ -1127,7 +1127,7 @@ function consultaLicencias(){
 
 	for(var i=0; i< userArray.userArray; i++){
 
-		for(var j=0; j<userArray[i].userAppsArray.length)
+		for(var j=0; j<userArray[i].userAppsArray.length; j++)
 		{
 			var fila = mapLicencias.get(userArray[i].UserLicense);
 			var columna = mapAplicaciones.get(userArray[i].userAppsArray[k]);
