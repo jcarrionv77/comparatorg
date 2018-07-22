@@ -1091,13 +1091,18 @@ function consultaLicencias(){
 
 	console.log(userArray.length);
 
-	console.log(JSON.stringify(userArray));
+	//console.log(JSON.stringify(userArray));
 
 
 
 
 	nombreAppArray = unique(listaAppProcesada);
 	licenciasArray = unique(listaLicenciaProcesada);
+
+
+	console.log('licenciasArray.length ' + licenciasArray.length);
+	console.log('nombreAppArray.length ' + nombreAppArray.length);
+	console.log('userArray.length ' + userArray.length);
 
 
 	var matriz = new Array();
@@ -1110,6 +1115,8 @@ function consultaLicencias(){
 		{
 			for (k=0; userArray.length; k++)
 			{
+				console.log('userArray[k].userAppsArray.length ' + userArray[k].userAppsArray.length);
+
 				for(l=0;userArray[k].userAppsArray.length; l++)
 				{
 					if(licenciasArray[i]==userArray[k].UserLicense && licenciasArray[k] == userArray[k].userAppsArray[l])
@@ -1120,7 +1127,7 @@ function consultaLicencias(){
 			}
 		}
 
-		console.log(fila);
+		console.log('fila es ' + fila);
 		matriz.push(fila);
 	}
 
