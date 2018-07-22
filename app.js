@@ -1174,7 +1174,7 @@ function consultaLicencias(){
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 
-			HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  matriz[i][k]  + '</div></th>';
+			HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  Number.parseFloat(matriz[i][k]).toPrecision(2)   + '</div></th>';
 			
 				
 		}
