@@ -1059,7 +1059,7 @@ function consultaLicencias(){
 						 && miPS.arrayApps[j] != 'Sales'
 						 && miPS.arrayApps[j] != 'Lightning Usage App') 
 				{
-					contador = contador++;
+					contador = contador + 1;
 					userAppsArray.push(miPS.arrayApps[j]);
 					listaAppProcesada.push(miPS.arrayApps[j]);
 					console.log('contador : ' + contador);
