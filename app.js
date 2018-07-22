@@ -1105,18 +1105,26 @@ function consultaLicencias(){
 	console.log('userArray.length ' + userArray.length);
 
 
-	var matriz = new Array();
+	var matriz = new Array(licenciasArray.length);
 
-	for(i=0; i<licenciasArray.length;i++)
-	{
-		for (j=0; j<userArray.length;j++)
-		{
-			if(licenciasArray[i] = userArray[j])
-			{
-				console.log('licenciasArray[i] ' + licenciasArray[i]);
-			}
+	var mapLicencias = new HashMap();
+	for(var i=0; i< licenciasArray.length; i++){
+		mapLicencias.set(licenciasArray[i], i);
+		matriz[i] = new Array(nombreAppArray.length);
+	}
+
+	var mapAplicaciones = new HashMap();
+	for(var i=0; i< nombreAppArray.length; i++){
+		mapAplicaciones.set(nombreAppArray[i], i);
+	}
+
+	for(var i=0; i< licenciasArray.length; i++){
+		for(var j=0; j< nombreAppArray.length; j++){
+			matriz[i][j] = 0;
 		}
 	}
+
+
 
 
 
