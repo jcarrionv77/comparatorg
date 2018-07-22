@@ -1029,7 +1029,9 @@ function consultaLicencias(){
 		objUser={};
 		userAppsArray = [];
 
-		//console.log('objUser.Name : ' + objUser.Name);
+		console.log('jsonContent.result.records[i].UserLicense : ' + jsonContent.result.records[i].UserLicense);
+		console.log('jsonContent.result.records[i].cuenta : ' + jsonContent.result.records[i].cuenta);
+
 
 		//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
 
@@ -1060,7 +1062,7 @@ function consultaLicencias(){
 					contador = contador++;
 					userAppsArray.push(miPS.arrayApps[j]);
 					listaAppProcesada.push(miPS.arrayApps[j]);
-					console.log('app : ' + miPS.arrayApps[j]);
+					console.log('contador : ' + contador);
 				}
 
 			}
