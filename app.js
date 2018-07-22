@@ -1125,27 +1125,25 @@ function consultaLicencias(){
 	}
 
 
+	for(var i=0; i< userArray.userArray; i++){
 
-
-
-/*	
-	console.log(nombreAppArray.length);
-	console.log(listaAppProcesada.length);
-
-	console.log('nombreAppArray.length es: ' + listaAppProcesada.length);
-	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
-
-	for(var i=0; i<userArray.length; i++)
-	{
-		userArray[i].userAppsArray = unique(userArray[i].userAppsArray);
+		for(var j=0; j<userArray[i].userAppsArray.length)
+		{
+			var fila = mapLicencias.get(userArray[i].UserLicense);
+			var columna = mapAplicaciones.get(userArray[i].userAppsArray[k]);
+			matriz[fila][columna] = matriz[fila][columna] + userArray.cuenta;
+		}
 	}
-	
+
+
+
+
 
 	var HTML = '';
 
 	console.log('HTML es: ' + HTML);
 
-	var nombreColumna = 'Usuario';
+	var nombreColumna = 'Licencia';
 
 	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
 	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
@@ -1165,28 +1163,12 @@ function consultaLicencias(){
 	for(var i=0; i<userArray.length; i++){
 
 
-		var lastLogin;
-		if(userArray[i].LastLoginDate != null)
-			lastLogin = userArray[i].LastLoginDate.substring(0, 10);
-		else
-			lastLogin = '';
-
 		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].UserLicense + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
-			var bool = false;
-			for (var j=0; j< userArray[i].userAppsArray.length; j++){
 
-				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
-					var bool = true;
-				}
-
-			}
-
-			if(bool)
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  userArray[i].cuenta  + '</div></th>';
-			else
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+			HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  matriz[i][j]  + '</div></th>';
+			
 				
 		}
 		HTML = HTML + '</tr>';
@@ -1204,7 +1186,7 @@ function consultaLicencias(){
 
 	dbCli.query('UPDATE licenses set html =($1) ', 
 		[HTML]); 
-	console.log('row update');*/
+	console.log('row update');
 
 
 }
