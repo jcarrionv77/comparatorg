@@ -1163,7 +1163,7 @@ function consultaLicencias(){
 	for(var i=0; i<licenciasArray.length; i++){
 
 
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].UserLicense + '</div></th>';
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + licenciasArray[i] + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
 
