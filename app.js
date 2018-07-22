@@ -1032,8 +1032,7 @@ function consultaLicencias(){
 		objUser={};
 		userAppsArray = [];
 
-		//console.log('jsonContent.result.records[i].UserLicense : ' + jsonContent.result.records[i].UserLicense);
-		//console.log('jsonContent.result.records[i].cuenta : ' + jsonContent.result.records[i].cuenta);
+
 
 
 		//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
@@ -1077,7 +1076,12 @@ function consultaLicencias(){
 		if(contador)
 			objUser.cuenta = jsonContent.result.records[i].cuenta / contador;
 
+		console.log('jsonContent.result.records[i].UserLicense : ' + jsonContent.result.records[i].UserLicense);
+		console.log('jsonContent.result.records[i].cuenta : ' + jsonContent.result.records[i].cuenta);	
+		console.log('contador : ' + contador);		
+		console.log('objUser.cuenta : ' + objUser.cuenta);		
 		
+
 		objUser.userAppsArray = userAppsArray;
 		userArray.push(objUser);
 
@@ -1132,11 +1136,6 @@ function consultaLicencias(){
 		{
 			var fila = mapLicencias.get(userArray[i].UserLicense);
 			var columna = mapAplicaciones.get(userArray[i].userAppsArray[j]);
-
-			console.log('fila' + fila);
-			console.log('columna ' + columna);
-			console.log('matriz[fila][columna] ' + matriz[fila][columna]);
-			console.log(' userArray[i].cuenta ' +  userArray[i].cuenta);
 
 			matriz[fila][columna] = matriz[fila][columna] + userArray[i].cuenta;
 		}
