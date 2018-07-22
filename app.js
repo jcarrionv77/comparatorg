@@ -1015,6 +1015,9 @@ function consultaLicencias(){
 	var userAppsArray = new Array();
 
 	var listaAppProcesada = new Array();
+	var listaLicenciaProcesada = new Array();
+
+	var licenciasArray = new Array();
 
 	//console.log('********************************************');
 
@@ -1062,7 +1065,7 @@ function consultaLicencias(){
 					contador = contador + 1;
 					userAppsArray.push(miPS.arrayApps[j]);
 					listaAppProcesada.push(miPS.arrayApps[j]);
-					console.log('contador : ' + contador);
+					//console.log('contador : ' + contador);
 				}
 
 			}
@@ -1070,6 +1073,7 @@ function consultaLicencias(){
 
 		objUser.cuenta = 0;
 		objUser.UserLicense = jsonContent.result.records[i].UserLicense;
+		listaLicenciaProcesada.push(jsonContent.result.records[i].UserLicense);
 		if(contador)
 			objUser.cuenta = jsonContent.result.records[i].cuenta / contador;
 
@@ -1093,7 +1097,36 @@ function consultaLicencias(){
 
 
 	nombreAppArray = unique(listaAppProcesada);
+	licenciasArray = unique(listaLicenciaProcesada);
 
+
+	var matriz = new Array();
+
+	for(i=0; i<licenciasArray.length;i++)
+	{
+		var fila = new Array();
+
+		for(j=0; j<nombreAppArray.length;j++)
+		{
+			for (k=0; userArray.length; k++)
+			{
+				for(l=0;userArray.userAppsArray.length; l++)
+				{
+					if(licenciasArray[i]==userArray[k].UserLicense && licenciasArray[k] == userArray[k].userAppsArray[l])
+					{
+						fila[l] =  fila[l] + 0 + userArray[k].cuenta;
+					}
+				}
+			}
+		}
+
+		console.log(fila);
+		matriz.push(fila);
+	}
+
+
+
+/*	
 	console.log(nombreAppArray.length);
 	console.log(listaAppProcesada.length);
 
@@ -1166,6 +1199,7 @@ function consultaLicencias(){
 
 	console.log('********************************************');
 
+*/
 	dbCli.query('UPDATE licenses set html =($1) ', 
 		[HTML]); 
 	console.log('row update');
