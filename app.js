@@ -1121,7 +1121,7 @@ function consultaLicencias(){
 	for(var i=0; i< licenciasArray.length; i++){
 		for(var j=0; j< nombreAppArray.length; j++){
 			matriz[i][j] = 0;
-			console.log('matriz[i][j] ' + matriz[i][j]);
+
 		}
 	}
 
@@ -1132,7 +1132,7 @@ function consultaLicencias(){
 		{
 			var fila = mapLicencias.get(userArray[i].UserLicense);
 			var columna = mapAplicaciones.get(userArray[i].userAppsArray[j]);
-			//matriz[fila][columna] = matriz[fila][columna] + userArray.cuenta;
+			matriz[fila][columna] = matriz[fila][columna] + userArray[i].cuenta;
 		}
 	}
 
