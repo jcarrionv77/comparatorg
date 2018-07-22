@@ -1022,113 +1022,63 @@ function consultaLicencias(){
 
 	for (var i =0; i<jsonContent.result.records.length; i++)
 	{
-		//if(jsonContent.result.records[i].Assignee.Name != 'JOSE SANCHEZ-QUINTANAR SANCHEZ-ALARCOS')
-		//{
-			if(i == 0 || jsonContent.result.records[i].UserLicense != jsonContent.result.records[i-1].UserLicense)
+
+
+				
+		var contador =0;
+		objUser={};
+		userAppsArray = [];
+
+		//console.log('objUser.Name : ' + objUser.Name);
+
+		//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
+
+		if(mapPS.get(jsonContent.result.records[i].PermissionSet) != null){
+			var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet);
+
+			//console.log('miPS: ' + JSON.stringify(miPS));
+
+			for (var j=0; j<miPS.arrayApps.length; j++)
 			{
-				if (i>0){
-					objUser.userAppsArray = userAppsArray;
-					userArray.push(objUser);
-				}
-					//console.log('******');
-				
-				var contador =0;
-				objUser={};
-				userAppsArray = [];
-				
-				objUser.cuenta = 0;
-				objUser.UserLicense = jsonContent.result.records[i].UserLicense;
-
-				//console.log('objUser.Name : ' + objUser.Name);
-
-				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
-
-				if(mapPS.get(jsonContent.result.records[i].PermissionSet) != null){
-					var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet);
-
-					//console.log('miPS: ' + JSON.stringify(miPS));
-
-					for (var j=0; j<miPS.arrayApps.length; j++)
-					{
-						if(miPS.arrayApps[j] != 'Chatter Repsol' && miPS.arrayApps[j] != 'App Launcher' 
-								 && miPS.arrayApps[j] != '' 
-								 && miPS.arrayApps[j] != 'undefined' 
-								 && miPS.arrayApps[j] != null 
-								 && miPS.arrayApps[j] != 'All Tabs' 
-								 && miPS.arrayApps[j] != 'Sales Console'
-								 && miPS.arrayApps[j] != 'Sales'
-								 && miPS.arrayApps[j] != 'Content'
-								 && miPS.arrayApps[j] != 'Sample Console'
-								 && miPS.arrayApps[j] != 'Platform'
-								 && miPS.arrayApps[j] != 'Service Console'
-								 && miPS.arrayApps[j] != 'Service'
-								 && miPS.arrayApps[j] != 'Marketing'
-								 && miPS.arrayApps[j] != 'Analytics Studio'
-								 && miPS.arrayApps[j] != 'Sales'
-								 && miPS.arrayApps[j] != 'Lightning Usage App') 
-						{
-							contador = contador++;
-							userAppsArray.push(miPS.arrayApps[j]);
-							listaAppProcesada.push(miPS.arrayApps[j]);
-							console.log('app : ' + miPS.arrayApps[j]);
-						}
-
-					}
-				}
-				if(contador)
+				if(miPS.arrayApps[j] != 'Chatter Repsol' && miPS.arrayApps[j] != 'App Launcher' 
+						 && miPS.arrayApps[j] != '' 
+						 && miPS.arrayApps[j] != 'undefined' 
+						 && miPS.arrayApps[j] != null 
+						 && miPS.arrayApps[j] != 'All Tabs' 
+						 && miPS.arrayApps[j] != 'Sales Console'
+						 && miPS.arrayApps[j] != 'Sales'
+						 && miPS.arrayApps[j] != 'Content'
+						 && miPS.arrayApps[j] != 'Sample Console'
+						 && miPS.arrayApps[j] != 'Platform'
+						 && miPS.arrayApps[j] != 'Service Console'
+						 && miPS.arrayApps[j] != 'Service'
+						 && miPS.arrayApps[j] != 'Marketing'
+						 && miPS.arrayApps[j] != 'Analytics Studio'
+						 && miPS.arrayApps[j] != 'Sales'
+						 && miPS.arrayApps[j] != 'Lightning Usage App') 
 				{
-					objUser.cuenta = objUser.cuenta + jsonContent.result.records[i].cuenta/contador;
+					contador = contador++;
+					userAppsArray.push(miPS.arrayApps[j]);
+					listaAppProcesada.push(miPS.arrayApps[j]);
+					console.log('app : ' + miPS.arrayApps[j]);
 				}
-
-
 
 			}
-			else
-			{
-				var contador = 0;
-				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
-				
-				if(mapPS.get(jsonContent.result.records[i].PermissionSet) != null){
-					var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet);
-					
-					//console.log('miPS: ' + JSON.stringify(miPS));
+		}
 
-					for (var j=0; j<miPS.arrayApps.length; j++)
-					{
-						if(miPS.arrayApps[j] != 'Chatter Repsol' && miPS.arrayApps[j] != 'App Launcher' 
-								 && miPS.arrayApps[j] != 'All Tabs' 
-								 && miPS.arrayApps[j] != '' 
-								 && miPS.arrayApps[j] != null 
-								 && miPS.arrayApps[j] != 'undefined' 
-								 && miPS.arrayApps[j] != 'Sales Console'
-								 && miPS.arrayApps[j] != 'Sales'
-								 && miPS.arrayApps[j] != 'Content'
-								 && miPS.arrayApps[j] != 'Sample Console'
-								 && miPS.arrayApps[j] != 'Platform'
-								 && miPS.arrayApps[j] != 'Service Console'
-								 && miPS.arrayApps[j] != 'Service'
-								 && miPS.arrayApps[j] != 'Marketing'
-								 && miPS.arrayApps[j] != 'Analytics Studio'
-								 && miPS.arrayApps[j] != 'Sales'
-								 && miPS.arrayApps[j] != 'Lightning Usage App') 	
-						{
-							userAppsArray.push(miPS.arrayApps[j]);
-							listaAppProcesada.push(miPS.arrayApps[j]);
-							contador = contador++;
-							//console.log('app : ' + miPS.arrayApps[j]);
-						}
-					}
-				}
-				if(contador)
-				{
-					objUser.cuenta = objUser.cuenta + jsonContent.result.records[i].cuenta/contador;
-				}
-			}
+		objUser.cuenta = 0;
+		objUser.UserLicense = jsonContent.result.records[i].UserLicense;
+		if(contador)
+			objUser.cuenta = jsonContent.result.records[i].cuenta / contador;
+
+		
+		objUser.userAppsArray = userAppsArray;
+		userArray.push(objUser);
+
 		//}
 	}
 
-	objUser.userAppsArray = userAppsArray;
-	userArray.push(objUser);
+
 
 	console.log('********************************************');
 
