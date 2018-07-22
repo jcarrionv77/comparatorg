@@ -1110,7 +1110,7 @@ function consultaLicencias(){
 		{
 			for (k=0; userArray.length; k++)
 			{
-				for(l=0;userArray.userAppsArray.length; l++)
+				for(l=0;userArray[k].userAppsArray.length; l++)
 				{
 					if(licenciasArray[i]==userArray[k].UserLicense && licenciasArray[k] == userArray[k].userAppsArray[l])
 					{
