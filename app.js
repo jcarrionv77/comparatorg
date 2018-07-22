@@ -1032,8 +1032,8 @@ function consultaLicencias(){
 		objUser={};
 		userAppsArray = [];
 
-		console.log('jsonContent.result.records[i].UserLicense : ' + jsonContent.result.records[i].UserLicense);
-		console.log('jsonContent.result.records[i].cuenta : ' + jsonContent.result.records[i].cuenta);
+		//console.log('jsonContent.result.records[i].UserLicense : ' + jsonContent.result.records[i].UserLicense);
+		//console.log('jsonContent.result.records[i].cuenta : ' + jsonContent.result.records[i].cuenta);
 
 
 		//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
@@ -1126,7 +1126,7 @@ function consultaLicencias(){
 	}
 
 
-	for(var i=0; i< userArray.userArray; i++){
+	for(var i=0; i< userArray.length; i++){
 
 		for(var j=0; j<userArray[i].userAppsArray.length; j++)
 		{
@@ -1137,7 +1137,7 @@ function consultaLicencias(){
 			console.log('columna ' + columna);
 			console.log('matriz[fila][columna] ' + matriz[fila][columna]);
 			console.log(' userArray[i].cuenta ' +  userArray[i].cuenta);
-			
+
 			matriz[fila][columna] = matriz[fila][columna] + userArray[i].cuenta;
 		}
 	}
