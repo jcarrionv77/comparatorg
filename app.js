@@ -1107,32 +1107,15 @@ function consultaLicencias(){
 
 	var matriz = new Array();
 
-	for(i=0; i<licenciasArray.length;i++)
+	for(i=0; i<userArray.length;i++)
 	{
-		var fila = new Array();
-
-		for(j=0; j<nombreAppArray.length;j++)
+		for (j=0; j<licenciasArray.length;j++)
 		{
-			for (k=0; userArray.length; k++)
+			if(userArray[i] = licenciasArray[j])
 			{
-				console.log('userArray[k].userAppsArray.length ' + userArray[k].userAppsArray.length);
-
-				for(l=0;userArray[k].userAppsArray.length; l++)
-				{
-					if(licenciasArray[i]==userArray[k].UserLicense && nombreAppArray[j] == userArray[k].userAppsArray[l])
-					{
-						console.log('licenciasArray[i] ' + licenciasArray[i]);
-						console.log('userArray[k].UserLicense ' + userArray[k].UserLicense);
-						console.log('nombreAppArray[j] ' + nombreAppArray[j]);
-						console.log('userArray[k].userAppsArray[l] ' + userArray[k].userAppsArray[l]);
-						fila[j] =  fila[j] + 0 + userArray[k].cuenta;
-					}
-				}
+				console.log('userArray[i] ' + userArray[i]);
 			}
 		}
-
-		console.log('fila es ' + fila);
-		matriz.push(fila);
 	}
 
 
