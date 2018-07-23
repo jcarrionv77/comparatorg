@@ -207,7 +207,7 @@ function read(){
 	console.log('fin release 2');
 
 	consultaLicenciasSalesforce();
-	consultaLicencias();
+	//consultaLicencias();
 
 	console.log('fin release 3');
 
@@ -910,15 +910,15 @@ function consultaLicenciasSalesforce(){
 
 }
 
-
-
 function consultaLicencias(){
 
-	var directorio = 'tmp/licenciasSF';
+
+
+	var directorio = 'tmp/licencias';
 
 	execSync('mkdir ' + directorio);
 
-	var fileName = './tmp/licenciasSF/asignacionPS.json'
+	var fileName = './tmp/licencias/asignacionPS.json'
 	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.Id, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where Assignee.IsActive = true  order by Assignee.name';
 	var sProduccion = 'produccion';
 	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
@@ -927,7 +927,7 @@ function consultaLicencias(){
 
 	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
-	var fileName = './tmp/licenciasSF/asignacionApp.json'
+	var fileName = './tmp/licencias/asignacionApp.json'
 	sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\'  order by Parent.name';
 	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
@@ -936,7 +936,7 @@ function consultaLicencias(){
 	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
 
-	var fileName = './tmp/licenciasSF/App.json'
+	var fileName = './tmp/licencias/App.json'
 	sQuery = 'SELECT ApplicationId,Label FROM AppMenuItem WHERE Type = \'TabSet\'';
 	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
@@ -944,7 +944,7 @@ function consultaLicencias(){
 
 	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
 
-	var MyFile = fs.readFileSync('tmp/licenciasSF/App.json');
+	var MyFile = fs.readFileSync('tmp/licencias/App.json');
 	var jsonContent = JSON.parse(MyFile);
 
 	var map = new HashMap();
@@ -956,7 +956,7 @@ function consultaLicencias(){
 		nombreAppArray.push(jsonContent.result.records[i].Label);
 	}
 
-	MyFile = fs.readFileSync('tmp/licenciasSF/asignacionApp.json');
+	MyFile = fs.readFileSync('tmp/licencias/asignacionApp.json');
 	jsonContent = JSON.parse(MyFile);
 	
 	var psArray = new Array();
@@ -1009,7 +1009,7 @@ function consultaLicencias(){
 	//console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
 
 
-	MyFile = fs.readFileSync('tmp/licenciasSF/asignacionPS.json');
+	MyFile = fs.readFileSync('tmp/licencias/asignacionPS.json');
 	jsonContent = JSON.parse(MyFile);
 
 	var userArray = new Array();
@@ -1205,9 +1205,297 @@ function consultaLicencias(){
 	dbCli.query('UPDATE licenses set html =($1) ', 
 		[HTML]); 
 	console.log('row update');
+}
+	
+
+function consultaLicenciasOLD(){
+
+	var directorio = 'tmp/licencias';
+
+	execSync('mkdir ' + directorio);
+
+	var fileName = './tmp/licencias/asignacionPS.json'
+	var sQuery = 'SELECT count(id) cuenta, Assignee.Profile.UserLicense.name UserLicense, PermissionSet.name PermissionSet FROM PermissionSetAssignment  where Assignee.IsActive = true  group by Assignee.Profile.UserLicense.name,  PermissionSet.name order by Assignee.Profile.UserLicense.name';
+	var sProduccion = 'produccion';
+	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
+
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+	var fileName = './tmp/licencias/asignacionApp.json'
+	sQuery = 'SELECT Id, Parent.name,SetupEntityId FROM SetupEntityAccess WHERE SetupEntityType = \'TabSet\'  order by Parent.name';
+	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
+
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+
+	var fileName = './tmp/licencias/App.json'
+	sQuery = 'SELECT ApplicationId,Label FROM AppMenuItem WHERE Type = \'TabSet\'';
+	commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
+
+	console.log('commandSFDXDescribe ' + commandSFDXDescribe);
+
+	execSync(commandSFDXDescribe, {maxBuffer: 1024 * 500});
+
+	var MyFile = fs.readFileSync('tmp/licencias/App.json');
+	var jsonContent = JSON.parse(MyFile);
+
+	var map = new HashMap();
+	var nombreAppArray = new Array();
+
+	for (var i =0; i<jsonContent.result.records.length; i++)
+	{
+		map.set(jsonContent.result.records[i].ApplicationId, jsonContent.result.records[i].Label);
+		nombreAppArray.push(jsonContent.result.records[i].Label);
+	}
+
+	MyFile = fs.readFileSync('tmp/licencias/asignacionApp.json');
+	jsonContent = JSON.parse(MyFile);
+	
+	var psArray = new Array();
+	var appsArray = new Array();
+	var objPsAppp ={};
+	var mapPS = new HashMap();
+
+	console.log('********************************************');
+
+	for (var i =0; i<jsonContent.result.records.length; i++)
+	{
+		
+		if(i == 0 || jsonContent.result.records[i].Parent.Name != jsonContent.result.records[i-1].Parent.Name)
+		{
+			if (i>0){
+				objPsApp.arrayApps = appsArray;
+				psArray.push(objPsApp);
+
+				//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+				//console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
+
+				mapPS.set(objPsApp.NamePs, objPsApp);
+			}
+
+			objPsApp={};
+			appsArray = [];
+			objPsApp.NamePs = jsonContent.result.records[i].Parent.Name;
+			//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+
+			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'Chatter Repsol')
+				appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
+		}
+		else
+		{
+			if(map.get(jsonContent.result.records[i].SetupEntityId) != 'Chatter Repsol')
+				appsArray.push(map.get(jsonContent.result.records[i].SetupEntityId));
+			//console.log('objPsApp.NameAPP : ' +map.get(jsonContent.result.records[i].SetupEntityId));
+		}
+		
+	}
+
+
+	objPsApp.arrayApps = appsArray;
+
+	mapPS.set(objPsApp.NamePs, objPsApp);
+	psArray.push(objPsApp);
+
+	//console.log('objPsApp.NamePs : ' + objPsApp.NamePs);
+	//console.log('objPsApp.arrayApps : ' + objPsApp.arrayApps);
+
+
+	MyFile = fs.readFileSync('tmp/licencias/asignacionPS.json');
+	jsonContent = JSON.parse(MyFile);
+
+	var userArray = new Array();
+	var objUser ={};
+	var userAppsArray = new Array();
+
+	var listaAppProcesada = new Array();
+	var listaLicenciaProcesada = new Array();
+
+	var licenciasArray = new Array();
+
+	//console.log('********************************************');
+
+	//console.log('jsonContent.result.records.length ' + jsonContent.result.records.length);
+
+	for (var i =0; i<jsonContent.result.records.length; i++)
+	{
+
+
+				
+		var contador =0;
+		objUser={};
+		userAppsArray = [];
+
+
+
+
+		//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
+
+		if(mapPS.get(jsonContent.result.records[i].PermissionSet) != null){
+			var miPS = mapPS.get(jsonContent.result.records[i].PermissionSet);
+
+			//console.log('miPS: ' + JSON.stringify(miPS));
+
+			for (var j=0; j<miPS.arrayApps.length; j++)
+			{
+				if(miPS.arrayApps[j] != 'Chatter Repsol' && miPS.arrayApps[j] != 'App Launcher' 
+						 && miPS.arrayApps[j] != '' 
+						 && miPS.arrayApps[j] != 'undefined' 
+						 && miPS.arrayApps[j] != null 
+						 && miPS.arrayApps[j] != 'All Tabs' 
+						 && miPS.arrayApps[j] != 'Sales Console'
+						 && miPS.arrayApps[j] != 'Sales'
+						 && miPS.arrayApps[j] != 'Content'
+						 && miPS.arrayApps[j] != 'Sample Console'
+						 && miPS.arrayApps[j] != 'Platform'
+						 && miPS.arrayApps[j] != 'Service Console'
+						 && miPS.arrayApps[j] != 'Service'
+						 && miPS.arrayApps[j] != 'Marketing'
+						 && miPS.arrayApps[j] != 'Analytics Studio'
+						 && miPS.arrayApps[j] != 'Sales'
+						 && miPS.arrayApps[j] != 'Lightning Usage App') 
+				{
+					contador = contador + 1;
+					userAppsArray.push(miPS.arrayApps[j]);
+					listaAppProcesada.push(miPS.arrayApps[j]);
+					//console.log('contador : ' + contador);
+				}
+
+			}
+		}
+
+		objUser.cuenta = 0;
+		objUser.UserLicense = jsonContent.result.records[i].UserLicense;
+		listaLicenciaProcesada.push(jsonContent.result.records[i].UserLicense);
+		if(contador)
+			objUser.cuenta = jsonContent.result.records[i].cuenta / contador;
+
+		console.log('jsonContent.result.records[i].UserLicense : ' + jsonContent.result.records[i].UserLicense);
+		console.log('jsonContent.result.records[i].cuenta : ' + jsonContent.result.records[i].cuenta);	
+		console.log('contador : ' + contador);		
+		console.log('objUser.cuenta : ' + objUser.cuenta);		
+		
+
+		objUser.userAppsArray = userAppsArray;
+		userArray.push(objUser);
+
+		//}
+	}
+
+
+
+	console.log('********************************************');
+
+
+	console.log(userArray.length);
+
+	//console.log(JSON.stringify(userArray));
+
+
+
+
+	nombreAppArray = unique(listaAppProcesada);
+	licenciasArray = unique(listaLicenciaProcesada);
+
+
+	console.log('licenciasArray.length ' + licenciasArray.length);
+	console.log('nombreAppArray.length ' + nombreAppArray.length);
+	console.log('userArray.length ' + userArray.length);
+
+
+	var matriz = new Array(licenciasArray.length);
+
+	var mapLicencias = new HashMap();
+	for(var i=0; i< licenciasArray.length; i++){
+		mapLicencias.set(licenciasArray[i], i);
+		matriz[i] = new Array(nombreAppArray.length);
+	}
+
+	var mapAplicaciones = new HashMap();
+	for(var i=0; i< nombreAppArray.length; i++){
+		mapAplicaciones.set(nombreAppArray[i], i);
+	}
+
+	for(var i=0; i< licenciasArray.length; i++){
+		for(var j=0; j< nombreAppArray.length; j++){
+			matriz[i][j] = 0;
+
+		}
+	}
+
+
+	for(var i=0; i< userArray.length; i++){
+
+		for(var j=0; j<userArray[i].userAppsArray.length; j++)
+		{
+			var fila = mapLicencias.get(userArray[i].UserLicense);
+			var columna = mapAplicaciones.get(userArray[i].userAppsArray[j]);
+
+			matriz[fila][columna] = matriz[fila][columna] + userArray[i].cuenta;
+		}
+	}
+
+
+
+
+
+	var HTML = '';
+
+	console.log('HTML es: ' + HTML);
+
+	var nombreColumna = 'Licencia';
+
+	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
+	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
+
+	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
+
+	for (var k=0; k<nombreAppArray.length;k++){
+
+		HTML = HTML + '<th scope="col"><div class="slds-truncate">' + nombreAppArray[k] + '</div></th>';
+		
+	}
+
+	HTML = HTML + '</thead><tbody>';
+
+	console.log('userArray.length es: ' + userArray.length);
+
+	for(var i=0; i<licenciasArray.length; i++){
+
+
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + licenciasArray[i] + '</div></th>';
+	
+		for (var k=0; k<nombreAppArray.length;k++){
+
+			HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  Number.parseFloat(matriz[i][k]).toPrecision(2)   + '</div></th>';
+			
+				
+		}
+		HTML = HTML + '</tr>';
+		
+
+	}	
+	
+	HTML = HTML + '</tbody></table>';
+
+
+	//console.log('HTML es: ' + HTML);
+
+	console.log('********************************************');
+
+
+	dbCli.query('UPDATE licenses set html =($1) ', 
+		[HTML]); 
+	console.log('row update');
 
 
 }
+
+
 
 
 function consultaPermission(){
