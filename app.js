@@ -207,7 +207,7 @@ function read(){
 	console.log('fin release 2');
 
 	consultaLicenciasSalesforce();
-	//consultaLicencias();
+	consultaLicencias();
 
 	console.log('fin release 3');
 
@@ -773,7 +773,7 @@ function consultaLicenciasSalesforce(){
 						{
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
-							console.log('app : ' + miPS.arrayApps[j]);
+							//console.log('app : ' + miPS.arrayApps[j]);
 						}
 
 					}
