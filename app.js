@@ -1239,7 +1239,7 @@ function consultaLicencias(){
 
 	console.log('********************************************');
 
-	dbCli.query('UPDATE licenses set html2 =($1) ', 
+	dbCli.query('UPDATE licenses set html =($1) ', 
 		[HTML]); 
 	console.log('row update');
 }
