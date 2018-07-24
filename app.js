@@ -743,6 +743,7 @@ function consultaLicenciasSalesforce(){
 				objUser.LastLoginDate = jsonContent.result.records[i].Assignee.LastLoginDate;
 				objUser.Profile = jsonContent.result.records[i].Assignee.Profile.Name;
 				objUser.ProfileId = jsonContent.result.records[i].Assignee.Profile.Id;
+
 				//console.log('objUser.Name : ' + objUser.Name);
 
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
@@ -1017,6 +1018,7 @@ function consultaLicencias(){
 	var userAppsArray = new Array();
 
 	var listaAppProcesada = new Array();
+	var listaLicenciaProcesada = new Array();
 
 	//console.log('********************************************');
 
@@ -1042,6 +1044,9 @@ function consultaLicencias(){
 				objUser.LastLoginDate = jsonContent.result.records[i].Assignee.LastLoginDate;
 				objUser.Profile = jsonContent.result.records[i].Assignee.Profile.Name;
 				objUser.ProfileId = jsonContent.result.records[i].Assignee.Profile.Id;
+				objUser.UserLicense = jsonContent.result.records[i].Assignee.Profile.UserLicense.name;
+				
+				listaLicenciaProcesada.push(jsonContent.result.records[i].Assignee.Profile.UserLicense.name;);
 				//console.log('objUser.Name : ' + objUser.Name);
 
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
@@ -1130,6 +1135,38 @@ function consultaLicencias(){
 
 	nombreAppArray = unique(listaAppProcesada);
 
+
+	var nombreLicenceArray = new Array();
+	nombreLicenceArray = unique(listaLicenciaProcesada);
+
+
+/*****
+
+	var matriz = new Array(licenciasArray.length);
+
+	var mapLicencias = new HashMap();
+	for(var i=0; i< licenciasArray.length; i++){
+		mapLicencias.set(licenciasArray[i], i);
+		matriz[i] = new Array(nombreAppArray.length);
+	}
+
+	var mapAplicaciones = new HashMap();
+	for(var i=0; i< nombreAppArray.length; i++){
+		mapAplicaciones.set(nombreAppArray[i], i);
+	}
+
+	for(var i=0; i< licenciasArray.length; i++){
+		for(var j=0; j< nombreAppArray.length; j++){
+			matriz[i][j] = 0;
+
+		}
+	}
+*/
+
+
+
+	
+
 	console.log(nombreAppArray.length);
 	console.log(listaAppProcesada.length);
 
@@ -1202,7 +1239,7 @@ function consultaLicencias(){
 
 	console.log('********************************************');
 
-	dbCli.query('UPDATE licenses set html =($1) ', 
+	dbCli.query('UPDATE licenses set html2 =($1) ', 
 		[HTML]); 
 	console.log('row update');
 }

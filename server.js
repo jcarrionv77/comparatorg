@@ -141,10 +141,11 @@ app.listen(port, function() {
 
 	}
 
-	var rowsLicencia = client.querySync('SELECT  html FROM licenses limit 1');
+	var rowsLicencia = client.querySync('SELECT  html, html2 FROM licenses limit 1');
 	if  (rowsLicencia != null && rowsLicencia.length>0)
 	{
-		sLicencia = rowsLicencia[0].html;
+		sLicenciaSF = rowsLicencia[0].html;
+		sLicencia = rowsLicencia[0].html2;
 
 	}
 
