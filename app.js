@@ -1124,6 +1124,11 @@ function consultaLicencias(){
 		//}
 	}
 
+
+
+
+
+
 	objUser.userAppsArray = userAppsArray;
 	userArray.push(objUser);
 
@@ -1140,13 +1145,13 @@ function consultaLicencias(){
 	nombreLicenceArray = unique(listaLicenciaProcesada);
 
 
-/*****
 
-	var matriz = new Array(licenciasArray.length);
+
+	var matriz = new Array(nombreLicenceArray.length);
 
 	var mapLicencias = new HashMap();
-	for(var i=0; i< licenciasArray.length; i++){
-		mapLicencias.set(licenciasArray[i], i);
+	for(var i=0; i< nombreLicenceArray.length; i++){
+		mapLicencias.set(nombreLicenceArray[i], i);
 		matriz[i] = new Array(nombreAppArray.length);
 	}
 
@@ -1161,32 +1166,31 @@ function consultaLicencias(){
 
 		}
 	}
-*/
-
-
-
-	
 
 	console.log(nombreAppArray.length);
-	console.log(listaAppProcesada.length);
+	console.log(nombreLicenceArray.length);
 
-	console.log('nombreAppArray.length es: ' + listaAppProcesada.length);
-	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
 
-	for(var i=0; i<userArray.length; i++)
-	{
-		userArray[i].userAppsArray = unique(userArray[i].userAppsArray);
+	for(var i=0; i< userArray.length; i++){
+
+		for(var j=0; j<userArray[i].userAppsArray.length; j++)
+		{
+			var fila = mapLicencias.get(userArray[i].UserLicense);
+			var columna = mapAplicaciones.get(userArray[i].userAppsArray[j]);
+
+			matriz[fila][columna] = matriz[fila][columna] + userArray[i].cuenta;
+		}
 	}
-	
+
 
 	var HTML = '';
 
 	console.log('HTML es: ' + HTML);
 
-	var nombreColumna = 'Usuario';
+	var nombreColumna = 'Licencia';
 
 	HTML = '<table class="slds-table slds-table_bordered slds-table_cell-buffer">';
-	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th><th scope="col"><div class="slds-truncate">Last Login</div></th></th><th scope="col"><div class="slds-truncate">Profile</div></th>';
+	HTML = HTML + '<thead><tr class="slds-text-title_caps"><th scope="col"><div class="slds-truncate">' + nombreColumna + '</div></th>';
 
 	console.log('nombreAppArray.length es: ' + nombreAppArray.length);
 
@@ -1200,31 +1204,15 @@ function consultaLicencias(){
 
 	console.log('userArray.length es: ' + userArray.length);
 
-	for(var i=0; i<userArray.length; i++){
+	for(var i=0; i<licenciasArray.length; i++){
 
 
-		var lastLogin;
-		if(userArray[i].LastLoginDate != null)
-			lastLogin = userArray[i].LastLoginDate.substring(0, 10);
-		else
-			lastLogin = '';
-
-		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + userArray[i].Name + '</div></th><th scope="row"><div class="slds-truncate">' + lastLogin + '</div></th><th scope="row"><div class="slds-truncate">' + userArray[i].Profile + '</div></th>';
+		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + nombreLicenceArray[i] + '</div></th>';
 	
 		for (var k=0; k<nombreAppArray.length;k++){
-			var bool = false;
-			for (var j=0; j< userArray[i].userAppsArray.length; j++){
 
-				if(userArray[i].userAppsArray[j]==nombreAppArray[k]){
-					var bool = true;
-				}
-
-			}
-
-			if(bool)
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  Number.parseFloat(1/userArray[i].userAppsArray.length).toPrecision(2)  + '</div></th>';
-			else
-				HTML = HTML + '<th scope="row"><div class="slds-truncate">' + '' + '</div></th>';
+			HTML = HTML + '<th scope="row"><div class="slds-truncate">' +  Number.parseFloat(matriz[i][k]).toPrecision(2)   + '</div></th>';
+			
 				
 		}
 		HTML = HTML + '</tr>';
@@ -1233,6 +1221,13 @@ function consultaLicencias(){
 	}	
 	
 	HTML = HTML + '</tbody></table>';
+
+
+	//console.log('HTML es: ' + HTML);
+
+	console.log('********************************************');
+
+
 
 
 	//console.log('HTML es: ' + HTML);
