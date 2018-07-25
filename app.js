@@ -920,7 +920,7 @@ function consultaLicencias(){
 	execSync('mkdir ' + directorio);
 
 	var fileName = './tmp/licencias/asignacionPS.json'
-	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.Id, Assignee.Profile.UserLicense.name,Id,  PermissionSet.name FROM PermissionSetAssignment  where Assignee.IsActive = true  order by Assignee.name';
+	var sQuery = 'SELECT Assignee.name,  Assignee.LastLoginDate, Assignee.Profile.Name, Assignee.Profile.Id, Assignee.Profile.UserLicense.name, Id,  PermissionSet.name FROM PermissionSetAssignment  where Assignee.IsActive = true  order by Assignee.name';
 	var sProduccion = 'produccion';
 	var commandSFDXDescribe	= 'sfdx force:data:soql:query -q "' + sQuery  +  '" ' + '-u ' + sProduccion +' --json > ' + fileName;
 
@@ -1044,9 +1044,9 @@ function consultaLicencias(){
 				objUser.LastLoginDate = jsonContent.result.records[i].Assignee.LastLoginDate;
 				objUser.Profile = jsonContent.result.records[i].Assignee.Profile.Name;
 				objUser.ProfileId = jsonContent.result.records[i].Assignee.Profile.Id;
-				objUser.UserLicense = jsonContent.result.records[i].Assignee.Profile.UserLicense.name;
+				objUser.UserLicense = jsonContent.result.records[i].Assignee.Profile.UserLicense.Name;
 
-				console.log('jsonContent.result.records[i].Assignee.Profile.UserLicense.name: ' + jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
+				console.log('jsonContent.result.records[i].Assignee.Profile.UserLicense.Name: ' + jsonContent.result.records[i].Assignee.Profile.UserLicense.Name);
 				
 				listaLicenciaProcesada.push(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
 				//console.log('objUser.Name : ' + objUser.Name);
