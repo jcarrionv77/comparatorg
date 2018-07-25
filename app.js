@@ -1204,7 +1204,7 @@ function consultaLicencias(){
 
 	console.log('userArray.length es: ' + userArray.length);
 
-	for(var i=0; i<licenciasArray.length; i++){
+	for(var i=0; i<nombreLicenceArray.length; i++){
 
 
 		HTML = HTML + '<tr><th scope="row"><div class="slds-truncate">' + nombreLicenceArray[i] + '</div></th>';
