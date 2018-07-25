@@ -1160,7 +1160,7 @@ function consultaLicencias(){
 		mapAplicaciones.set(nombreAppArray[i], i);
 	}
 
-	for(var i=0; i< licenciasArray.length; i++){
+	for(var i=0; i< nombreLicenceArray.length; i++){
 		for(var j=0; j< nombreAppArray.length; j++){
 			matriz[i][j] = 0;
 
