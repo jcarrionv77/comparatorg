@@ -1046,7 +1046,7 @@ function consultaLicencias(){
 				objUser.ProfileId = jsonContent.result.records[i].Assignee.Profile.Id;
 				objUser.UserLicense = jsonContent.result.records[i].Assignee.Profile.UserLicense.name;
 				
-				listaLicenciaProcesada.push(jsonContent.result.records[i].Assignee.Profile.UserLicense.name;);
+				listaLicenciaProcesada.push(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
 				//console.log('objUser.Name : ' + objUser.Name);
 
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
