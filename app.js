@@ -1045,6 +1045,8 @@ function consultaLicencias(){
 				objUser.Profile = jsonContent.result.records[i].Assignee.Profile.Name;
 				objUser.ProfileId = jsonContent.result.records[i].Assignee.Profile.Id;
 				objUser.UserLicense = jsonContent.result.records[i].Assignee.Profile.UserLicense.name;
+
+				console.log('jsonContent.result.records[i].Assignee.Profile.UserLicense.name: ' + jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
 				
 				listaLicenciaProcesada.push(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
 				//console.log('objUser.Name : ' + objUser.Name);
@@ -1077,7 +1079,7 @@ function consultaLicencias(){
 						{
 							userAppsArray.push(miPS.arrayApps[j]);
 							listaAppProcesada.push(miPS.arrayApps[j]);
-							console.log('app : ' + miPS.arrayApps[j]);
+							
 						}
 
 					}
