@@ -1048,7 +1048,7 @@ function consultaLicencias(){
 
 				console.log('jsonContent.result.records[i].Assignee.Profile.UserLicense.Name: ' + jsonContent.result.records[i].Assignee.Profile.UserLicense.Name);
 				
-				listaLicenciaProcesada.push(jsonContent.result.records[i].Assignee.Profile.UserLicense.name);
+				listaLicenciaProcesada.push(jsonContent.result.records[i].Assignee.Profile.UserLicense.Name);
 				//console.log('objUser.Name : ' + objUser.Name);
 
 				//console.log('jsonContent.result.records[i].PermissionSet.Name : ' + jsonContent.result.records[i].PermissionSet.Name);
@@ -1147,6 +1147,8 @@ function consultaLicencias(){
 	nombreLicenceArray = unique(listaLicenciaProcesada);
 
 
+	console.log('nombreLicenceArray.length ' + nombreLicenceArray.length);
+	console.log('nombreAppArray.length ' + nombreAppArray.length);
 
 
 	var matriz = new Array(nombreLicenceArray.length);
